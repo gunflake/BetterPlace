@@ -8,7 +8,8 @@
 - 황현지
 
 ## Version
-- 1.0
+- 코드 소스 : 1.0  
+- JDK     : 12
 
 ## 사용 스택 
 - gradle
@@ -25,19 +26,20 @@
 ## Code Rule
 
 1. 타입
-	String : strVar
-	Int : intVar
-	bool : bVar
-	float : fVar
-	double : dVar
+	String : strVar  
+	Int : intVar  
+	bool : bVar  
+	float : fVar  
+	double : dVar  
 	object : objVar
 
 ## Schedule
 
-8.1 ~ 8.3 : 스터디 계획  
-8.4 - 8.10 : 어떤 프로젝트로 할지 정하기  
-8.11 - 8.16 : Spring Boot 공부  
-8.17 - 8.24 : 화면정의서 관리자 / 사용자 정의  
-8.25 - 8.31 : DB 설계  
-9.1 -  - 9.8 : GitHub 설정 및 AWS 구축  
+8.01 ~ 8.03 : 스터디 계획  
+8.04 ~ 8.10 : 어떤 프로젝트로 할지 정하기  
+8.11 ~ 8.16 : Spring Boot 공부  
+8.17 ~ 8.24 : 화면정의서 관리자 / 사용자 정의  
+8.25 ~ 8.31 : DB 설계  
+9.01 ~ 9.08 : GitHub 설정 및 AWS 구축  
+9.09 ~ 9.14 : DB 설계 및 RDS 적용  
 
