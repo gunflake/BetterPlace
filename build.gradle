@@ -27,4 +27,5 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor" // properties 설정파일읽기위해 사용
 }
