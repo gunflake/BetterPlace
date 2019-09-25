@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello Thymeleaf</title>
+</head>
+<body>
+<dl th:each="c : ${customer}">
+    <dt>id</dt>
+    <dd th:text="${c.name}"></dd>
+    <dt>value</dt>
+    <dd th:text="${c.phone}"></dd>
+    <dt>value</dt>
+    <dd th:text="${c.age}"></dd>
+
+</dl>
+</body>
+</html>
