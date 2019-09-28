@@ -1,17 +1,13 @@
 package com.betterplace.dev.test;
 
-import com.betterplace.dev.customer.CustomerRepository;
 import com.betterplace.dev.payment.Payment;
 import com.betterplace.dev.payment.PaymentRepository;
 import com.betterplace.dev.pg.PG;
 import com.betterplace.dev.pg.PGRepository;
-import com.betterplace.dev.reserve.Reservation;
 import com.betterplace.dev.reserve.ReservationRepository;
 import com.betterplace.dev.user.User;
 import com.betterplace.dev.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +29,7 @@ public class TestController {
     @RequestMapping("/")
     public String home(){
         User user = new User("gunflake", "vincent", "1234", "gunflake09@naver.com");
+
         PG pg = new PG();
         pg.setPgName("네이버 페이");
 
@@ -41,13 +38,13 @@ public class TestController {
         payment.setTid("ABDJSJFK12141");
         payment.setUser(user);
         payment.setPg(pg);
-
-        Reservation reservation = new Reservation();
-        reservation.setTotalPrice(10000.0);
-        reservation.setRealPrice(9000.0);
-        reservation.setCuponPrice(1000.0);
-        reservation.setPayment(payment);
-        reservation.setUser(user);
+//
+//        Reservation reservation = new Reservation();
+//        reservation.setTotalPrice(10000.0);
+//        reservation.setRealPrice(9000.0);
+//        reservation.setCuponPrice(1000.0);
+//        reservation.setPayment(payment);
+//        reservation.setUser(user);
 
 //        pg.addPayment(payment);
 //        user.addPayment(payment);
@@ -55,7 +52,11 @@ public class TestController {
         userRepository.save(user);
         pgRepository.save(pg);
         paymentRepository.save(payment);
-        reservationRepository.save(reservation);
+
+
+        Payment one = paymentRepository.getOne(3);
+//        reservationRepository.save(reservation);
+        System.out.println(one.toString());
         return "Home";
     }
 

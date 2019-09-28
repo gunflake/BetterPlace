@@ -14,10 +14,10 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "userNo")
-    private User user; //유저정보
+    private User user; //유저정보 << 유저번호
 
     @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
-    private Reservation reservation;
+    private Reservation reservation; //예약
 
     @ManyToOne
     @JoinColumn(name = "pgNo")
@@ -110,5 +110,20 @@ public class Payment {
 
     public void setUpdDate(Date updDate) {
         this.updDate = updDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "paymentNo=" + paymentNo +
+                ", reservation=" + reservation +
+                ", price=" + price +
+                ", state=" + state +
+                ", tid='" + tid + '\'' +
+                ", cid='" + cid + '\'' +
+                ", regDate=" + regDate +
+                ", updDate=" + updDate +
+                ", userName=" + user.getNickName() +
+                '}';
     }
 }

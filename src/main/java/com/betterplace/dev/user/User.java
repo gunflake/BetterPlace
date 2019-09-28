@@ -13,7 +13,7 @@ public class User {
     @Id @GeneratedValue
     private Integer userNo; //유저번호
 
-    @Column(length = 20)
+    @Column(length = 20, unique = true)
     private String userID; //유저아이디
 
     @Column(length = 20)
