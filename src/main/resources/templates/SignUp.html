@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+
+<body>
+<!--th:action="@{/fooform}" th:object="${user}"-->
+<form action="/user/signup" method="post">
+    <table>
+        <tr>
+            <th>
+                <label>UserID</label>
+            </th>
+            <td>
+                <label>
+                    <input type="text" name="ID">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label>NickName</label>
+            </th>
+            <td>
+                <label>
+                    <input type="text" name="NickName">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label>Password</label>
+            </th>
+            <td>
+                <label>
+                    <input type="text" name="Password">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label>E-Mail</label>
+            </th>
+            <td>
+                <label>
+                    <input type="text" name="Email">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan = 2>
+                <input type="submit" value="회원가입">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

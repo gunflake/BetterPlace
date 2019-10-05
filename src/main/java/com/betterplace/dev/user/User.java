@@ -118,6 +118,9 @@ public class User {
         this.payments = payments;
     }
 
+    public User() {
+    }
+
     public User(String userID, String nickName, String password, String email) {
         super();
         this.userID = userID;
