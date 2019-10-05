@@ -35,19 +35,9 @@ public class UserService {
     }
 
     @RequestMapping(value = "/user/signup")
-    public String signUpUser(HttpServletRequest request){
-        String id = request.getParameter("ID");
-        String nickname = request.getParameter("NickName");
-        String password = request.getParameter("Password");
-        String email = request.getParameter("Email");
+    public String signUpUser(User user){
 
-        User newUser = new User();
-        newUser.setUserID(id);
-        newUser.setNickName(nickname);
-        newUser.setPassword(password);
-        newUser.setEmail(email);
-
-        userRepository.save(newUser);
+        userRepository.save(user);
 
         return "Login";
     }
