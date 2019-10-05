@@ -1,25 +1,18 @@
-package com.betterplace.dev.user;
+package com.betterplace.dev.Partner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
-public class UserService {
+public class PartnerService {
 
     @Autowired
-    UserRepository userRepository;
+    PartnerRepository partnerRepository;
 
-    @RequestMapping(value = "/user/loginform")
+    @RequestMapping(value = "/partner/loginform")
     public String loginPage(){
         // id / pw 받으면 Db조회에서 값이 일치하면
         // login 페이지로 이동
@@ -28,25 +21,25 @@ public class UserService {
         return "Login";
     }
 
-    @RequestMapping(value = "/user/signupform")
+    @RequestMapping(value = "/partner/signupform")
     public String signUpPage(){
         //데이터받아서 user테이블에 데이터 넣어주기
         return "SignUp";
     }
 
-    @RequestMapping(value = "/user/signup")
-    public String signUpUser(User user){
-        userRepository.save(user);
+    @RequestMapping(value = "/partner/signup")
+    public String signUpUser(Partner partner){
+        partnerRepository.save(partner);
 
         return "Login";
     }
 
-    @RequestMapping(value = "/user/login")
+    @RequestMapping(value = "/partner/login")
     public String loginUser(HttpServletRequest request){
         String id = request.getParameter("ID" );
         String password = request.getParameter("Password" );
 
-        User getUser = userRepository.findByUserIDAndPassword(id, password);
+        Partner getUser = partnerRepository.findByPartnerIDAndPassword(id, password);
 
         if(getUser != null) {
             return "Home";

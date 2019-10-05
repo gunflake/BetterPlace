@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+
+<body>
+<!--th:action="@{/fooform}" th:object="${user}"-->
+<form action="/partner/login" method="post">
+    <table>
+        <tr>
+            <th>
+                <label>파트너ID</label>
+            </th>
+            <td>
+                <label>
+                    <input type="text" name="ID">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label>Password</label>
+            </th>
+            <td>
+                <label>
+                    <input type="text" name="Password">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan = 2>
+                <input type="submit" value="로그인">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
