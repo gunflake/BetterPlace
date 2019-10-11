@@ -1,0 +1,44 @@
+package com.betterplace.dev.SendMail;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+
+import org.thymeleaf.context.Context;
+
+@Service
+public class EmailService {
+    // Java 메일
+    private JavaMailSender javaMailSender;
+
+    // Thymeleaf Template 사용
+    private TemplateEngine templateEngine;
+
+    public EmailService(JavaMailSender javaMailSender, TemplateEngine templateEngine){
+        this.javaMailSender = javaMailSender;
+        this.templateEngine = templateEngine;
+    }
+
+    public void sendSimpleMessage(String to, String subject, String text) {
+        // Thymeleaf 사용
+        MimeMessagePreparator message = mimeMessage -> {
+            String content = build(text);
+
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(to);
+            messageHelper.setSubject(subject);
+            messageHelper.setText(content, true);
+        };
+        javaMailSender.send(message);
+    }
+
+    // Thymeleaf 셋팅
+    private String build (String text) {
+        Context context = new Context();
+        context.setVariable("text", text);
+        return templateEngine.process("mail-template", context);
+    }
+
+}

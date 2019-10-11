@@ -34,9 +34,6 @@ public class Partner {
     @Column
     private Date dropDate; //탈퇴날짜
 
-    @OneToMany(mappedBy = "partner", cascade = CascadeType.ALL)
-    private Set<Payment> payments = new HashSet<>();
-
 
     public Integer getPartnerNo() {
         return partnerNo;
@@ -101,14 +98,6 @@ public class Partner {
 
     public void setDropDate(Date dropDate) {
         this.dropDate = dropDate;
-    }
-
-    public Set<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(Set<Payment> payments) {
-        this.payments = payments;
     }
 
     public Partner() {

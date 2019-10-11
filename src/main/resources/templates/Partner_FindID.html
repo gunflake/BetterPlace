@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기</title>
+</head>
+
+<body>
+<!--th:action="@{/fooform}" th:object="${parter}"-->
+<form action="/partner/resultID" method="post">
+    <table>
+        <tr>
+            <th>
+                <label>이메일 주소 입력</label>
+            </th>
+            <td>
+                <label>
+                    <input type="text" name="Email">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan = 2>
+                <input type="submit" value="아이디 찾기">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
