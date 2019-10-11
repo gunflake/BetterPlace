@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+</head>
+<body>
+    <h1>프로필 관리</h1>
+
+    <div>
+        <table>
+            <tbody>
+            <tr>
+                <td>닉네임</td>
+                <td th:text="${customer.getNickname()}"></td>
+            </tr>
+            <tr>
+                <td>이메일</td>
+                <td th:text="${customer.getEmail()}"></td>
+            </tr>
+            <tr>
+                <td>연락처</td>
+                <td>
+                    <p th:text="${customer.getPhone()}"> </p>
+                    <a th:href="@{/auth/change/phone}">변경하기</a>
+                </td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><a href="/auth/change/password">변경하기</a> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script th:inline="javascript">
+
+    var resultMessage = [[${resultMessage}]];
+
+    $(document).ready(function(){
+        if(resultMessage != null){
+            alert(resultMessage);
+        }
+    });
+
+</script>
+
+</html>
