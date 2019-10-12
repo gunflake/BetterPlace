@@ -18,6 +18,7 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
+
     /** 유저 프로필 페이지로 이동한다. */
     @RequestMapping("/my")
     public String profileManageForm(Model model, @RequestParam(value ="message", defaultValue = "default")String message){
