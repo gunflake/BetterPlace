@@ -22,15 +22,9 @@ public class PartnerService {
         return "Partner_Login";
     }
 
+    @Autowired
     private EmailService emailService;
 
-    private void sendEmailTest() {
-        String to = "gkslwhs@naver.com";
-        String subject = "이메일 테스트";
-        String text = "메일 내용";
-
-        emailService.sendSimpleMessage(to,subject,text);
-    }
 
     @RequestMapping(value = "/partner/signupform")
     public String signUpPage(){
@@ -69,6 +63,9 @@ public class PartnerService {
         String email = request.getParameter("Email" );
 
         Partner getPartner = partnerRepository.findPartnerByEmail(email);
+
+        // 파트너 ID 전달
+        emailService.sendSimpleMessage(getPartner.getEmail(),"BetterPlace 아이디 확인", "파트너 ID는 " + getPartner.getPartnerID());
 
         if(getPartner != null) {
             model.addAttribute("id", getPartner.getPartnerID());
