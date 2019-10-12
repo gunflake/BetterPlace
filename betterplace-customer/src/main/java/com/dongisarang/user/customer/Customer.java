@@ -23,7 +23,6 @@ public class Customer {
     @Column(length = 13)
     private String phone; //휴대폰
 
-
     @Column(length = 50)
     private String email; //이메일
 
@@ -39,6 +38,10 @@ public class Customer {
     @Column
     private Boolean emailReceptionAgree;
 
+    //비밀번호 변경시 필요한 데이터
+    @Transient
+    private String changePassword;
+
 
     public String getCustomerId() {
         return customerId;
@@ -48,52 +51,12 @@ public class Customer {
         this.customerId = customerId;
     }
 
-    public String getNickName() {
-        return nickname;
-    }
-
-    public void setNickName(String nickname) {
-        this.nickname = nickname;
-    }
-
     public String getCustomerPassword() {
         return customerPassword;
     }
 
     public void setCustomerPassword(String customerPassword) {
         this.customerPassword = customerPassword;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Byte getState() {
-        return state;
-    }
-
-    public void setState(Byte state) {
-        this.state = state;
-    }
-
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
     }
 
     public String getNickname() {
@@ -112,8 +75,36 @@ public class Customer {
         this.phone = phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public Byte getState() {
+        return state;
+    }
+
+    public void setState(Byte state) {
+        this.state = state;
     }
 
     public Boolean getEmailReceptionAgree() {
@@ -124,8 +115,13 @@ public class Customer {
         this.emailReceptionAgree = emailReceptionAgree;
     }
 
+    public void setChangePassword(String changePassword) {
+        this.changePassword = changePassword;
+    }
 
-
+    public String getChangePassword() {
+        return changePassword;
+    }
 
     public Customer() {
     }

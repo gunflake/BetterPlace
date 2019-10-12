@@ -20,5 +20,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile 'org.webjars:jquery:3.4.1'
     compile project(':betterplace-common')
 }
