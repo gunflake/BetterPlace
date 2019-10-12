@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class PartnerController {
 
@@ -34,20 +36,34 @@ public class PartnerController {
         return "login";
     }
 
+
     @RequestMapping("/login")
-    public String Login(Partner partner){
+    public String Login(Partner partner, HttpSession session){
+        Partner loginPartner =  partnerService.GetPartner(partner);
 
-        boolean isPartner =  partnerService.GetPartner(partner);
-        //Log
-        System.out.println(isPartner);
-
-        //파트너이면 index페이지로, 아니면 error페이지(임시)로 리다이렉트
-        if(isPartner){
-            return "index";
-        }else{
-            return "error";
+        if( loginPartner == null) {
+            return "redirect:/loginform";
         }
 
+        if( !partner.getPartnerPassword().equals(loginPartner.getPartnerPassword())){
+            return "redirect:/loginform";
+        }
+
+        session.setAttribute("partnerId", loginPartner.getPartnerId());
+
+        //Log
+        System.out.println("LOGIN SUCCEESS [id: " + loginPartner.getPartnerId()
+                            + " /sessioned Id: " + session.getAttribute("partnerId") + "]");
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/logout")
+    public String Logout(HttpSession session){
+        session.removeAttribute("partnerId");
+        //LOG
+        System.out.println("LOGOUT SUCCESS");
+        return "redirect:/";
     }
 }
 

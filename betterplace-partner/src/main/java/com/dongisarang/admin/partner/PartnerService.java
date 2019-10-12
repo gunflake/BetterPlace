@@ -19,13 +19,11 @@ public class PartnerService {
         partnerRepository.save(partner);
     }
 
-    public boolean GetPartner(Partner partner ){
+    public Partner GetPartner(Partner partner){
+
         Partner loginPartner = partnerRepository.findByPartnerIdAndPartnerPassword(partner.getPartnerId(), partner.getPartnerPassword());
 
-        if(loginPartner != null){
-            return true;
-        }else{
-            return false;
-        }
+        return loginPartner;
+
     }
 }
