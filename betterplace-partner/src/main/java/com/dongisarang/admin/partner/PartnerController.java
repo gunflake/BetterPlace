@@ -64,7 +64,7 @@ public class PartnerController {
         session.removeAttribute("partnerId");
         //LOG
         System.out.println("LOGOUT SUCCESS" );
-        System.out.println(session.getAttribute("partnerId");
+        System.out.println(session.getAttribute("partnerId"));
         return "redirect:/";
     }
 }
