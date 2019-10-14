@@ -36,7 +36,7 @@ public class PartnerController {
         return "login";
     }
 
-
+    //TODO: Security 사용 예정
     @RequestMapping("/login")
     public String Login(Partner partner, HttpSession session){
         Partner loginPartner =  partnerService.GetPartner(partner);
@@ -49,11 +49,12 @@ public class PartnerController {
             return "redirect:/loginform";
         }
 
+        //TODO: sessionPartner 또는 partnerSession으로 변경하여 충돌 방지
         session.setAttribute("partnerId", loginPartner.getPartnerId());
 
         //Log
         System.out.println("LOGIN SUCCEESS [id: " + loginPartner.getPartnerId()
-                            + " /sessioned Id: " + session.getAttribute("partnerId") + "]");
+                + " /sessioned Id: " + session.getAttribute("partnerId") + "]");
 
         return "redirect:/";
     }
@@ -62,7 +63,8 @@ public class PartnerController {
     public String Logout(HttpSession session){
         session.removeAttribute("partnerId");
         //LOG
-        System.out.println("LOGOUT SUCCESS");
+        System.out.println("LOGOUT SUCCESS" );
+        System.out.println(session.getAttribute("partnerId");
         return "redirect:/";
     }
 }
