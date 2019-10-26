@@ -3,10 +3,7 @@ package com.dongisarang.user.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -18,6 +15,22 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
+    /** 로그인 페이지로 이동한다. */
+    @RequestMapping(value = "/login")
+    public String loginForm() { return "Login"; }
+
+    /** 회원가입 페이지로 이동한다. */
+    @RequestMapping(value = "/signup")
+    public String signUpPage() { return "SignUp"; }
+
+    @PostMapping(value="/signup")
+    public String signUpPost(@ModelAttribute("customer")Customer customer) {
+        //log.info("CUSTOMER : " + customer);
+
+        customerService.signUpCustomer(customer);
+
+        return "SignUpResult";
+    }
 
     /** 유저 프로필 페이지로 이동한다. */
     @RequestMapping("/my")

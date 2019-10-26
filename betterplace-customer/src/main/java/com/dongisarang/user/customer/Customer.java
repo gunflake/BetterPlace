@@ -42,6 +42,7 @@ public class Customer {
     @Transient
     private String changePassword;
 
+    public int getCustomerNo() { return customerNo; }
 
     public String getCustomerId() {
         return customerId;
