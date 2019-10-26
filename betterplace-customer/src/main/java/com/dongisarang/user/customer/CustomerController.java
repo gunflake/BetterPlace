@@ -18,6 +18,15 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
+    @GetMapping("/join")
+    public String goSearch(){
+        return "fragments/join";
+    }
+
+    @GetMapping("/login")
+    public String goLogin(){
+        return "fragments/login";
+    }
 
     /** 유저 프로필 페이지로 이동한다. */
     @RequestMapping("/my")
