@@ -1,10 +1,15 @@
 package com.dongisarang.user.customer;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 
 
 @Entity
+@Getter
+@Setter
 public class Customer {
 
     @Id
@@ -42,100 +47,4 @@ public class Customer {
     @Transient
     private String changePassword;
 
-    public void setCustomerNo(int customerNo) {
-        this.customerNo = customerNo;
-    }
-
-    public int getCustomerNo() { return customerNo; }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getCustomerPassword() {
-        return customerPassword;
-    }
-
-    public void setCustomerPassword(String customerPassword) {
-        this.customerPassword = customerPassword;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public Byte getState() {
-        return state;
-    }
-
-    public void setState(Byte state) {
-        this.state = state;
-    }
-
-    public Boolean getEmailReceptionAgree() {
-        return emailReceptionAgree;
-    }
-
-    public void setEmailReceptionAgree(Boolean emailReceptionAgree) {
-        this.emailReceptionAgree = emailReceptionAgree;
-    }
-
-    public void setChangePassword(String changePassword) {
-        this.changePassword = changePassword;
-    }
-
-    public String getChangePassword() {
-        return changePassword;
-    }
-
-    public Customer() {
-    }
-
-    public Customer(String customerId, String nickname, String customerPassword, String email) {
-        super();
-        this.customerId = customerId;
-        this.nickname = nickname;
-        this.customerPassword = customerPassword;
-        this.email = email;
-    }
 }

@@ -23,4 +23,7 @@ dependencies {
     compile 'org.webjars:jquery:3.4.1'
     compile project(':betterplace-common')
     compile 'org.springframework.boot:spring-boot-starter-security'
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 }

@@ -24,8 +24,7 @@ public class CustomerController {
     public String signUpPage() { return "SignUp"; }
 
     @PostMapping(value="/signup")
-    public String signUpPost(@ModelAttribute("customer")Customer customer) {
-        //log.info("CUSTOMER : " + customer);
+    public String signUpPost(Customer customer) {
 
         customerService.signUpCustomer(customer);
 
