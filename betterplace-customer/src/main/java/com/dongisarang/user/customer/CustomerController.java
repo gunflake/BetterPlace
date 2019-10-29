@@ -28,14 +28,14 @@ public class CustomerController {
 
         customerService.signUpCustomer(customer);
 
-        return "redirect:/my";
+        return "redirect:/login";
     }
 
     /** 유저 프로필 페이지로 이동한다. */
     @RequestMapping("/my")
     public String profileManageForm(Model model, @RequestParam(value ="message", defaultValue = "default")String message){
         //검증
-        Customer getCustomer = customerRepository.findByCustomerId("gunflake09");
+        Customer getCustomer = customerRepository.findByCustomerId("hskim");
         System.out.println(getCustomer.getNickname());
 
         //로그인 정보 가지고 오기 > Customer 객체로 모델 담기
