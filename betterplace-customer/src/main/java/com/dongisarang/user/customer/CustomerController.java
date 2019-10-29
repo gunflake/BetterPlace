@@ -29,7 +29,7 @@ public class CustomerController {
 
         customerService.signUpCustomer(customer);
 
-        return "SignUpResult";
+        return "redirect:/my";
     }
 
     /** 유저 프로필 페이지로 이동한다. */

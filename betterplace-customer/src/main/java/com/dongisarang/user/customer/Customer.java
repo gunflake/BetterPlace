@@ -42,6 +42,10 @@ public class Customer {
     @Transient
     private String changePassword;
 
+    public void setCustomerNo(int customerNo) {
+        this.customerNo = customerNo;
+    }
+
     public int getCustomerNo() { return customerNo; }
 
     public String getCustomerId() {

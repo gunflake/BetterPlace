@@ -24,11 +24,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //게스트 모든권한 해제, Home, Login, SignUp, Reservation
         http.authorizeRequests().antMatchers("/**").permitAll();
         //로그인한 Customer만 권한 해제
-        http.authorizeRequests().antMatchers("/auth/**").hasRole("CUSTOMER");
+        http.authorizeRequests().antMatchers("/customer/**").hasRole("CUSTOMER");
 
         // Spring Boot 에서 제공하는 기본 로그인 페이지를 제외한
         // form 태그를 사용하는 로그인 페이지 지정
-        //http.formLogin().loginPage("/guest/login");
+        http.formLogin().loginPage("/login");
 
         //세션 무효화, logoutUrl은 세션 무효화를 수행하는 페이지 주체
         //http.logout().logoutUrl("/customer/reservation").invalidateHttpSession(true).logoutSuccessUrl("/customer/reservation");
