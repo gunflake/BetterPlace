@@ -15,6 +15,10 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
+    /** 홈 페이지로 이동한다. */
+    @RequestMapping(value = "/home")
+    public String homeForm() { return "Home"; }
+
     /** 로그인 페이지로 이동한다. */
     @RequestMapping(value = "/login")
     public String loginForm() { return "Login"; }
