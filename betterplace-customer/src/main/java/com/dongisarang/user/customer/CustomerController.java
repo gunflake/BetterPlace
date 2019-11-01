@@ -25,10 +25,11 @@ public class CustomerController {
 
     /** 회원가입 페이지로 이동한다. */
     @RequestMapping(value = "/signup")
-    public String signUpPage() { return "SignUp"; }
+    public String signUpForm() { return "SignUp"; }
 
+    /** 회원가입 후 로그인 페이지로 이동한다. */
     @PostMapping(value="/signup")
-    public String signUpPost(Customer customer) {
+    public String setSignUpForm(Customer customer) {
 
         customerService.signUpCustomer(customer);
 
