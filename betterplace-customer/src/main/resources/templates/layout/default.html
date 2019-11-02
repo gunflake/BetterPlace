@@ -9,8 +9,9 @@
     </head>
     <body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
         <div class="h-screen w-screen overflow-auto ">
-            <header th:insert="~{components/navigation :: header}"></header>
+            <header th:replace="~{components/header :: header}"></header>
             <th:block th:include="${template}"/>
+            <footer th:replace="~{components/footer :: footer}"></footer>
         </div>
     </body>
 </html>
