@@ -1,8 +1,8 @@
 package com.dongisarang.admin.partner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class PartnerService {
@@ -10,20 +10,18 @@ public class PartnerService {
     @Autowired
     PartnerRepository partnerRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-    public void RegisterPartner(Partner partner) {
-        //Log
-        System.out.println(partner.getPartnerId());
-        System.out.println(partner.getPartnerPassword());
-
+    /* 파트너 등록 */
+    public void createPartner(Partner partner) {
+        partner.setPartnerPassword(passwordEncoder.encode((partner.getPartnerPassword())));
         partnerRepository.save(partner);
     }
 
-    public Partner GetPartner(Partner partner){
-
-        Partner loginPartner = partnerRepository.findByPartnerIdAndPartnerPassword(partner.getPartnerId(), partner.getPartnerPassword());
-
-        return loginPartner;
-
+    /* 파트너 조회 */
+    public Partner findPartner(String partnerId){
+        return partnerRepository.findByPartnerId(partnerId);
     }
+
 }

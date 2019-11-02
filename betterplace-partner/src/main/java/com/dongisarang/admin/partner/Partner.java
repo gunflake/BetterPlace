@@ -3,8 +3,10 @@ package com.dongisarang.admin.partner;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,13 +23,13 @@ public class Partner {
     private Integer partnerNo; //파트너번호(자동 증가값)
 
     @Column
-    private String partnerId; //아이디
+    private String partnerId; //아이디 (이메일형식)
 
     @Column
     private String partnerPassword; //비밀번호
 
     @Column
-    private String email; //이메일
+    private String nickname; //닉네임
 
     @CreationTimestamp
     private Date registerDate; //등록일
@@ -37,6 +39,5 @@ public class Partner {
 
     @Column
     private Byte state; //상태
-
 
 }
