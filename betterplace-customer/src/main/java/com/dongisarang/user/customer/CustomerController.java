@@ -20,12 +20,22 @@ public class CustomerController {
 
     @GetMapping("/join")
     public String goSearch(){
-        return "fragments/join";
+        return "pages/join";
     }
 
     @GetMapping("/login")
     public String goLogin(){
-        return "fragments/login";
+        return "pages/login";
+    }
+
+    @GetMapping("/")
+    public String goLMain(){
+        return "pages/main";
+    }
+
+    @GetMapping("/profile")
+    public String goProfile(){
+        return "pages/profile";
     }
 
     /** 유저 프로필 페이지로 이동한다. */

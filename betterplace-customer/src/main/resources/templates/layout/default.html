@@ -8,8 +8,8 @@
         <link href="https://unpkg.com/tailwindcss@1.0.4/dist/tailwind.min.css" rel="stylesheet">
     </head>
     <body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
-        <div class="h-screen w-screen">
-            <header th:insert="~{fragments/navigation :: header}"></header>
+        <div class="h-screen w-screen overflow-auto ">
+            <header th:insert="~{components/navigation :: header}"></header>
             <th:block th:include="${template}"/>
         </div>
     </body>
