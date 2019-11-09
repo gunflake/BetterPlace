@@ -52,8 +52,7 @@ public class PartnerController {
     @GetMapping("/mypage")
     public String initMypage(Model model, Principal principal){
 
-        String partnerId = principal.getName();
-        Partner partner = partnerService.findPartner(partnerId);
+        Partner partner = partnerService.findPartner(principal.getName());
 
         if(partner != null)
             model.addAttribute("partner", partner);
