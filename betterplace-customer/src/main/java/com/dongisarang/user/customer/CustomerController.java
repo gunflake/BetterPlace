@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
+
 @Controller
 public class CustomerController {
 
@@ -15,16 +17,34 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
+    /** Main test for side bar */
+    @GetMapping(value = "/main")
+    public String goMain(){
+        return "pages/main";
+    }
+
     /** 홈 페이지로 이동한다. */
     @RequestMapping(value = "/home")
-    public String homeForm() { return "Home"; }
+    public String homeForm() {
+        return "Home";
+    }
+
+    /** 홈 페이지로 이동한다. */
+    @RequestMapping(value = "/test")
+    public String testForm(Principal principal) {
+
+        if(principal != null)
+        System.out.println(principal.getName());
+
+        return "Home";
+    }
 
     /** 로그인 페이지로 이동한다. */
     @RequestMapping(value = "/login")
     public String loginForm() { return "Login"; }
 
     /** 회원가입 페이지로 이동한다. */
-    @RequestMapping(value = "/signup")
+    @GetMapping(value = "/signup")
     public String signUpForm() { return "SignUp"; }
 
     /** 회원가입 후 로그인 페이지로 이동한다. */

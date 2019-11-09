@@ -4,16 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <div th:replace="fragments/header :: header-css"></div>
+    <link href="https://unpkg.com/tailwindcss@1.0.4/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">
     <title>The Better Place</title>
 </head>
 <body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
 <!-- This is an example component -->
 <div class="w-full h-screen">
     <!-- This is start of header -->
-    <div th:replace="fragments/header :: header"></div>
-
+    <div th:replace="fragments/Header :: header"></div>
     <!-- This is start of content for page -->
 </div>
 </body>
 </html>
+

@@ -1,13 +1,22 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <div th:fragment="header-css">
-        <!-- header-css -->
-        <link href="https://unpkg.com/tailwindcss@1.0.4/dist/tailwind.min.css" rel="stylesheet">
-        <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">
-    </div>
+
+    <script>
+        function openSlideMenu(){
+            document.getElementById('menu').style.width = '250px';
+            document.getElementById('content').style.marginLeft = '250px';
+        }
+        function closeSlideMenu(){
+            document.getElementById('menu').style.widows = '0';
+            document.getElementById('content').style.marginLeft = '0';
+        }
+    </script>
 </head>
 <body>
-    <div th:fragment="header">
+    <div th:fragment="header" >
         <!-- This is an example component -->
             <header class="bg-teal-400">
                 <nav class="flex justify-between w-full bg-purple-500 text-white p-4">
@@ -28,14 +37,17 @@
                             </button>
                         </div>
                         <div class="md:flex hidden">
-                            <!--<a class="block md:text-white mr-4" href="/link">Link 1</a>
+                            <a class="block md:text-white mr-4" href="/link">Link 1</a>
                             <a class="block md:text-white mr-4" href="/link">Link 2</a>
                             <a class="block md:text-white mr-4" href="/link">Link 3</a>
-                            <a class="block md:text-white mr-4" href="/link">Link 4</a>-->
+                            <a class="block md:text-white mr-4" href="/link">Link 4</a>
                         </div>
-                        <div class="flex text-sm" v-else>
-                            <a class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100" href="/login">Login</a>
-                            <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" href="/signup">Sign up</a>
+
+                        <div   class="flex text-sm">
+                            <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600">Logout</a>
+                            <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600">Logout</a>
+                            <a sec:authorize="isAnonymous()" class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100" href="/login">Login</a>
+                            <a sec:authorize="isAnonymous()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" href="/signup">Sign up</a>
                         </div>
                     </div>
                 </nav>
