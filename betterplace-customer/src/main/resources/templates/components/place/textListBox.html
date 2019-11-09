@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<div class="text_box" th:fragment="textBox (title, facility)">
+    <h4 class="h_intro" th:text="${title}"></h4>
+    <ol class="info_list" th:each="facility : ${facility}">
+        <li>
+            <strong class="tit" th:text="${facilityStat.index}+1"></strong>
+            <span class="data" th:text="${facility}"></span>
+        </li>
+    </ol>
+</div>
+
+</body>
+</html>

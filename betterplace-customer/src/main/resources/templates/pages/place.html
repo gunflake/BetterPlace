@@ -1,0 +1,116 @@
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{layout/divide2 :: layout (~{::left}, ~{::right})}">
+
+
+
+<left>
+
+    <p class="text-4xl font-extrabold">소셜팩토리 2호점</p>
+    <p class="text-2xl font-thin">홍대에서 스터디·파티·모임·회의·세미나·강연·교육</p>
+
+    <br/>
+
+    <div class="bg-gray-400">
+       <img class="object-cover h-64 w-full" src="https://images.unsplash.com/photo-1556742393-d75f468bfcb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80">
+    </div>
+
+    <br/>
+
+    <div th:replace="~{components/place/textDetailBox :: textBox('공간 소개', ${information}, '10~22시', '일요일')}"></div>
+
+    <!-- 공간 소개
+    <p class="text-xl font-bold"> 공간 소개</p>
+    <div class="whitespace-pre-line">
+
+    </div>
+    -->
+
+
+
+
+
+    <div th:replace="~{components/place/textListBox :: textBox('시설 안내', ${facility})}"></div>
+
+    <div th:replace="~{components/place/textListBox :: textBox('예약시 주의사항', ${reservation})}"></div>
+
+
+
+
+
+    <div class="max-w-6xl mx-auto">
+        <div class="flex items-center justify-center">
+            <div class="w-full py-6">
+                <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+
+                    <div class="p-4">
+                        <p class="text-2xl font-bold">소셜팩토리 2호점</p>
+                        <p class="text-lg text-gray-900">서울특별시 마포구 연남동 565-11 지하 1층 소셜팩토리 홍대 2호점 (신주소 = 마포구 연남로3길 43)</p>
+                        <p class="text-lg text-gray-700">http://www.socialfactory.co.kr</p>
+                    </div>
+
+                    <div class="bg-cover bg-center p-4" style="height: 70vh;">
+                        <div id="map" style="width:100%;height:100%;"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+        var mapTypeControl = new kakao.maps.MapTypeControl();
+
+        // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+        // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+        // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+        var zoomControl = new kakao.maps.ZoomControl();
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    </script>
+
+    <!-- Q & A -->
+    <div>
+        <div class="text_box msimple">
+            <h4 class="h_intro">
+            Q&amp;A
+                <strong style="color: #6d3afb;">4개</strong>
+            <a style="float:right"><span class="sp_icon icon_write"></span> <span>질문 작성하기</span></a>
+            </h4>
+        </div>
+        <div class="review_box">
+            <ul class="review_list">
+                <li class="rlist">
+                    <div class=" ">
+                        <img class="pf_img" src="https://images.unsplash.com/photo-1541418950054-c12804e149d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" >
+                        <strong class="guest_name">남우</strong>
+                        <p class="p_review">
+                            평일은 예약이 다 찬건가요? 다 회색으로되어있네요..
+                        </p>
+                        <div class="rbox_info_base">
+                            <span class="time_info"> 2018.12.08 18:41:41 </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</left>
+<right>
+    <h1>right</h1>
+</right>
+
+
+
+</html>

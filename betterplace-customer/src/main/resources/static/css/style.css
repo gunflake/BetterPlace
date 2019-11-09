@@ -1,0 +1,67 @@
+.h_intro {
+    position: relative;
+    padding-bottom: 16px;
+    margin: 70px 0 28px;
+    color: #000;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+
+
+.h_intro:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    height: 4px;
+    width: 20px;
+    background-color: #ffd014;
+}
+
+.tit {
+    left: 0;
+    padding-top: 3px;
+    vertical-align: middle;
+}
+
+.data {
+    color: #656565;
+    padding-top: 3px;
+    line-height: 28px;
+    vertical-align: middle;
+    padding-left: 29px;
+
+}
+
+.info_list li {
+    position: relative;
+    padding: 10px 0 8px;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 16px;
+}
+
+.review_box .rlist {
+    padding: 24px 0 0;
+    font-size: 16px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.review_box .rlist .pf_img {
+    top: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+}
+
+.text_box .p_intro {
+    font-size: 16px;
+    line-height: 28px;
+    color: #656565;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.p_intro+.info_list {
+    margin-top: 35px;
+}
