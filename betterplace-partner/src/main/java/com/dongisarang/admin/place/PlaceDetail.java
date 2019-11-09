@@ -26,5 +26,4 @@ public class PlaceDetail {
     @Column
     private Integer maxCount;
 
-
 }

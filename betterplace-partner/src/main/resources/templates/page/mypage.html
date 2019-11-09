@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout (~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>프로필 관리</h1>
+
+<div>
+    <table>
+        <tbody>
+        <tr>
+            <td>닉네임</td>
+            <td th:text="${partner.getNickname()}"></td>
+        </tr>
+        <tr>
+            <td>이메일</td>
+            <td th:text="${partner.getPartnerId()}"></td>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td><a th:href="@{/mypage/changepassword}">변경하기</a> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

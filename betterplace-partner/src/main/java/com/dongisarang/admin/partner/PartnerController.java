@@ -2,10 +2,12 @@ package com.dongisarang.admin.partner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class PartnerController {
@@ -44,6 +46,25 @@ public class PartnerController {
     }
 
     //TODO: 비밀번호 찾기 시 이메일 서비스 추가
+
+
+    /* 파트너 마이페이지 */
+    @GetMapping("/mypage")
+    public String initMypage(Model model, Principal principal){
+
+        String partnerId = principal.getName();
+        Partner partner = partnerService.findPartner(partnerId);
+
+        if(partner != null)
+            model.addAttribute("partner", partner);
+
+        return "page/mypage";
+    }
+
+    @GetMapping("/mypage/changepassword")
+    public String initPasswordForm(){
+        return "page/changepassword";
+    }
 
 }
 
