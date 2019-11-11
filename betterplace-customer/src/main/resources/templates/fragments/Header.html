@@ -2,19 +2,6 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-
-    <script>
-        function openSlideMenu(){
-            document.getElementById('menu').style.width = '250px';
-            document.getElementById('content').style.marginLeft = '250px';
-        }
-        function closeSlideMenu(){
-            document.getElementById('menu').style.widows = '0';
-            document.getElementById('content').style.marginLeft = '0';
-        }
-    </script>
-</head>
 <body>
     <div th:fragment="header" >
         <!-- This is an example component -->
@@ -36,22 +23,16 @@
                         </svg>
                             </button>
                         </div>
-                        <div class="md:flex hidden">
-                            <a class="block md:text-white mr-4" href="/link">Link 1</a>
-                            <a class="block md:text-white mr-4" href="/link">Link 2</a>
-                            <a class="block md:text-white mr-4" href="/link">Link 3</a>
-                            <a class="block md:text-white mr-4" href="/link">Link 4</a>
-                        </div>
 
-                        <div   class="flex text-sm">
+                        <div  class="flex text-sm">
                             <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600">Logout</a>
-                            <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600">Logout</a>
-                            <a sec:authorize="isAnonymous()" class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100" href="/login">Login</a>
-                            <a sec:authorize="isAnonymous()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" href="/signup">Sign up</a>
+                            <a th:href="@{/login}" sec:authorize="isAnonymous()" class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100">Login</a>
+                            <a th:href="@{/signup}" sec:authorize="isAnonymous()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600">Sign up</a>
                         </div>
                     </div>
                 </nav>
+                <i class="fas fa-bars"></i>
             </header>
-        </div>
+    </div>
 </body>
 </html>

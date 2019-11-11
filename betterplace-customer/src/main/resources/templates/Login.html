@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +35,7 @@
                 <div class="flex flex-col flex-1 justify-center mb-8">
                     <h1 class="text-4xl text-center font-thin">Welcome Back</h1>
                     <div class="w-full mt-4">
-                        <form class="form-horizontal w-3/4 mx-auto" method="POST">
+                        <form th:action="@{/login}" class="form-horizontal w-3/4 mx-auto" method="POST">
                             <div class="flex flex-col mt-4">
                                 <input id="username" type="text" class="flex-grow h-8 px-2 border rounded border-grey-400" name="username" value="" placeholder="UserId">
                             </div>
@@ -49,11 +52,11 @@
                                 </button>
                             </div>
                         </form>
-                        <div class="text-center mt-4">
+                        <!--<div class="text-center mt-4">
                             <a class="no-underline hover:underline text-blue-dark text-xs" href="{{ route('password.request') }}">
                                 Forgot Your Password?
                             </a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

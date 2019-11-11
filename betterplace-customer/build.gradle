@@ -23,6 +23,7 @@ dependencies {
     compile 'org.webjars:jquery:3.4.1'
     compile project(':betterplace-common')
     compile 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' // 타임리프에서 스프링 시큐리티 통합 모듈 사용하기 위함
     //Lombok
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
