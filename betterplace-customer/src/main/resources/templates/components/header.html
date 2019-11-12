@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <!-- This is an example component -->
+  <header class="bg-teal-400" th:fragment="header">
+    <nav class="flex justify-between w-full bg-purple-500 text-white p-4">
+      <a href="/main"><span class="font-semibold text-xl tracking-tight">BetterPlace</span></a>
+
+        <div class="md:items-center md:w-auto flex">
+          <div class="md:flex hidden">
+            <a class="block md:text-white mr-4" href="/link">Link 1</a>
+            <a class="block md:text-white mr-4" href="/link">Link 2</a>
+            <a class="block md:text-white mr-4" href="/link">Link 3</a>
+            <a class="block md:text-white mr-4" href="/link">Link 4</a>
+          </div>
+          <div  class="flex text-sm">
+            <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600">Logout</a>
+            <a th:href="@{/login}" sec:authorize="isAnonymous()" class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100">Login</a>
+            <a th:href="@{/join}" sec:authorize="isAnonymous()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600">Sign up</a>
+          </div>
+        </div>
+    </nav>
+  </header>
+
+</body>
+</html>

@@ -31,23 +31,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/resources/static/**")
-                .permitAll()
-                .anyRequest()
-                .permitAll()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/","/home","/signup","/login", "/test").permitAll()
+                .antMatchers("/","/main","/join","/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/main")
                 .permitAll()
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/home")
+                .logoutSuccessUrl("/main")
                 .invalidateHttpSession(true)
                 .permitAll()
                 .and()
@@ -60,12 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    //@Autowired
-    //public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-    //    log.info("build Auth global......");
-    //    auth.userDetailsService(securityCustomerService).passwordEncoder(passwordEncoder());
-    //}
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

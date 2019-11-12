@@ -1,0 +1,31 @@
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{layout/default :: layout (~{::body})}">
+<body>
+
+    <br/>
+
+    <div class="bg-gray-400">
+       <img class="object-cover h-64 w-full" src="https://images.unsplash.com/photo-1556742393-d75f468bfcb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80">
+    </div>
+
+    <br/>
+
+    <p class="font-bold text-4xl text-center">추천</p>
+
+    <div th:replace="~{components/photoCard :: card('소셜팩토리 1호점', '홍대 합정', 'https://images.unsplash.com/photo-1467238307002-480ffdd260f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', '1500원/시간', '#'
+                                                   ,'굿브라더스 1호점', '강남', 'https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', '2000원/시간', '#'
+                                                   ,'배럴플레이스 강남점', '강남 역삼', 'https://images.unsplash.com/photo-1556742393-d75f468bfcb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80', '1000원/시간', '#')}" ></div>
+
+    <br/>
+    <br/>
+
+    <p class="font-bold text-4xl text-center">지역 공간</p>
+
+    <div th:replace="~{components/photoCard :: card('소셜팩토리 1호점', '홍대 합정', 'https://images.unsplash.com/photo-1467238307002-480ffdd260f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', '1500원/시간', '#'
+                                                   ,null, '강남', 'https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', '2000원/시간', '#'
+                                                   ,null, '강남 역삼', 'https://images.unsplash.com/photo-1556742393-d75f468bfcb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80', '1000원/시간', '#')}" ></div>
+
+
+
+</body>
+</html>

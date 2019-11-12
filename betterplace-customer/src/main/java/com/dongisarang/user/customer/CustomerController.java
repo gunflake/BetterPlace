@@ -17,39 +17,23 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
-    /** Main test for side bar */
+    /** 메인 페이지로 이동한다. */
     @GetMapping(value = "/main")
-    public String goMain(){
+    public String goMain() {
         return "pages/main";
     }
 
-    /** 홈 페이지로 이동한다. */
-    @RequestMapping(value = "/home")
-    public String homeForm() {
-        return "Home";
-    }
-
-    /** 홈 페이지로 이동한다. */
-    @RequestMapping(value = "/test")
-    public String testForm(Principal principal) {
-
-        if(principal != null)
-        System.out.println(principal.getName());
-
-        return "Home";
-    }
-
     /** 로그인 페이지로 이동한다. */
-    @RequestMapping(value = "/login")
-    public String loginForm() { return "Login"; }
+    @GetMapping(value = "/login")
+    public String goLogin() { return "pages/login"; }
 
     /** 회원가입 페이지로 이동한다. */
-    @GetMapping(value = "/signup")
-    public String signUpForm() { return "SignUp"; }
+    @GetMapping(value = "/join")
+    public String goJoin() { return "pages/join"; }
 
     /** 회원가입 후 로그인 페이지로 이동한다. */
-    @PostMapping(value="/signup")
-    public String setSignUpForm(Customer customer) {
+    @PostMapping(value="/join")
+    public String setJoin(Customer customer) {
 
         customerService.signUpCustomer(customer);
 
