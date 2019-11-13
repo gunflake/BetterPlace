@@ -40,9 +40,14 @@
     border-bottom: 1px solid #ebebeb;
     font-size: 16px;
 }
+.review_box{
+    padding-bottom: 24px;
+}
+
 
 .review_box .rlist {
-    padding: 24px 0 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
     font-size: 16px;
     border-bottom: 1px solid #ebebeb;
 }
@@ -64,4 +69,34 @@
 
 .p_intro+.info_list {
     margin-top: 35px;
+}
+
+
+
+
+.input[type="radio"] + .label .span {
+    transition: background .2s,
+    transform .2s;
+}
+
+.input[type="radio"] + .label .span:hover,
+.input[type="radio"] + .label:hover .span{
+    transform: scale(1.2);
+}
+
+.input[type="radio"]:checked + .label .span {
+    background-color: #3490DC; //bg-blue
+box-shadow: 0px 0px 0px 2px white inset;
+}
+
+.input[type="radio"]:checked + .label{
+    color: #3490DC; //text-blue
+}
+
+.ico_table {
+    background-size: 684px 663px;
+    background-image: url(../image/08341ee.png);
+    background-position: -599px -380px;
+    width: 34px;
+    height: 34px;
 }

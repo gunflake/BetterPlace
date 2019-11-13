@@ -1,10 +1,15 @@
 <html xmlns:th="https://www.thymeleaf.org"
-      th:replace="~{layout/divide2 :: layout (~{::left}, ~{::right})}">
+      th:replace="~{layout/divide2 :: layout (~{::links},~{::top}, ~{::left}, ~{::right})}" lang="ko">
 
+<th:block th:fragment="links">
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/tailwind.css" />
+</th:block>
 
+<th:block th:fragment="top">
+</th:block>
 
-<left>
-
+<th:block th:fragment="left">
     <p class="text-4xl font-extrabold">소셜팩토리 2호점</p>
     <p class="text-2xl font-thin">홍대에서 스터디·파티·모임·회의·세미나·강연·교육</p>
 
@@ -18,25 +23,11 @@
 
     <div th:replace="~{components/place/textDetailBox :: textBox('공간 소개', ${information}, '10~22시', '일요일')}"></div>
 
-    <!-- 공간 소개
-    <p class="text-xl font-bold"> 공간 소개</p>
-    <div class="whitespace-pre-line">
-
-    </div>
-    -->
-
-
-
-
-
     <div th:replace="~{components/place/textListBox :: textBox('시설 안내', ${facility})}"></div>
 
     <div th:replace="~{components/place/textListBox :: textBox('예약시 주의사항', ${reservation})}"></div>
 
-
-
-
-
+    <!-- 지도 -->
     <div class="max-w-6xl mx-auto">
         <div class="flex items-center justify-center">
             <div class="w-full py-6">
@@ -90,27 +81,71 @@
         <div class="review_box">
             <ul class="review_list">
                 <li class="rlist">
-                    <div class=" ">
-                        <img class="pf_img" src="https://images.unsplash.com/photo-1541418950054-c12804e149d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" >
-                        <strong class="guest_name">남우</strong>
-                        <p class="p_review">
-                            평일은 예약이 다 찬건가요? 다 회색으로되어있네요..
-                        </p>
-                        <div class="rbox_info_base">
-                            <span class="time_info"> 2018.12.08 18:41:41 </span>
+                    <div class="flex">
+                        <div class="w-2/12">
+                            <img class="pf_img" src="https://images.unsplash.com/photo-1541418950054-c12804e149d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" >
+                        </div>
+                        <div class="w-10/12">
+                            <strong class="guest_name">남우</strong>
+                            <p class="p_review">
+                                평일은 예약이 다 찬건가요? 다 회색으로되어있네요..
+                            </p>
+                            <div class="rbox_info_base">
+                                <span class="time_info"> 2018.12.08 18:41:41 </span>
+                            </div>
                         </div>
                     </div>
                 </li>
+
+                <li class="rlist">
+                    <div class="flex">
+                        <div class="w-2/12">
+                            <img class="pf_img" src="https://images.unsplash.com/photo-1541418950054-c12804e149d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" >
+                        </div>
+                        <div class="w-10/12">
+                            <strong class="guest_name">남우</strong>
+                            <p class="p_review">
+                                평일은 예약이 다 찬건가요? 다 회색으로되어있네요..
+                            </p>
+                            <div class="rbox_info_base">
+                                <span class="time_info"> 2018.12.08 18:41:41 </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>
+</th:block>
+<th:block th:fragment="right">
 
 
-</left>
-<right>
-    <h1>right</h1>
-</right>
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">세부공간 선택</div>
+
+        <div class="w-full border-0 border-grey-light  border-solid text-sm">
+            <div class="text-center text-base border-0 border-grey-light border-b border-solid py-4">
+                예약할 공간을 선택해주세요.
+            </div>
+            <div>
+                <div  th:each="placeDtl : ${placeDtls}">
+                    <div class="border-0 border-grey-light border-b border-solid py-4">
+                        <label>
+                            <input type="radio" name="selectPlace" value="" th:text="${placeDtl}"/>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- 선택 -->
+            <div>
+                <button class="w-full bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2  border border-blue-500 hover:border-transparent rounded">
+                    예약하기
+                </button>
+            </div>
+
+        </div>
 
 
+</th:block>
 
 </html>
