@@ -22,6 +22,10 @@
             <a th:href="@{/login}" sec:authorize="isAnonymous()" class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100">Login</a>
             <a th:href="@{/join}" sec:authorize="isAnonymous()" class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600">Sign up</a>
           </div>
+          <div class="container">
+            <!--<i data-toggle="modal" data-target="#sidebar-right" class=" fas fa-bars pull-right" ></i>-->
+            <button type="button" data-toggle="modal" data-target="#sidebar-right" class="btn btn-primary navbar-btn pull-right">Right Sidebar</button>
+          </div>
         </div>
     </nav>
   </header>

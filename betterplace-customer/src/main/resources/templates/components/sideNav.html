@@ -1,42 +1,65 @@
-<html lang="en"
+<!doctype html>
+<html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <div th:fragment="sidenav-css">
-        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-            .round {
-                border-radius: 50%;
-            }
-        </style>
-    </div>
-</head>
+      xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<div class="w-full flex flex-row flex-wrap" th:fragment="sidenav">
-    <div class="w-full bg-indigo-100 h-screen flex flex-row flex-wrap justify-center ">
+<!--<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <button type="button" data-toggle="modal" data-target="#sidebar-right" class="btn btn-primary navbar-btn pull-right">Right Sidebar</button>
+    </div>
+</nav>-->
 
-        <!-- Begin Navbar -->
+<!-- Sidebar Right -->
+<div th:fragment="sidenav" class="modal fade right" id="sidebar-right" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <!--<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Right Sidebar</h4>
+            </div>-->
+            <div class="modal-body">
 
-        <div class="bg-white shadow-lg border-t-4 border-indigo-500 absolute bottom-0 w-full md:w-0 md:hidden flex flex-row flex-wrap">
-            <div class="w-full text-right"><button class="p-2 fa fa-bars text-4xl text-gray-600"></button></div>
-        </div>
+                <ul class="nav nav-pills nav-stacked text-center lead">
+                    <li role="presentation" class="active"><a href="#home">Home</a></li>
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="myTabDrop1" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">Services <span class="fa fa-fw fa-chevron-down"></span></a>
+                        <ul class="dropdown-menu btn-block">
+                            <li><a href="#design" role="tab">Design</a></li>
+                            <li><a href="#develop" role="tab">Develop</a></li>
+                            <li><a href="#support" role="tab">Support</a></li>
+                        </ul>
+                    </li>
+                    <li role="presentation"><a href="#about">About</a></li>
+                </ul>
 
-        <div class="w-0 md:w-1/4 lg:w-1/5 h-0 md:h-screen overflow-y-hidden bg-white shadow-lg">
-            <div class="p-5 bg-white sticky top-0">
-                <img class="border border-indigo-100 shadow-lg round" src="http://lilithaengineering.co.za/wp-content/uploads/2017/08/person-placeholder.jpg">
-                <div class="pt-2 border-t mt-5 w-full text-center text-xl text-gray-600">
-                    Some Person
+                <hr>
+
+                <div class="form-group hide">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-fw fa-search"></i></button>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="w-full h-screen antialiased flex flex-col hover:cursor-pointer">
-                <a class="hover:bg-gray-300 bg-gray-200 border-t-2 p-3 w-full text-xl text-left text-gray-600 font-semibold" href=""><i class="fa fa-comment text-gray-600 text-2xl pr-1 pt-1 float-right"></i>Messages</a>
-                <a class="hover:bg-gray-300 bg-gray-200 border-t-2 p-3 w-full text-xl text-left text-gray-600 font-semibold" href=""><i class="fa fa-cog text-gray-600 text-2xl pr-1 pt-1 float-right"></i>Settings</a>
-                <a class="hover:bg-gray-300 bg-gray-200 border-t-2 p-3 w-full text-xl text-left text-gray-600 font-semibold" href=""><i class="fa fa-arrow-left text-gray-600 text-2xl pr-1 pt-1 float-right"></i>Log out</a>
+
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" id="search-right" placeholder="Search">
+                    <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <hr>
+
+                <div class="btn-group-vertical center-block">
+                    <a class="btn btn-instagram btn-lg" href="" target="_blank"><i class="fa fa-fw fa-instagram"></i></a>
+                    <a class="btn btn-twitter btn-lg" href="" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+                    <a class="btn btn-github btn-lg" href="" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </div>
+
             </div>
         </div>
-
-        <!-- End Navbar -->
+    </div>
+</div>
 </body>
 </html>
