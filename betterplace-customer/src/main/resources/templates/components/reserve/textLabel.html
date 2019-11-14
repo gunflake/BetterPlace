@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<div class="py-4 border-b border-gray-400 flex" th:fragment="label(title, content)">
+    <div class="w-1/4">
+        <div class="text-base text-gray-500" th:text="${title}">
+            [title]
+        </div>
+    </div>
+    <div class="w-3/4 pl-8">
+        <div class="text-base text-right" th:text="${content}">
+            [content]
+        </div>
+    </div>
+</div>
+</body>
+</html>
