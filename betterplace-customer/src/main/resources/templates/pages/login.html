@@ -9,8 +9,8 @@
                     <div class="w-full mt-4">
                         <form th:object="${Customer}" class="form-horizontal w-3/4 mx-auto" method="POST" >
 
-                            <div th:replace="~{fragments/inputField :: input('username', 'text')}" ></div>
-                            <div th:replace="~{fragments/inputField :: input('password', 'password')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('username', 'text')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('password', 'password')}" ></div>
 
                             <div class="flex items-center mt-4">
                                 <input type="checkbox" name="remember" id="remember" class="mr-2"> <label for="remember" class="text-sm text-grey-dark">Remember Me</label>

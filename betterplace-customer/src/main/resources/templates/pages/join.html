@@ -11,14 +11,14 @@
                     <div class="w-full mt-4">
                         <form th:object="${Customer}" class="form-horizontal w-3/4 mx-auto" method="POST" >
 
-                            <div th:replace="~{components/inputField :: input('username', 'text')}" ></div>
-                            <div th:replace="~{components/inputField :: input('email', 'text')}" ></div>
-                            <div th:replace="~{components/inputField :: input('password', 'password')}" ></div>
-                            <div th:replace="~{components/inputField :: input('passwordConfirm', 'password')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('username', 'text')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('email', 'text')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('password', 'password')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('passwordConfirm', 'password')}" ></div>
 
-                            <div th:replace="~{components/checkBox :: check('agree', '아래 약관에 모두 동의합니다.')}"></div>
-                            <div th:replace="~{components/checkBox :: check('serviceAgree', '서비스 이용약관(필수)')}"></div>
-                            <div th:replace="~{components/checkBox :: check('userInfoAgree', '개인정보 처리 방침(필수)')}"></div>
+                            <div th:replace="~{components/member/checkBox :: check('agree', '아래 약관에 모두 동의합니다.')}"></div>
+                            <div th:replace="~{components/member/checkBox :: check('serviceAgree', '서비스 이용약관(필수)')}"></div>
+                            <div th:replace="~{components/member/checkBox :: check('userInfoAgree', '개인정보 처리 방침(필수)')}"></div>
 
                             <div class="flex flex-col mt-8">
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded">
