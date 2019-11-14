@@ -63,7 +63,7 @@
 
     <!-- 예약정보 -->
     <div class="pb-20">
-        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">예약 공간</div>
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">예약 정보</div>
         <div class="px-8 bg-gray-100">
             <!-- 예약 날짜-->
             <div class="py-4 border-b border-gray-400 flex">
@@ -98,17 +98,79 @@
     <div class="pb-20">
         <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">예약자 정보</div>
         <div class="px-8 bg-gray-100">
+            <!-- 예약자 -->
+            <div th:insert="~{components/reserve/inputBox :: inputBox('예약자', 'booker', 'text')}" ></div>
+            <!-- 연락처 -->
+            <div th:insert="~{components/reserve/inputBox :: inputBox('연락처', 'phone', 'text')}" ></div>
+            <!-- 이메일 -->
+            <div th:insert="~{components/reserve/inputBox :: inputBox('이메일', 'email', 'email')}" ></div>
+            <!-- 요청사항 -->
+            <div th:insert="~{components/reserve/inputBox :: inputBox('요청사항', 'requests', 'text')}" ></div>
+        </div>
+        <div class="w-full p-2 text-sm text-gray-700">
+            예약자 정보로 알림톡과 이메일이 발송됩니다. 정확한 정보인지 확인해주세요.
+        </div>
+    </div>
+
+    <!-- 결제 방법 선택 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">결제 방법 선택</div>
+        <div class="p-8 bg-gray-100">
+            <label th:insert="~{components/reserve/radioButton :: radioButton('신용카드', 'payment', 'checked')}"></label>
+            <label th:insert="~{components/reserve/radioButton :: radioButton('실시간 계좌이체', 'payment', null)}"></label>
+            <label th:insert="~{components/reserve/radioButton :: radioButton('카카오 페이', 'payment', null)}"></label>
+            <label th:insert="~{components/reserve/radioButton :: radioButton('네이버 페이', 'payment', null)}"></label>
+        </div>
+        <div class="w-full p-2 text-sm text-red-600 font-semibold">
+            계좌이체의 경우, 모바일에서는 네이버페이 계좌 간편결제만 가능합니다!(일반 계좌이체는 PC에서만 지원)
+        </div>
+    </div>
+
+    <!-- 서비스 동의 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">서비스 동의</div>
+        <div class="p-8 bg-gray-100">
+            <label th:insert="~{components/reserve/checkBox :: checkBox('위 공간의 예약 조건 확인 및 결제 진행 동의', 'rule1', true)}"></label>
+            <label th:insert="~{components/reserve/checkBox :: checkBox('환불규정 안내에 대한 동의', 'rule1', true)}"></label>
+            <label th:insert="~{components/reserve/checkBox :: checkBox('개인정보 제3자 제공 동의', 'rule1', true)}"></label>
+            <label th:insert="~{components/reserve/checkBox :: checkBox('개인정보 수집 및 이용 동의', 'rule1', false)}"></label>
+        </div>
+        <div class="w-full p-2 text-sm text-red-600 font-semibold">
+            서비스 이용약관 동의는 필수입니다.
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="right">
+
+    <!-- 예약정보 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">결제 예정 금액</div>
+        <div class="px-4 bg-gray-100">
             <!-- 예약 날짜-->
             <div class="py-4 border-b border-gray-400 flex">
-                <div class="w-1/5">
-                    <div class="h-full text-base font-bold text-gray-500" style="-webkit-align-items: center;
-                    align-items: center;">
-                        <div>예약자</div>
+                <div class="w-1/4">
+                    <div class="text-base text-gray-500">
+                        예약 날짜
                     </div>
                 </div>
-                <div class="w-4/5">
-                    <input class="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value="Jane Doe" />
-
+                <div class="w-3/4 pl-8">
+                    <div class="text-base text-right">
+                        2019.11.25 (월)
+                    </div>
+                </div>
+            </div>
+            <!-- 예약 시간-->
+            <div class="py-4 border-b border-gray-400 flex">
+                <div class="w-1/4">
+                    <div class="text-base text-gray-500">
+                        예약 시간
+                    </div>
+                </div>
+                <div class="w-3/4 pl-8">
+                    <div class="text-base text-right">
+                        10시 ~ 13시 3시간
+                    </div>
                 </div>
             </div>
             <!-- 예약 인원-->
@@ -125,14 +187,11 @@
                 </div>
             </div>
         </div>
+        <button class="w-full mt-1 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2  border border-blue-500 hover:border-transparent rounded">
+            결제하기
+        </button>
     </div>
 
-
-
-
-</th:block>
-
-<th:block th:fragment="right">
 </th:block>
 
 </html>

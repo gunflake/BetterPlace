@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<div class="py-4 border-b border-gray-400 flex" th:fragment="inputBox(title, name, type)">
+<div class="w-1/5">
+    <div class="h-full text-base font-bold text-gray-500" th:text="${title}">
+    </div>
+</div>
+<div class="w-4/5">
+    <input class="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" th:name="${name}" th:id="${name}" th:type="${type}" />
+</div>
+</div>
+
+</body>
+</html>
