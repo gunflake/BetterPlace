@@ -99,6 +99,11 @@ public class CustomerController {
         return "pages/reserve";
     }
 
+    @GetMapping("/reserved")
+    public String goReserved(){
+        return "pages/reserved";
+    }
+
 
     /** 유저 프로필 페이지로 이동한다. */
     @RequestMapping("/my")

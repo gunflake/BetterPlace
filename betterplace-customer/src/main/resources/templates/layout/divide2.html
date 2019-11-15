@@ -5,19 +5,15 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=458b9dffd87c64113a5d7c313972aa95"></script>
-
-
+        <link rel="stylesheet" href="css/tailwind.css" />
         <th:block th:include="${links}"/>
-
     </head>
     <body class="h-screen overflow-hidden flex items-center justify-center">
         <div class="h-screen w-screen overflow-auto ">
             <header th:replace="~{components/header :: header}"></header>
-            <div class="mt-16">
-                <div class="w-full text-center pb-16">
+            <div class="mt-32">
+                <div class="w-full text-center">
                     <th:block th:include="${top}"/>
                 </div>
                 <div class="flex">
