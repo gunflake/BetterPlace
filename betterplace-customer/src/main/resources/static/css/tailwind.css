@@ -3837,6 +3837,10 @@ video {
   height: 16rem;
 }
 
+.h-128 {
+  height: 26rem;
+}
+
 .h-auto {
   height: auto;
 }

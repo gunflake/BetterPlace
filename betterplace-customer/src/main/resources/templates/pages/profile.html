@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org"
-      th:replace="~{layout/default :: layout (~{::body})}">
-
-<body>
-
+<html lang="ko" xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{layout/default :: layout (~{::head}, ~{::body})}">
+<th:block th:fragment="head">
+</th:block>
+<th:block th:fragment="body">
     <br/>
 
     <p class="font-bold text-4xl text-center">프로필 관리</p>
@@ -32,5 +31,6 @@
         </div>
     </div>
 
-</body>
+
+</th:block>
 </html>
