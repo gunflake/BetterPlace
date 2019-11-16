@@ -1,0 +1,26 @@
+<!--
+https://images.unsplash.com/photo-1467238307002-480ffdd260f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60
+https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60
+-->
+
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+  <div th:fragment="card (title1, location1, photoUrl1, price1, link1
+                         ,title2, location2, photoUrl2, price2, link2
+                         ,title3, location3, photoUrl3, price3, link3)">
+
+    <div class="flex w-full">
+
+      <div th:replace="~{components/card :: card(${title1},${location1}, ${photoUrl1}, ${price1}, ${link1})}"></div>
+      <div th:replace="~{components/card :: card(${title2},${location2}, ${photoUrl2}, ${price2}, ${link2})}"></div>
+      <div th:replace="~{components/card :: card(${title3},${location3}, ${photoUrl3}, ${price3}, ${link3})}"></div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

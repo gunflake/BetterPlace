@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <!-- This is an example component -->
+  <header class="w-full bg-teal-400 fixed z-50" th:fragment="header">
+    <nav class="flex justify-between w-full bg-blue-600 text-white py-4 px-6">
+      <div class="flex w-7/12 items-center">
+        <!-- logo -->
+        <div class="font-bold mr-6 text-xl tracking-tight">
+          <a href="/">BetterPlace</a>
+        </div>
+        <!-- search -->
+        <div class="flex w-full items-center bg-white  border-b border-b-2 border-teal-500 py-2">
+          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-4 leading-tight focus:outline-none" type="text" placeholder="원하는 공간을 입력하세요.">
+          <a href="/#">
+          <svg version="1.1" class="h-4 mr-4 text-dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               viewBox="0 0 52.966 52.966" style="enable-background:new 0 0 52.966 52.966;" xml:space="preserve">
+            <path d="M51.704,51.273L36.845,35.82c3.79-3.801,6.138-9.041,6.138-14.82c0-11.58-9.42-21-21-21s-21,9.42-21,21s9.42,21,21,21
+            c5.083,0,9.748-1.817,13.384-4.832l14.895,15.491c0.196,0.205,0.458,0.307,0.721,0.307c0.25,0,0.499-0.093,0.693-0.279
+            C52.074,52.304,52.086,51.671,51.704,51.273z M21.983,40c-10.477,0-19-8.523-19-19s8.523-19,19-19s19,8.523,19,19
+            S32.459,40,21.983,40z"/>
+            </svg>
+          </a>
+<!--          <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">-->
+<!--            Search-->
+<!--          </button>-->
+        </div>
+
+      </div>
+
+        <div class="w-5/12 md:items-center md:w-auto flex">
+          <div class="md:flex hidden">
+            <a class="block text-white text-xl font-base mr-4" href="/link">공간 등록하기</a>
+          </div>
+          <div class="flex text-sm" v-else>
+          	<a class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100" th:href="@{/login}">Login</a>
+            <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" th:href="@{/join}">Sign up</a>
+          </div>
+        </div>
+    </nav>
+  </header>
+
+</body>
+</html>
