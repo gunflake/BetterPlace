@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import java.security.Principal;
 @Controller
 public class CustomerController {
 
@@ -104,12 +106,20 @@ public class CustomerController {
         return "pages/reserved";
     }
 
+    /** 회원가입 후 로그인 페이지로 이동한다. */
+    @PostMapping(value="/join")
+    public String setJoin(Customer customer) {
+
+        customerService.signUpCustomer(customer);
+
+        return "redirect:/login";
+    }
 
     /** 유저 프로필 페이지로 이동한다. */
     @RequestMapping("/my")
     public String profileManageForm(Model model, @RequestParam(value ="message", defaultValue = "default")String message){
         //검증
-        Customer getCustomer = customerRepository.findByCustomerId("gunflake09");
+        Customer getCustomer = customerRepository.findByCustomerId("hskim");
         System.out.println(getCustomer.getNickname());
 
         //로그인 정보 가지고 오기 > Customer 객체로 모델 담기

@@ -1,6 +1,8 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
     <!-- This is an example component -->
   <header class="w-full bg-teal-400 fixed z-50" th:fragment="header">
@@ -22,9 +24,6 @@
             S32.459,40,21.983,40z"/>
             </svg>
           </a>
-<!--          <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">-->
-<!--            Search-->
-<!--          </button>-->
         </div>
 
       </div>
@@ -34,8 +33,13 @@
             <a class="block text-white text-xl font-base mr-4" href="/link">공간 등록하기</a>
           </div>
           <div class="flex text-sm" v-else>
-          	<a class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100" th:href="@{/login}">Login</a>
-            <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" th:href="@{/join}">Sign up</a>
+          	<a class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+            <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" sec:authorize="isAnonymous()" th:href="@{/join}">Sign up</a>
+            <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+          </div>
+          <div class="container">
+            <!--<i data-toggle="modal" data-target="#sidebar-right" class=" fas fa-bars pull-right" ></i>-->
+            <button type="button" data-toggle="modal" data-target="#sidebar-right" class="btn btn-primary navbar-btn pull-right">Right Sidebar</button>
           </div>
         </div>
     </nav>
@@ -43,3 +47,4 @@
 
 </body>
 </html>
+
