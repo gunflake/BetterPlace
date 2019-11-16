@@ -38,4 +38,7 @@ public class Partner {
     @Column
     private Byte state; //상태
 
+    @Transient
+    private String changePassword; // 변경 비밀번호
+
 }

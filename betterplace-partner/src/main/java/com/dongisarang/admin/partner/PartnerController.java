@@ -1,6 +1,7 @@
 package com.dongisarang.admin.partner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,9 @@ public class PartnerController {
 
     @Autowired
     PartnerService partnerService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     /* Index 페이지로 이동한다 */
     @GetMapping("/")
@@ -60,9 +64,29 @@ public class PartnerController {
         return "page/mypage";
     }
 
+    /* 파트너 비밀번호 변경페이지 */
     @GetMapping("/mypage/changepassword")
     public String initPasswordForm(){
+
         return "page/changepassword";
+    }
+
+    /* 파트너 비밀번호 변경 */
+    @PostMapping("/mypage/changepassword")
+    public String processPasswordForm(String partnerPassword, String changePassword, Principal principal){
+
+        Partner partner = partnerService.findPartner(principal.getName());
+
+        // 현재 비밀번호 확인
+        if(!passwordEncoder.matches(partnerPassword,partner.getPartnerPassword()))
+        {
+            return "redirect:/mypage";
+        }
+
+        // 새 비밀번호 등록
+        partnerService.changePassword(partner,changePassword);
+
+        return "redirect:/";
     }
 
 }
