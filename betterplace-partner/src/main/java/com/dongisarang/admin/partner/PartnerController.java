@@ -22,26 +22,26 @@ public class PartnerController {
     }
 
     /* 로그인 페이지로 이동한다 */
-    @GetMapping("/login")
+    @GetMapping("/auth/login")
     public String initLoginForm(){
         return "page/login";
     }
 
     /* 파트너 회원가입 페이지로 이동한다 */
-    @GetMapping("/signup")
+    @GetMapping("/auth/signup")
     public String initSignupForm(){
         return "page/signup";
     }
 
     /* 파트너 등록 후 로그인 페이지로 이동한다 */
-    @PostMapping("/signup")
+    @PostMapping("/auth/signup")
     public String processSignupForm(@Valid Partner partner, BindingResult result){
         //TODO: 유효성 추가
         if(result.hasErrors()){
             return "/";
         }else{
             partnerService.createPartner(partner);
-            return "redirect:/login";
+            return "redirect:/auth/login";
         }
     }
 

@@ -13,8 +13,8 @@
                     <th:block th:insert="~{component/search :: content}"></th:block>
                 </div>
                 <div class="hidden sm:flex sm:items-center">
-                    <a th:href="@{/login}"  sec:authorize="isAnonymous()" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">로그인</a>
-                    <a th:href="@{/signup}" sec:authorize="isAnonymous()" class="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600">회원가입</a>
+                    <a th:href="@{/auth/login}"  sec:authorize="isAnonymous()" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">로그인</a>
+                    <a th:href="@{/auth/signup}" sec:authorize="isAnonymous()" class="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600">회원가입</a>
                     <a th:href="@{/mypage}" sec:authorize="isAuthenticated()" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">마이페이지</a>
                     <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600">로그아웃</a>
                 </div>

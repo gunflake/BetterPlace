@@ -11,7 +11,7 @@
     <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             <h1 class="mb-8 text-3xl text-center">로그인</h1>
-            <form th:action="@{/login}" method="POST">
+            <form th:action="@{/auth/login}" method="POST">
                 <input
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
@@ -33,7 +33,7 @@
 
         <div class="text-grey-dark mt-6">
             아직 BetterPlace 회원이 아니신가요?
-            <a class="no-underline border-b border-blue text-blue" href="../signup">
+            <a class="no-underline border-b border-blue text-blue" th:href="@{/auth/signup}">
                 회원가입
             </a>
         </div>

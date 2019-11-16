@@ -49,12 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/","/login","/signup", "/logout").permitAll()
+                .antMatchers("/","/auth/**").permitAll()
                 //.antMatchers("/partner").hasRole("PARTNER")
                 .anyRequest().authenticated()
         .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/auth/login")
                 .defaultSuccessUrl("/")
                 .usernameParameter("partnerId")
                 .passwordParameter("partnerPassword")
