@@ -41,8 +41,8 @@
 
 1. 프로젝트 root 폴더에서 ./buildew clean build 실행  
 2. 생성된 build/libs/ 안에 있는 생성된 jar 파일을 실행 (java -jar 생성된jar파일 옵션)  
-    1. aws 옵션을 주면 AWS 프로퍼티 정보를 읽어서 실행 (AWS RDS 이용)  
-    2. 파라미터를 안주면 Local 프로퍼티 정보를 읽어서 실행됨 (Local DB 이용)  
+    1. Default = Local Properties  
+    2. --spring.profiles.active=aws 옵션을 주면 application-aws.properties 파일을 읽는다.  
 
 ## Code Rule
 
@@ -56,11 +56,14 @@
 
 ## Schedule
 
-8.01 ~ 8.03 : 스터디 계획  
-8.04 ~ 8.10 : 어떤 프로젝트로 할지 정하기  
-8.11 ~ 8.16 : Spring Boot 공부  
-8.17 ~ 8.24 : 화면정의서 관리자 / 사용자 정의  
-8.25 ~ 8.31 : DB 설계  
-9.01 ~ 9.08 : GitHub 설정 및 AWS 구축  
-9.09 ~ 9.14 : DB 설계 및 RDS 적용  
+08.01 ~ 08.03 : 스터디 계획  
+08.04 ~ 08.10 : 어떤 프로젝트로 할지 정하기  
+08.11 ~ 08.16 : Spring Boot 공부  
+08.17 ~ 08.24 : 화면정의서 관리자 / 사용자 정의  
+08.25 ~ 08.31 : DB 설계  
+09.01 ~ 09.08 : GitHub 설정 및 AWS 구축  
+09.09 ~ 09.14 : DB 설계 및 RDS 적용  
+09.15 ~ 10.05 : DB JPA 매핑  
+10.06 ~       : 코드 구현  
+
 
