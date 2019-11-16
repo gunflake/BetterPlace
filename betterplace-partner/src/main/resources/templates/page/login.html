@@ -1,12 +1,10 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/default :: layout (~{::head}, ~{::body})}">
+
+<th:block th:fragment="head"></th:block>
+
+<th:block th:fragment="body">
+<div class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
 <div class="bg-grey-lighter min-h-screen flex flex-col">
     <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
@@ -39,5 +37,6 @@
         </div>
     </div>
 </div>
-</body>
+</div>
+</th:block>
 </html>
