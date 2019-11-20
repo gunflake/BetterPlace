@@ -30,19 +30,70 @@
 
         <div class="w-5/12 md:items-center md:w-auto flex">
           <div class="md:flex hidden">
+            <a class="block text-white text-xl font-base mr-4" href="/">기획전</a>
             <a class="block text-white text-xl font-base mr-4" href="/link">공간 등록하기</a>
           </div>
           <div class="flex text-sm" v-else>
-          	<a class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+          	<!--<a class="p-2 ml-2 bg-white text-teal-500 font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-100" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
             <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" sec:authorize="isAnonymous()" th:href="@{/join}">Sign up</a>
-            <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
-          </div>
-          <div class="container">
-            <!--<i data-toggle="modal" data-target="#sidebar-right" class=" fas fa-bars pull-right" ></i>-->
-            <button type="button" data-toggle="modal" data-target="#sidebar-right" class="btn btn-primary navbar-btn pull-right">Right Sidebar</button>
+            <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>-->
+            <span style="font-size:30px;cursor:pointer;float:right" onclick="openNav()">&#9776;</span>
           </div>
         </div>
     </nav>
+
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div id="profile" class="sidenav_cont profile">
+        <img src="image/img_avatar.png" alt="profile" class="img_profile">
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" style="position: relative;width:100px;display: inline-block;">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/}" style="position: relative;width:100px;display: inline-block;">Edit Profile</a>
+      </div>
+      <div id="menu_top" class="sidenav_cont menu_top">
+        <a>
+          link1
+        </a>
+        <a>
+          link2
+        </a>
+        <a>
+          link3
+        </a>
+      </div>
+      <div id="title" class="sidenav_cont title">
+        <a>이 달의 기획전</a>
+      </div>
+      <div id="menu" class="sidenav_cont menu">
+        <a>이 달의 기획전</a>
+        <a>이 달의 기획전</a>
+        <a>이 달의 기획전</a>
+        <a>이 달의 기획전</a>
+        <a>이 달의 기획전</a>
+        <a>이 달의 기획전</a>
+      </div>
+      <div id="sidenav_footer" class="sidenav_cont sidenav_footer">
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" style="position: relative;width:100px; display:block;">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" style="position: relative;width:100px; display:block;">Logout</a>
+        <span>The Better Place Corp.</span>
+      </div>
+      <a href="/">호스트 센터로 이동</a>
+    </div>
+
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "300px";
+        document.getElementById("main").style.marginRight = "0";
+
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginRight= "0"; // div id="main" 지정 아직 못함, 이미지 파일 음영 불가
+
+        document.body.style.backgroundColor = "white";
+      }
+    </script>
   </header>
 
 </body>
