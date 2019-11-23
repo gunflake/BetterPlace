@@ -5,6 +5,8 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+**/bin/**
+
 ### STS ###
 .apt_generated
 .classpath
@@ -21,7 +23,7 @@ build/
 *.ipr
 out/
 
-*.DS_Store 
+*.DS_Store
 
 ### NetBeans ###
 /nbproject/private/
@@ -32,6 +34,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-### 혁민 설정 ###
-/betterplace-customer/src/main/java/com/dongisarang/user/test/

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+<form>
+    <div th:fragment="input (name, type)">
+        <div class="flex flex-col mt-4" th:switch="${type}">
+            <input th:case="'text'" th:id="${name}" type="text" class="flex-grow h-8 px-2 border rounded border-grey-400" th:name="${name}" value="" th:placeholder="${name}" />
+            <input th:case="'password'" th:id="${name}" type="password" class="flex-grow h-8 px-2 border rounded border-grey-400" th:name="${name}" value="" th:placeholder="${name}" />
+        </div>
+    </div>
+</form>
+</body>
+</html>

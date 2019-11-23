@@ -1,0 +1,12 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<label class="container pr-8" th:fragment="radioButton(title, name, checked)" th:inline="text">[[${title}]]
+    <input type="radio" th:checked="${checked}"  th:name="${name}">
+    <span class="checkmark"></span>
+</label>
+
+</body>
+</html>

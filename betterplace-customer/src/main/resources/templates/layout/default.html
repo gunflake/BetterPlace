@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:fragment="layout (head, template)">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="script" href="js/all.js">
+        <link rel="stylesheet" href="css/sidebar.css">
+<!--        <link rel="stylesheet" href="css/bootstrap.css">-->
+        <link rel="stylesheet" href="css/tailwind.css" />
+        <link rel="stylesheet" href="css/style_hs.css">
+        <!--sideNav(modal) script-->
+        <script type="text/javascript">
+            $(document).ready (function () {
+                $(".modal a").not (".dropdown-toggle").on ("click", function () {
+                    $(".modal").modal ("hide");
+                });
+            });
+        </script>
+        <th:block th:include="${head}"/>
+    </head>
+    <body class="h-screen overflow-hidden flex items-center justify-center bg-white">
+        <div class="h-screen w-screen overflow-auto ">
+            <header th:replace="~{components/header :: header}"></header>
+            <th:block th:include="${template}"/>
+            <footer th:replace="~{components/footer :: footer}"></footer>
+        </div>
+    </body>
+    <th:block th:replace="~{components/sideNav :: sidenav}"/>
+</html>
