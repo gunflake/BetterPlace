@@ -1,5 +1,8 @@
-<html lang="ko" xmlns:th="https://www.thymeleaf.org"
-      th:replace="~{layout/default :: layout (~{::body})}">
+<html lang="ko" xmlns:th="https://www.thymeleaf.org" th:replace="~{layout/default :: layout (~{::head}, ~{::body})}">
+
+<th:block th:fragment="head">
+    <!--<link rel -->
+</th:block>
 
 <th:block th:fragment="body">
     <div class="h-screen overflow-hidden flex items-center justify-center">
