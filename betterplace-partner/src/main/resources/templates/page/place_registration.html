@@ -1,91 +1,88 @@
-<!DOCTYPE html>
-<html lang="en" th:replace="~{layout/default :: layout (~{::body})}" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{layout/default :: layout (~{::body})}">
 
-<div class="container mx-auto flex-1 flex flex-col items-center justify-center px-2" >
-    <div class="w-2/3 overflow-scroll" >
-        <h1 class="mb-8 text-2xl text-center">공간 등록하기</h1>
-        <form th:action="@{/placeregistration}" method="POST">
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placename">
-                        공간명
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placename" type="text" placeholder="">
-                </div>
+<th:block th:fragment="body">
+    <div class="bg-scroll pt-10 bg-gray-120">
+        <div class="container mx-auto flex-1 flex flex-col items-center justify-center px-2" >
+            <div class="w-2/3" >
+                <h1 class="mb-8 text-2xl text-center">공간 등록하기</h1>
+                <form th:action="@{/placeregistration}" method="POST">
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placename">
+                                공간명
+                            </label>
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placename" type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placedescription">
+                                공간 한줄 소개
+                            </label>
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placedescription" type="text" placeholder="공간을 소개하는 한줄 문장을 입력해 주세요">
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeintro">
+                                공간 소개
+                            </label>
+                            <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeintro" type="text" placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."></textarea>
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placetag">
+                                공간 태그
+                            </label>
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placetag" type="text" placeholder="태그를 입력해 주세요.">
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placesss">
+                                시설안내
+                            </label>
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placesss" type="text" placeholder="최대 10개까지 작성가능합니다.">
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="plcaesssa">
+                                예약 시 주의사항
+                            </label>
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="plcaesssa" type="text" placeholder="최대 10개까지 작성가능합니다.">
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeurl">
+                                웹사이트
+                            </label>
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeurl" type="text" placeholder="웹사이트 URL을 입력해 주세요.">
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeimage">
+                                대표이미지
+                            </label>
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeimage" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)">
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeaddress">
+                                주소(위치)
+                            </label>
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeaddress" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)">
+                            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeaddress2" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)">
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placedescription">
-                        공간 한줄 소개
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placedescription" type="text" placeholder="공간을 소개하는 한줄 문장을 입력해 주세요">
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeintro">
-                        공간 소개
-                    </label>
-                    <textarea class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeintro" type="text" placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."></textarea>
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placetag">
-                        공간 태그
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placetag" type="text" placeholder="태그를 입력해 주세요.">
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placesss">
-                        시설안내
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placesss" type="text" placeholder="최대 10개까지 작성가능합니다.">
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="plcaesssa">
-                        예약 시 주의사항
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="plcaesssa" type="text" placeholder="최대 10개까지 작성가능합니다.">
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeurl">
-                        웹사이트
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeurl" type="text" placeholder="웹사이트 URL을 입력해 주세요.">
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeimage">
-                        대표이미지
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeimage" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)">
-                </div>
-            </div>
-            <div class="-mx-3 md:flex mb-6">
-                <div class="md:w-full px-3">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeaddress">
-                        주소(위치)
-                    </label>
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeaddress" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)">
-                    <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeaddress2" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)">
-                </div>
-            </div>
-        </form>
-
+        </div>
     </div>
-</div>
-</body>
+</th:block>
 </html>
