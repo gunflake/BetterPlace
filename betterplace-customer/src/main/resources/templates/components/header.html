@@ -37,10 +37,29 @@
             <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" sec:authorize="isAnonymous()" th:href="@{/join}">Sign up</a>
             <a class="p-2 ml-2 bg-teal-500 text-gray-100 font-semibold leading-none border border-teal-600 rounded hover:border-transparent hover:bg-teal-600" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
           </div>
-          <div class="container">
-            <!--<i data-toggle="modal" data-target="#sidebar-right" class=" fas fa-bars pull-right" ></i>-->
-            <button type="button" data-toggle="modal" data-target="#sidebar-right" class="btn btn-primary navbar-btn pull-right">Right Sidebar</button>
+          <div>
+            <div id="mySidenav" class="sidenav">
+              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+              <a href="#">About</a>
+              <a href="#">Services</a>
+              <a href="#">Clients</a>
+              <a href="#">Contact</a>
+            </div>
+
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
           </div>
+
+          <script>
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+            }
+          </script>
+
         </div>
     </nav>
   </header>
