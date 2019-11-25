@@ -1,4 +1,4 @@
-package com.dongisarang.admin;
+package com.dongisarang.partner;
 
 
 import org.springframework.boot.SpringApplication;
@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class AdminApplication {
+public class PartnerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminApplication.class, args);
+        SpringApplication.run(PartnerApplication.class, args);
     }
 }
