@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<div class="flex py-4 border-b border-gray-400" th:fragment="checkBox(title, name, necessary)">
+    <label class="block text-black font-bold">
+        <input class="mr-4 leading-tight" th:id="${name}" th:name="${name}" type="checkbox" style="transform: scale(1.5);">
+        <span class="text-lg" th:text="${title}">[규정 내용]</span>
+        <span class="text-lg text-red-600" th:if="${necessary}">(필수)</span>
+    </label>
+</div>
+
+</body>
+</html>

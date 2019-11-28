@@ -7,23 +7,23 @@
         <div class="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0" style="height: 500px">
             <div class="flex flex-col w-full md:w-1/2 p-4">
                 <div class="flex flex-col flex-1 justify-center mb-8">
-                    <h1 class="text-4xl text-center font-thin">Welcome Back</h1>
+                    <h1 class="text-4xl text-center font-thin">Create Account</h1>
                     <div class="w-full mt-4">
                         <form th:object="${Customer}" class="form-horizontal w-3/4 mx-auto" method="POST" >
 
-                            <div th:replace="~{components/member/inputField :: input('username', 'text')}" ></div>
-                            <div th:replace="~{components/member/inputField :: input('password', 'password')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('customerId', 'text')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('email', 'text')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('customerPassword', 'password')}" ></div>
+                            <div th:replace="~{components/member/inputField :: input('nickname', 'text')}" ></div>
 
-                            <div class="flex items-center mt-4">
-                                <input type="checkbox" name="remember" id="remember" class="mr-2"> <label for="remember" class="text-sm text-grey-dark">Remember Me</label>
-                            </div>
+                            <div th:replace="~{components/member/checkBox :: check('agree', '아래 약관에 모두 동의합니다.')}"></div>
+                            <div th:replace="~{components/member/checkBox :: check('serviceAgree', '서비스 이용약관(필수)')}"></div>
+                            <div th:replace="~{components/member/checkBox :: check('userInfoAgree', '개인정보 처리 방침(필수)')}"></div>
+
                             <div class="flex flex-col mt-8">
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded">
-                                    Login
-                                </button>
-                                <a href="/join" class="bg-green-500 hover:bg-green-700 text-white text-sm font-semibold py-2 px-4 rounded text-center">
                                     Join
-                                </a>
+                                </button>
                             </div>
                         </form>
                         <div class="text-center mt-4">

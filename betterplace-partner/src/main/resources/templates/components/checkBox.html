@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+<form>
+    <div th:fragment="check (name, content)">
+
+        <div class="flex items-center mt-4">
+            <input type="checkbox" th:name="${name}" th:id="${name}" class="mr-2">
+            <label th:for="${name}" class="text-sm text-grey-dark" th:text="${content}"></label>
+        </div>
+
+
+    </div>
+</form>
+</body>
+</html>
