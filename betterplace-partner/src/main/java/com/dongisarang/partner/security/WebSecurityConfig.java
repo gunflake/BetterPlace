@@ -1,7 +1,7 @@
-package com.dongisarang.admin.security;
+package com.dongisarang.partner.security;
 
-import com.dongisarang.admin.partner.Partner;
-import com.dongisarang.admin.partner.PartnerService;
+import com.dongisarang.partner.partner.Partner;
+import com.dongisarang.partner.partner.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/templates/**");
+        web.ignoring().mvcMatchers("/templates/**","/css/**");
     }
 
     @Override

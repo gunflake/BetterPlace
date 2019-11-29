@@ -1,4 +1,4 @@
-package com.dongisarang.admin.mailservice;
+package com.dongisarang.partner.mailservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
