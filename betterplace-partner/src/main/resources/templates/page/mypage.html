@@ -1,9 +1,7 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<head>
-    <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">
+<html lang="ko" xmlns:th="https://www.thymeleaf.org" th:replace="~{layout/default :: layout (~{::head}, ~{::body})}">
+
+<th:block th:fragment="head">
     <style>
-        /* The switch - the box around the slider */
         .switch {
             position: relative;
             display: inline-block;
@@ -66,8 +64,10 @@
             border-radius: 50%;
         }
     </style>
-</head>
-<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+</th:block>
+
+<th:block th:fragment="body">
+
 <div class="min-h-screen flex flex-col">
     <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
@@ -89,7 +89,7 @@
                         <label for="profile">프로필 변경하기</label>
                         <input type="file" id="profile"/>
                     </div> -->
-                    <button style="font-size: 13px" class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded mr-2" th:align="center">
+                    <button style="font-size: 13px" class="bg-transparent hover:bg-blue text-blue-dark font-semibold py-2 px-4 border border-blue hover:border-transparent rounded mr-2" th:align="center">
                         프로필 변경하기
                     </button>
                 </div>
@@ -139,13 +139,13 @@
                         </tr>
                     </table>
                     <br><br>
-                    <button
+                    <a
                             type="submit"
-                            class="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1">확인</button>
+                            class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1">확인</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
-</body>
+</th:block>
 </html>

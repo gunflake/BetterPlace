@@ -24,4 +24,10 @@ public class PartnerService {
         return partnerRepository.findByPartnerId(partnerId);
     }
 
+    /* 비밀번호 변경 */
+    public void changePassword(Partner partner, String passwordchange)
+    {
+        partner.setPartnerPassword(passwordEncoder.encode(passwordchange));
+        partnerRepository.save(partner);
+    }
 }
