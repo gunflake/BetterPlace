@@ -18,7 +18,7 @@ public class PartnerController {
     /* main 페이지로 이동한다 */
     @GetMapping("/")
     public String index(){
-        return "page/main";
+        return "page/notice";
     }
 
     /* 로그인 페이지로 이동한다 */
@@ -71,5 +71,9 @@ public class PartnerController {
         return "redirect:/login";
     }
 
+    @PostMapping(value="/notice")
+    public String initNotice() {
+        return "page/notice";
+    }
 }
 
