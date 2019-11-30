@@ -50,7 +50,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/","/auth/**").permitAll()
-                //.antMatchers("/partner").hasRole("PARTNER")
                 .anyRequest().authenticated()
         .and()
                 .formLogin()
