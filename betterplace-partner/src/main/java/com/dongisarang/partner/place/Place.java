@@ -22,6 +22,13 @@ public class Place {
     @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
     private List<PlaceDtl> placeDtls;
 
+    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
+    private List<PlaceRefund> placeRefunds;
+
+    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
+    private List<PlaceInfo> placeInfos;
+
+
     public boolean addPlaceDtl (PlaceDtl placeDtl) {
         if(placeDtls == null){
             placeDtls = new ArrayList<>();

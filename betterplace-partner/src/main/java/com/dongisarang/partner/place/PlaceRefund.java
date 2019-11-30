@@ -2,15 +2,13 @@ package com.dongisarang.partner.place;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-public class PlaceInfo {
+public class PlaceRefund {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="placeNo")
@@ -18,16 +16,14 @@ public class PlaceInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer placdinfono; // 공간정보번호
+    // 번호
+    private Integer placerefundno;
 
     @Column
-    private Integer day; // 요일
+    // 이용전날짜
+    private Integer beforeday;
 
     @Column
-    @CreationTimestamp
-    private Date starttime; // 시작시간
-
-    @Column
-    @CreationTimestamp
-    private Date endtime;  // 종료시간
+    // 환불%금액
+    private Integer refundpercent;
 }

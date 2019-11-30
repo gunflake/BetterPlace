@@ -2,17 +2,24 @@ package com.dongisarang.partner.place;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class PlaceDtl {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="placeNo")
     private Place place;
+
+    @OneToMany (mappedBy = "placeDtl", cascade = CascadeType.ALL)
+    private List<PlaceDtlPrice> placeDtlPrices;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +37,8 @@ public class PlaceDtl {
     @Column
     private Integer maxcount; // 최대예약인원
 
-    public PlaceDtl(String placedtlname, String placedtlintro, Integer mincount, Integer maxcount)
-    {
-        this.placedtlname   = placedtlname;
-        this.placedtlintro  = placedtlintro;
-        this.mincount       = mincount;
-        this.maxcount       = maxcount;
-    }
+    // 기본 생성자
+    public PlaceDtl () {}
 
     public PlaceDtl(Place place, String placedtlname, String placedtlintro, Integer mincount, Integer maxcount)
     {
@@ -46,4 +48,6 @@ public class PlaceDtl {
         this.mincount       = mincount;
         this.maxcount       = maxcount;
     }
+
+
 }
