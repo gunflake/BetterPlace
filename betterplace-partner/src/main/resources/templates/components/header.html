@@ -72,30 +72,28 @@
         </a>
       </div>
       <div id="menu" class="sidenav_cont menu">
-        <a href="/" class="border-solid border-b border-gray-500">
-          <span>&nbsp;&nbsp;Better Place 홈</span>
-          <i class="fas fa-angle-right text-right"></i>
-        </a>
-        <a href="/" class="border-solid border-b border-gray-500">
-          <span>&nbsp;&nbsp;써 본 사람</span>
-          <i class="fas fa-angle-right text-right"></i>
-        </a>
-        <a href="/" class="border-solid border-b border-gray-500">
-          <span>&nbsp;&nbsp;공지사항</span>
-          <i class="fas fa-angle-right text-right"></i>
-        </a>
-        <a href="/" class="border-solid border-b border-gray-500">
-          <span>&nbsp;&nbsp;도움말</span>
-          <i class="fas fa-angle-right text-right"></i>
-        </a>
-        <a href="/" class="border-solid border-b border-gray-500">
-          <span>&nbsp;&nbsp;1:1문의</span>
-          <i class="fas fa-angle-right text-right"></i>
-        </a>
-        <a href="/">
-          <span>&nbsp;&nbsp;서비스 정보</span>
-          <i class="fas fa-angle-right text-right"></i>
-        </a>
+        <div class="bg-white shadow w-64 my-2" style="width:100%;">
+          <ul class="list-reset">
+            <li >
+              <a href="#" class="block p-4 text-grey-darker font-bold border-purple hover:bg-grey-lighter border-r-4">Better Place Home</a>
+            </li>
+            <li >
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">써 본 사람</a>
+            </li>
+            <li >
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">공지사항</a>
+            </li>
+            <li >
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">도움말</a>
+            </li>
+            <li >
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">1:1문의</a>
+            </li>
+            <li >
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">서비스 정보</a>
+            </li>
+          </ul>
+        </div>
       </div>
       <div id="sidenav_footer" class="sidenav_cont sidenav_footer">
         <a sec:authorize="isAnonymous()" th:href="@{/login}" class="text-center">Login</a>
