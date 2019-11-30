@@ -1,0 +1,111 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<header>
+    <title>Notice</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</header>
+<body>
+<form method="Post">
+    <input type="hidden" id="page" name="page" value="0">
+    <input type="hidden" id="size" name="size" value="10">
+    <input type="hidden" id="sort" name="sort" value="DESC">
+
+    <header>
+        <h1>Notice</h1>
+    </header>
+
+    <div>
+        List Page
+    </div>
+    <div>
+        <input type="text" id="search" name="search">
+        <button>검색</button>
+    </div>
+    <div>
+        <p>[[${result}]]</p>
+        <div>[[${result.content}]]</div>
+    </div>
+    <!--<p>[[${result}]]</p>
+    <div th:with="result=${result.result}">
+        <div th:each="board:${result.content}">
+            [[${board}]]
+        </div>
+    </div>-->
+</form>
+</body>
+</html>
+
+<!--<html lang="ko" xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{layout/default :: layout (~{::head}, ~{::body})}">
+<th:block th:fragment="head">
+</th:block>
+<th:block th:fragment="body">
+<div class="flex items-center justify-center">
+<div class="container">
+    <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+        <tbody class="flex-1 sm:flex-none">
+        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+            <td class="border-grey-light border hover:bg-gray-100 p-3">John Covv</td>
+            <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">contato@johncovv.tech</td>
+            <td class="border-grey-light border hover:bg-gray-100 p-3 cursor-pointer">
+                <i class="far fa-angle-down"></i>
+            </td>
+        </tr>
+        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+            <td class="border-grey-light border hover:bg-gray-100 p-3">Michael Jackson</td>
+            <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">m_jackson@mail.com</td>
+            <td class="border-grey-light border hover:bg-gray-100 p-3 cursor-pointer">
+                <i class="far fa-angle-down"></i>
+            </td>
+        </tr>
+        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+            <td class="border-grey-light border hover:bg-gray-100 p-3">Julia</td>
+            <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">julia@mail.com</td>
+            <td class="border-grey-light border hover:bg-gray-100 p-3">
+                <i class="far fa-angle-down"></i>
+            </td>
+        </tr>
+        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+            <td class="border-grey-light border hover:bg-gray-100 p-3">Martin Madrazo</td>
+            <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">martin.madrazo@mail.com</td>
+            <td class="border-grey-light border hover:bg-gray-100 p-3">
+                <i class="far fa-angle-down"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    @media (min-width: 640px) {
+        table {
+            display: inline-table !important;
+        }
+
+        thead tr:not(:first-child) {
+            display: none;
+        }
+    }
+
+    td:not(:last-child) {
+        border-bottom: 0;
+    }
+
+    th:not(:last-child) {
+        border-bottom: 2px solid rgba(0, 0, 0, .1);
+    }
+</style>
+</th:block>
+</html>-->

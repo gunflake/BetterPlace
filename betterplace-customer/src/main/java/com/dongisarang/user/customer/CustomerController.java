@@ -41,6 +41,14 @@ public class CustomerController {
         return "pages/profile";
     }
 
+    @GetMapping("/notice")
+    public String goNotice() { return "pages/notice"; }
+
+    @PostMapping("/notice")
+    public String getNotice() {
+        return "pages/notice";
+    }
+
     @GetMapping("/place")
     public String goPlace(Model model){
 
