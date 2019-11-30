@@ -1,7 +1,7 @@
-package com.dongisarang.partner.security;
+package com.dongisarang.admin.security;
 
-import com.dongisarang.partner.partner.Partner;
-import com.dongisarang.partner.partner.PartnerService;
+import com.dongisarang.admin.partner.Partner;
+import com.dongisarang.admin.partner.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

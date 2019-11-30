@@ -1,4 +1,4 @@
-package com.dongisarang.partner.partner;
+package com.dongisarang.admin.partner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

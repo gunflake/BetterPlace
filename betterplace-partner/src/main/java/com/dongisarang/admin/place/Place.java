@@ -1,4 +1,4 @@
-package com.dongisarang.partner.place;
+package com.dongisarang.admin.place;
 
 import lombok.Getter;
 import lombok.Setter;
