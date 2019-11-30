@@ -1,4 +1,4 @@
-package com.dongisarang.admin.partner;
+package com.dongisarang.partner.partner;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

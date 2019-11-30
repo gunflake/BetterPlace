@@ -1,4 +1,4 @@
-package com.dongisarang.admin;
+package com.dongisarang.partner;
 
 
 import org.springframework.boot.SpringApplication;
