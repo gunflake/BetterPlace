@@ -37,9 +37,9 @@ public class PageMaker<T> {
     }
 
     private void calcPages() {
-        int tempEndNum = (int)(Math.ceil(this.currentPageNum/10.0)*10);
+        int tempEndNum = (int)(Math.ceil(this.currentPageNum/5.0)*5);
 
-        int startNum = tempEndNum - 9;
+        int startNum = tempEndNum - 4;
 
         Pageable startPage = this.currentPage;
 
@@ -50,7 +50,7 @@ public class PageMaker<T> {
         this.prevPage = startPage.getPageNumber() <= 0 ? null : startPage.previousOrFirst();
 
         log.info("tempEndNum: " + tempEndNum);
-        log.info("thotal: " + totalPageNum);
+        log.info("total: " + totalPageNum);
 
         if(this.totalPageNum < tempEndNum) {
             tempEndNum = this.totalPageNum;
@@ -61,6 +61,8 @@ public class PageMaker<T> {
             pageList.add(startPage);
             startPage = startPage.next();
         }
+
+        log.info("pagelist size" + pageList.size());
 
         this.nextPage = startPage.getPageNumber() + 1 < totalPageNum ? startPage : null;
     }

@@ -1,21 +1,29 @@
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="https://www.thymeleaf.org">
 
 <header>
-    <title>Notice</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="text/javascript">
+    <script th:inline="javascript">
+
+        $(document).ready(function() {
+            var formObj = $("#movePage");
+
+            $(".pager a").click(function(e) {
+
+                e.preventDefault();
+
+                formObj.find('[name="page"]').val( $(this).attr('href') );
+
+                formObj.submit();
+            });
+
+        });
 
     </script>
 </header>
 <body>
-<form method="Post">
-    <input type="hidden" id="page" name="page" value="0">
-    <input type="hidden" id="size" name="size" value="10">
-    <input type="hidden" id="sort" name="sort" value="DESC">
-
     <header>
         <h1>Notice</h1>
     </header>
@@ -23,21 +31,43 @@
     <div>
         List Page
     </div>
+    <form method="Post">
     <div>
-        <input type="text" id="search" name="search">
+        <label>
+            <input type="text" id="search" name="search">
+        </label>
         <button>검색</button>
     </div>
+    </form>
+    <form id="movePage" th:action="@{notice}" method="get">
+        <input type="hidden" name="page" th:value="${result.currentPageNum}">
+    </form>
     <div>
         <p>[[${result}]]</p>
-        <div>[[${result.content}]]</div>
-    </div>
-    <!--<p>[[${result}]]</p>
-    <div th:with="result=${result.result}">
-        <div th:each="board:${result.content}">
-            [[${board}]]
+        <div th:with="result=${result.result}">
+            <ul>
+                <li th:each="board:${result.content}">
+                    [[${board}]]
+                </li>
+            </ul>
         </div>
-    </div>-->
-</form>
+    </div>
+    <nav>
+        <div>
+            <ul class="pager">
+                <li th:if="${result.prevPage}">
+                    <a th:href="${result.prevPage.pageNumber} + 1">PREV [[${result.prevPage.pageNumber} + 1 ]]</a>
+                </li>
+                <li th:each="p:${result.pageList}">
+                    <!--th:classappend="${p.pageNumber == result.currentPageNum-1} ? active : '' "-->
+                    <a th:href="${p.pageNumber} + 1">[[${p.pageNumber} + 1]]</a>
+                </li>
+                <li th:if="${result.nextPage}">
+                    <a th:href="${result.nextPage.pageNumber} + 1">NEXT [[${result.nextPage.pageNumber} + 1 ]]</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </body>
 </html>
 

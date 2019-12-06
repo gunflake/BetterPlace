@@ -20,18 +20,11 @@ public class BoardController {
     @Autowired
     BoardRepository repo;
 
+    	//40	0	Content040	Title040
     @GetMapping("notice")
     public String goNotice(PageVO vo, Model model) {
-        log.info("notice call");
 
-        /*for(int i = 0; i < 40; i++) {
-            Board bo = new Board();
-            bo.setBoardNo(i+1);
-            bo.setTitle("Title0"+(i+1));
-            bo.setContent("Content0"+(i+1));
-            bo.setBoardType(0);
-            repo.save(bo);
-        }*/
+        log.info("notice call");
 
         Pageable page = vo.makePageable("boardNo");
 
@@ -42,13 +35,7 @@ public class BoardController {
 
         log.info("total page number" + result.getTotalPages());
 
-        /*for( Board board : result) {
-            log.info(board.getContent());
-        }*/
-
-        PageMaker<Board> paging = new PageMaker<>(result);
-
-        model.addAttribute("result", result);
+        model.addAttribute("result", new PageMaker<>(result) );
 
         return "pages/notice";
     }
