@@ -68,84 +68,89 @@
 
 <th:block th:fragment="body">
 
-<div class="min-h-screen flex flex-col">
-    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-        <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <h1 class="mb-8 text-3xl text-center" style="font-size: 1.3em;">마이페이지</h1>
-            <form>
-                <div class="w-full p-2 text-lg font-bold border-blue-600 border-t"></div>
-                <div align="center">
-                    <div class="w-24 h-24 relative mb-4" >
-                        <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
-                            <span class="hidden group-hover:table-cell text-white font-bold align-middle">KR</span>
-                            <img src="https://pickaface.net/gallery/avatar/unr_random_180410_1905_z1exb.png" alt="lovely avatar" class="object-cover object-center w-full h-full visible group-hover:hidden" />
+    <div class="min-h-screen flex flex-col">
+        <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+            <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                <h1 class="mb-8 text-3xl text-center" style="font-size: 1.3em;">마이페이지</h1>
+                <form>
+                    <div class="w-full p-2 text-lg font-bold border-blue-600 border-t"></div>
+                    <div align="center">
+                        <div class="w-24 h-24 relative mb-4">
+                            <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
+                                <span class="hidden group-hover:table-cell text-white font-bold align-middle">KR</span>
+                                <img src="https://pickaface.net/gallery/avatar/unr_random_180410_1905_z1exb.png"
+                                     alt="lovely avatar"
+                                     class="object-cover object-center w-full h-full visible group-hover:hidden"/>
+                            </div>
                         </div>
+                        <div>
+                            <h4 th:text="${partner.getNickname()}"></h4>
+                        </div>
+                        <br>
+                       <!-- <button style="font-size: 13px"
+                                class="bg-transparent hover:bg-blue text-blue-dark font-semibold py-2 px-4 border border-blue hover:border-transparent rounded mr-2"
+                                th:align="center">
+                            프로필 변경하기
+                        </button>-->
                     </div>
-                    <div>
-                        <h4 th:text="${partner.getNickname()}"></h4>
-                    </div>
+                    <div class="w-full p-2 text-lg font-bold border-blue-600 border-b"></div>
                     <br>
-                    <!-- <div class="profile">
-                        <label for="profile">프로필 변경하기</label>
-                        <input type="file" id="profile"/>
-                    </div> -->
-                    <button style="font-size: 13px" class="bg-transparent hover:bg-blue text-blue-dark font-semibold py-2 px-4 border border-blue hover:border-transparent rounded mr-2" th:align="center">
-                        프로필 변경하기
-                    </button>
-                </div>
-                <div class="w-full p-2 text-lg font-bold border-blue-600 border-b"></div>
-                <br>
-                <div>
-                    <table width="400ex">
-                        <tr style="height:40px">
-                            <td width="30%"><font size="2.5em">닉네임</font></td>
-                            <td width="50%" th:text="${partner.getNickname()}"><font size="2.5em" style="font-weight: bold">노하람</font></td>
-                            <td width="20%"></td>
-                        </tr>
-                        <tr style="height:40px">
-                            <td width="30%"><font size="2.5em">이메일</font></td>
-                            <td width="50%" th:text="${partner.getPartnerId()}"><font size="2.5em" style="font-weight: bold">gkslwhs@naver.com</font></td>
-                            <td width="20%"></td>
-                        </tr>
-                        <tr style="height:40px">
-                            <td width="30%" ><font size="2.5em">연락처</h4></td>
-                            <td width="50%"><font size="2.5em" style="font-weight: bold">010-9032-2577</font></td>
-                            <td width="20%"><a style="font-size: 13px" >인증하기</a></td>
-                        </tr>
-                        <tr style="height:40px">
-                            <td width="30%" ><font size="2.5em">비밀번호</font></td>
-                            <td width="50%"><a th:href="@{mypage/changepassword}" style="font-size: 13px">변경하기</a> </td>
-                            <td width="20%"></td>
-                        </tr>
-                        <tr style="height:40px">
-                            <td width="30%" ><font size="2.5em">마케팅 수신동의</font></td>
-                            <td width="50%"><font size="2.5em" style="font-weight: bold">이메일</font></td>
-                            <td width="20%">
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr style="height:40px">
-                            <td width="30%"></td>
-                            <td width="50%"><font size="2.5em" style="font-weight: bold">SMS</font></td>
-                            <td width="20%">  <!-- Rounded switch -->
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                    </table>
-                    <br><br>
-                    <a
-                            type="submit"
-                            class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1">확인</a>
-                </div>
-            </form>
+                    <div>
+                        <table width="400ex">
+                            <tr style="height:40px">
+                                <td width="30%"><font size="2.5em">닉네임</font></td>
+                                <td width="50%" th:text="${partner.getNickname()}"><font size="2.5em"
+                                                                                         style="font-weight: bold">노하람</font>
+                                </td>
+                                <td width="20%"></td>
+                            </tr>
+                            <tr style="height:40px">
+                                <td width="30%"><font size="2.5em">이메일</font></td>
+                                <td width="50%" th:text="${partner.getPartnerId()}"><font size="2.5em"
+                                                                                          style="font-weight: bold">gkslwhs@naver.com</font>
+                                </td>
+                                <td width="20%"></td>
+                            </tr>
+                            <tr style="height:40px">
+                                <td width="30%"><font size="2.5em">연락처</h4></td>
+                                <td width="50%"><font size="2.5em" style="font-weight: bold">010-9032-2577</font></td>
+                                <td width="20%"><a style="font-size: 13px">인증하기</a></td>
+                            </tr>
+                            <tr style="height:40px">
+                                <td width="30%"><font size="2.5em">비밀번호</font></td>
+                                <td width="50%"><a th:href="@{mypage/changepassword}" style="font-size: 13px">변경하기</a>
+                                </td>
+                                <td width="20%"></td>
+                            </tr>
+                            <tr style="height:40px">
+                                <td width="30%"><font size="2.5em">마케팅 수신동의</font></td>
+                                <td width="50%"><font size="2.5em" style="font-weight: bold">이메일</font></td>
+                                <td width="20%">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr style="height:40px">
+                                <td width="30%"></td>
+                                <td width="50%"><font size="2.5em" style="font-weight: bold">SMS</font></td>
+                                <td width="20%">  <!-- Rounded switch -->
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                        <br><br>
+                        <a
+                                type="submit"
+                                class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1">확인</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </th:block>
 </html>
