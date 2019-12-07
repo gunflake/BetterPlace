@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PlaceController {
 
-    /* 공간 등록페이지 */
+    /**
+     * 공간 등록페이지로 이동
+     * @return
+     */
     @GetMapping("/place/registration")
     public String initPlaceRegistForm(){
 

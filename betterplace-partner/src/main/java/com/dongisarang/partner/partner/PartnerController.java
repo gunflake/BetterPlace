@@ -19,25 +19,39 @@ public class PartnerController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    /* Index 페이지로 이동한다 */
+    /**
+     * 메인 페이지로 이동
+     * @return
+     */
     @GetMapping("/")
     public String index(){
         return "page/index";
     }
 
-    /* 로그인 페이지로 이동한다 */
+    /**
+     * 로그인 페이지로 이동
+     * @return
+     */
     @GetMapping("/auth/login")
     public String initLoginForm(){
         return "page/login";
     }
 
-    /* 파트너 회원가입 페이지로 이동한다 */
+    /**
+     * 파트너 회원가입 페이지로 이동
+     * @return
+     */
     @GetMapping("/auth/signup")
     public String initSignupForm(){
         return "page/signup";
     }
 
-    /* 파트너 등록 후 로그인 페이지로 이동한다 */
+    /**
+     * 파트너 등록 후 로그인 페이지로 이동
+     * @param partner
+     * @param result
+     * @return
+     */
     @PostMapping("/auth/signup")
     public String processSignupForm(@Valid Partner partner, BindingResult result){
         //TODO: 유효성 추가
@@ -52,7 +66,12 @@ public class PartnerController {
     //TODO: 비밀번호 찾기 시 이메일 서비스 추가
 
 
-    /* 파트너 마이페이지 */
+    /**
+     * 파트너 마이페이지로 이동
+     * @param model
+     * @param principal
+     * @return
+     */
     @GetMapping("/mypage")
     public String initMypage(Model model, Principal principal){
 
@@ -64,14 +83,23 @@ public class PartnerController {
         return "page/mypage";
     }
 
-    /* 파트너 비밀번호 변경페이지 */
+    /**
+     * 파트너 비밀번호 변경 페이지로 이동
+     * @return
+     */
     @GetMapping("/mypage/changepassword")
     public String initPasswordForm(){
 
         return "page/changepassword";
     }
 
-    /* 파트너 비밀번호 변경 */
+    /**
+     * 파트너 비밀번호 변경 로직
+     * @param partnerPassword 기존 비밀번호
+     * @param changePassword  새 비밀번호
+     * @param principal
+     * @return
+     */
     @PostMapping("/mypage/changepassword")
     public String processPasswordForm(String partnerPassword, String changePassword, Principal principal){
 
