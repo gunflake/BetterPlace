@@ -37,6 +37,7 @@ public class PageMaker<T> {
     }
 
     private void calcPages() {
+        //TODO 페이지 계산 수정..
         int tempEndNum = (int)(Math.ceil(this.currentPageNum/5.0)*5);
 
         int startNum = tempEndNum - 4;
@@ -61,8 +62,6 @@ public class PageMaker<T> {
             pageList.add(startPage);
             startPage = startPage.next();
         }
-
-        log.info("pagelist size" + pageList.size());
 
         this.nextPage = startPage.getPageNumber() + 1 < totalPageNum ? startPage : null;
     }

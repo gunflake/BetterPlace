@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,15 +21,14 @@ public class BoardController {
     @Autowired
     BoardRepository repo;
 
-    	//40	0	Content040	Title040
     @GetMapping("notice")
-    public String goNotice(PageVO vo, Model model) {
+    public String goNotice(@ModelAttribute("pageVO") PageVO vo, Model model) {
 
         log.info("notice call");
 
         Pageable page = vo.makePageable("boardNo");
 
-        Page<Board> result = repo.findAll(repo.makePredicate(null,null), page);
+        Page<Board> result = repo.findAll(repo.makePredicateNotice(vo.getType(), vo.getKeyword()), page);
 
         log.info("" + page);
         log.info("" + result);
@@ -40,18 +40,25 @@ public class BoardController {
         return "pages/notice";
     }
 
-    @PostMapping("notice")
-    public void searchNotice(Pageable pageable) {
-        log.info("post notice");
-
-        //System.out.println(pageable.getPageNumber());
-        //System.out.println(pageable.getPageSize());
-        //System.out.println(pageable.getSort());
-    }
-
     @GetMapping("info")
-    public String goInfo(Pageable pageable, Model model) {
-        log.info("info call");
+    public String goInfo(@ModelAttribute("pageVO") PageVO vo, Model model) {
+        log.info("notice call");
+
+        Pageable page = vo.makePageable("boardNo");
+
+        if(vo.getType() == null) {
+            vo.setType(0);
+        }
+
+        Page<Board> result = repo.findAll(repo.makePredicateInfo(vo.getType(), vo.getKeyword()), page);
+
+        log.info(""+vo.getType());
+        log.info("" + page);
+        log.info("" + result);
+
+        log.info("total page number" + result.getTotalPages());
+
+        model.addAttribute("result", new PageMaker<>(result) );
         return "pages/info";
     }
 }

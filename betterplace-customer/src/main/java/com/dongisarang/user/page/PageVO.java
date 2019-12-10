@@ -9,8 +9,27 @@ public class PageVO {
 
     private int page;
 
+    private String keyword;
+    private Integer type;
+
     public PageVO() {
         this.page = 1;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public int getPage() {
