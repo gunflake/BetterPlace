@@ -13,14 +13,15 @@ import java.util.Date;
 @Getter
 @Setter
 /*@ToString( exclude = )*/
+@Table(uniqueConstraints = {@UniqueConstraint(name = "PARTNER_ID_UNIQUE", columnNames = {"partnerId"})})
 @ToString
 public class Partner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer partnerNo; //파트너번호(자동 증가값)
+    private Long partnerNo; //파트너번호(자동 증가값)
 
-    @Column
+    @Column(unique = true)
     private String partnerId; //아이디 (이메일형식)
 
     @Column
