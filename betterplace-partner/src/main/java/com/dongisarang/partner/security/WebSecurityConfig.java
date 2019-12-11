@@ -42,19 +42,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/templates/**", "/css/**");
+        web.ignoring().mvcMatchers("/templates/**");
+        web.ignoring().antMatchers("/css/**", "/script/**", "/image/**", "/fonts/**", "/lib/**", "/js/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/","/login","/signup", "/logout").permitAll()
-                //.antMatchers("/partner").hasRole("PARTNER")
+                .antMatchers("/", "/auth/**").permitAll()
                 .anyRequest().authenticated()
         .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/auth/login")
                 .defaultSuccessUrl("/")
                 .usernameParameter("partnerId")
                 .passwordParameter("partnerPassword")

@@ -1,0 +1,167 @@
+.h_intro {
+    position: relative;
+    padding-bottom: 16px;
+    margin: 70px 0 28px;
+    color: #000;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+
+
+.h_intro:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    height: 4px;
+    width: 20px;
+    background-color: #ffd014;
+}
+
+.tit {
+    left: 0;
+    padding-top: 3px;
+    vertical-align: middle;
+}
+
+.data {
+    color: #656565;
+    padding-top: 3px;
+    line-height: 28px;
+    vertical-align: middle;
+    padding-left: 29px;
+
+}
+
+.info_list li {
+    position: relative;
+    padding: 10px 0 8px;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 16px;
+}
+.review_box{
+    padding-bottom: 24px;
+}
+
+
+.review_box .rlist {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    font-size: 16px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.review_box .rlist .pf_img {
+    top: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+}
+
+.text_box .p_intro {
+    font-size: 16px;
+    line-height: 28px;
+    color: #656565;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.p_intro+.info_list {
+    margin-top: 35px;
+}
+
+
+
+
+.input[type="radio"] + .label .span {
+    transition: background .2s,
+    transform .2s;
+}
+
+.input[type="radio"] + .label .span:hover,
+.input[type="radio"] + .label:hover .span{
+    transform: scale(1.2);
+}
+
+.input[type="radio"]:checked + .label .span {
+    background-color: #3490DC; //bg-blue
+box-shadow: 0px 0px 0px 2px white inset;
+}
+
+.input[type="radio"]:checked + .label{
+    color: #3490DC; //text-blue
+}
+
+.ico_table {
+    background-size: 684px 663px;
+    background-image: url(../image/08341ee.png);
+    background-position: -599px -380px;
+    width: 34px;
+    height: 34px;
+}
+
+/* Radio Button Css Start*/
+.container {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Radio Button Css End*/
