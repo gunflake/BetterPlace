@@ -12,7 +12,9 @@ public class PlaceService {
     //}
 
     /* 장소 등록 */
-    public void createPlace(Place place) {
-        placeRepository.save(place);
+    public int createPlace(Place place)
+    {
+        Place savePlace = placeRepository.save(place);
+        return savePlace.getPlaceNo();
     }
 }

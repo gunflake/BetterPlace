@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -56,17 +58,38 @@ public class PlaceController {
         return "page/place_registration";
     }
 
-    /* 공간 등록 후 메인으로 이동한다.*/
+    /* 공간 등록 후 세부 공간 등록페이지로 이동한다.*/
     @PostMapping("/place/registration")
     public String processPlaceRegistration(Place place, BindingResult result){
         //TODO: 유효성 추가
         if(result.hasErrors()){
             return "/";
         }else{
-            placeService.createPlace(place);
-            return "redirect:/";
+            int placeno = placeService.createPlace(place);
+            return "redirect:/placeDtl/registration/"+placeno;
         }
     }
 
+    /* 세부 공간 등록페이지로 이동 */
+    @GetMapping("/placeDtl/registration/{placeNo}")
+    public String initPlaceDtlRegistForm(@PathVariable("placeNo") int placeNo){
+        return "page/placedtl_registration";
+    }
 
+    /* 공간 등록 후 메인으로 이동한다.*/
+    @PostMapping("/placeDtl/registration/{placeNo}")
+    public String processPlaceDtlRegistration(@PathVariable("placeNo") int placeNo, PlaceDtl placedtl, BindingResult result){
+        //TODO: 유효성 추가
+        log.info("placeNo"+ placeNo);
+        if(result.hasErrors()){
+            return "/";
+        }else{
+
+            Place place = placeRepository.findPlaceByPlaceNo(placeNo);
+            PlaceDtl placeDtlAdd = new PlaceDtl(place, placedtl.getPlacedtlname(), placedtl.getPlacedtlintro(), placedtl.getMincount(), placedtl.getMaxcount());
+
+            placeDtlRepository.save(placeDtlAdd);
+            return "redirect:/";
+        }
+    }
 }
