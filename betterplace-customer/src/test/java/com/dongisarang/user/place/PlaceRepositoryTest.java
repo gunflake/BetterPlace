@@ -27,7 +27,7 @@ public class PlaceRepositoryTest {
     private PartnerRepository partnerRepository;
 
     @BeforeEach
-    void savePartner() throws Exception{
+    void beforeProcess() throws Exception{
 
         //Partner1
         Partner partner1 = new Partner();
@@ -44,7 +44,26 @@ public class PlaceRepositoryTest {
         partnerRepository.save(partner2);
     }
 
-    @BeforeEach
+    @Test
+    void savePartner() throws Exception{
+        Partner partner1 = new Partner();
+        partner1.setPartnerId("gunflake09");
+        partner1.setEmail("gunflake09@naver.com");
+        partner1.setPartnerPassword("1234");
+        partnerRepository.save(partner1);
+        Optional<Partner> gunflake09 = partnerRepository.findByPartnerId("gunflake09");
+        System.out.println("날짜 :"+ gunflake09.get().getRegisterDate());
+
+        Thread.sleep(2000);
+
+        partner1.setEmail("1234");
+        partnerRepository.save(partner1);
+        Optional<Partner> gunflake10 = partnerRepository.findByPartnerId("gunflake09");
+        System.out.println("날짜 :"+ gunflake10.get().getRegisterDate());
+
+    }
+
+    @Test
     void savePlace() throws Exception{
         Place place1 = new Place();
         place1.setPlaceName("빈 브라더스 1호점");
@@ -52,9 +71,10 @@ public class PlaceRepositoryTest {
         place1.setPhone("0242239142");
 
         place1.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow());
-        place1.setPartner(partnerRepository.findByPartnerId("hskim").orElseThrow());
 
         placeRepository.save(place1);
+
+        placeRepository.findByPlaceNameLike("%브라더스%");
 
         /*
         Place place2 = new Place();

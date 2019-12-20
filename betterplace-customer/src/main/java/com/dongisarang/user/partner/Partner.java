@@ -3,6 +3,7 @@ package com.dongisarang.user.partner;
 import com.dongisarang.user.place.Place;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,12 +24,11 @@ public class Partner {
     @Column
     private String partnerPassword;
 
-    @Getter
-    @Setter
     @Column(length = 50)
     private String email;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date registerDate;
 
     @Temporal(TemporalType.TIMESTAMP)

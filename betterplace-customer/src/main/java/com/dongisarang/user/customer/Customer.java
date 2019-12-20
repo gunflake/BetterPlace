@@ -19,7 +19,7 @@ public class Customer {
     @Column(length = 20, unique = true)
     private String customerId; //유저아이디
 
-    @Column(length = 60)
+    @Column(length = 255)
     private String customerPassword; //비밀번호
 
     @Column(length = 20)

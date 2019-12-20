@@ -3,6 +3,8 @@ package com.dongisarang.user.place;
 import com.dongisarang.user.partner.Partner;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,12 +26,14 @@ public class Place {
     private String placeName;
 
     @Column(length = 100)
+    @Lob
     private String intro; // 공간 소개
 
     @Column(length = 50)
     private String tag;
 
     @Column
+    @Lob
     private String info; //시설 안내
 
     @Column(length = 45)
@@ -47,20 +51,25 @@ public class Place {
     @Column(length = 50)
     private String email;
 
-    @Column(length = 10)
+    @Column(length = 12)
     private String phone; //대표 전화
 
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date registerDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
 
     @Column
+    @ColumnDefault("1")
     private Byte state;
 
-    @Column(length = 100)
+    @Column(length = 255)
     private String image;
+
+    @Column
+    private Integer defaultPrice;
 
     public void setPartner(Partner partner){
 
@@ -72,4 +81,11 @@ public class Place {
         partner.getPlaces().add(this);
     }
 
+    @Override
+    public String toString() {
+        return "Place{" +
+                "placeNo=" + placeNo +
+                ", placeName='" + placeName + '\'' +
+                '}';
+    }
 }
