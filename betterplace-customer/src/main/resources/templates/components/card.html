@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="https://www.thymeleaf.org">
 <body>
       <div th:fragment="card (title, location, photoUrl, price, tags, href)">
-        <div class="bg-white shadow relative " onclick="location.href ='/place'" th:if="${title}">
+        <a th:href="@{/place/{href}(href=${href})}">
+        <div class="bg-white shadow relative" th:if="${title}">
           <div class="img-hover-zoom">
             <img class="h-56 w-full object-cover object-center " th:src="${photoUrl}" alt="" src="">
           </div>
@@ -20,6 +21,7 @@
             </div>
           </div>
         </div>
+        </a>
       </div>
 </body>
 </html>

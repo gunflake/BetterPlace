@@ -1,5 +1,7 @@
 package com.dongisarang.user.dev;
 
+import com.dongisarang.user.customer.Customer;
+import com.dongisarang.user.customer.CustomerService;
 import com.dongisarang.user.partner.Partner;
 import com.dongisarang.user.partner.PartnerRepository;
 import com.dongisarang.user.place.Place;
@@ -24,10 +26,22 @@ public class DummyData implements ApplicationRunner {
     @Autowired
     private PlaceRepository placeRepository;
 
+    @Autowired
+    private CustomerService customerService;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         savePartner();
         savePlace();
+        saveCustomer();
+    }
+
+    private void saveCustomer() {
+        Customer customer = new Customer();
+        customer.setCustomerId("gunflake09");
+        customer.setCustomerPassword("1234");
+        customerService.signUpCustomer(customer);
+
     }
 
     private void savePlace() {
