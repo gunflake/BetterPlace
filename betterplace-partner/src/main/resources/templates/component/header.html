@@ -47,7 +47,8 @@
       <div id="profile" class="sidenav_cont profile">
         <img th:src="@{/image/img_avatar.png}" alt="profile" class="img_profile">
         <a sec:authorize="isAnonymous()" th:href="@{/auth/login}" style="position: relative;width:100px;display: inline-block;">Login</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/}" style="position: relative;width:100px;display: inline-block;">Edit Profile</a>
+        <p sec:authorize="isAuthenticated()"><span sec:authentication="principal.username"></span></p>
+        <a sec:authorize="isAuthenticated()" th:href="@{/mypage}" style="position: relative;width:100px;display: inline-block;">프로필 관리</a>
       </div>
       <div id="menu_top" class="sidenav_cont menu_top">
         <a href="/" class="border-solid border-r border-gray-500 text-center">
@@ -96,8 +97,8 @@
         </div>
       </div>
       <div id="sidenav_footer" class="sidenav_cont sidenav_footer">
-        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="text-center">Login</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="text-center">Logout</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="text-center">로그인</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="text-center">로그아웃</a>
         <span>The Better Place Corp.</span>
       </div>
       <a class="text-center align-middle" href="/" style="background-color:#b3d9ff;height:70px;">
