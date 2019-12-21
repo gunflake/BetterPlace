@@ -7,13 +7,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 /*@ToString( exclude = )*/
-@Table(uniqueConstraints = {@UniqueConstraint(name = "PARTNER_ID_UNIQUE", columnNames = {"partnerId"})})
+//@Table(uniqueConstraints = {@UniqueConstraint(name = "PARTNER_ID_UNIQUE", columnNames = {"partnerId"})})
 @ToString
 public class Partner {
 
@@ -21,7 +22,7 @@ public class Partner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long partnerNo; //파트너번호(자동 증가값)
 
-    @Column(unique = true)
+    @Column(length = 50, unique = true, nullable = false)
     private String partnerId; //아이디 (이메일형식)
 
     @Column

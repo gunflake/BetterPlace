@@ -37,8 +37,16 @@ public class Reservation {
     public Integer paymentNo;
 
     //총결제금액
+    @Column
+    public Double totalPrice;
+
     //지불금액
+    @Column
+    public Double price;
+
     //쿠폰사용금액
+    @Column
+    public Double couponUsedPrice;
 
     @Column
     public String startDate;

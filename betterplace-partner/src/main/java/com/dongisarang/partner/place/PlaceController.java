@@ -15,4 +15,12 @@ public class PlaceController {
         return "page/place_registration";
     }
 
+    /**
+     * 공간 관리 페이지로 이동
+     * @return
+     */
+    @GetMapping("/manage/place")
+    public String initManageForm(){
+        return "/";
+    }
 }

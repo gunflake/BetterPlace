@@ -1,5 +1,7 @@
 package com.dongisarang.partner.partner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ public class PartnerController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    private static final Logger logger = LoggerFactory.getLogger(PartnerController.class);
 
     /**
      * 메인 페이지로 이동
