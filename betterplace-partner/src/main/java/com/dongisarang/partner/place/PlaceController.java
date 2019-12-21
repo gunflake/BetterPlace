@@ -4,10 +4,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -59,15 +56,27 @@ public class PlaceController {
     }
 
     /* 공간 등록 후 세부 공간 등록페이지로 이동한다.*/
-    @PostMapping("/place/registration")
-    public String processPlaceRegistration(Place place, BindingResult result){
-        //TODO: 유효성 추가
-        if(result.hasErrors()){
-            return "/";
-        }else{
-            int placeno = placeService.createPlace(place);
-            return "redirect:/placeDtl/registration/"+placeno;
+            @PostMapping("/place/registration")
+            public String processPlaceRegistration(Place place, BindingResult result){
+                //TODO: 유효성 추가
+                if(result.hasErrors()){
+                    return "/";
+                }else{
+                    int placeno = placeService.createPlace(place);
+                    return "redirect:/placeDtl/registration/" + placeno;
         }
+    }
+
+    /* 공간 환불 정보 등록 페이지로 이동 */
+    @GetMapping("/placerefund/registration")
+    public String initPlaceRefundRegistForm(@RequestParam("placeNo") int placeNo){
+        return "page/place_refund";
+    }
+
+    /* 공간 환불 정보 등록 */
+    @PostMapping("/placerefund/registration")
+    public String processPlaceRefundRegistration(@RequestParam("placeNo") int placeNo){
+            return "page/place_refund";
     }
 
     /* 세부 공간 등록페이지로 이동 */
@@ -76,7 +85,7 @@ public class PlaceController {
         return "page/placedtl_registration";
     }
 
-    /* 공간 등록 후 메인으로 이동한다.*/
+    /* 공간 상세 등록 */
     @PostMapping("/placeDtl/registration/{placeNo}")
     public String processPlaceDtlRegistration(@PathVariable("placeNo") int placeNo, PlaceDtl placedtl, BindingResult result){
         //TODO: 유효성 추가
@@ -92,4 +101,5 @@ public class PlaceController {
             return "redirect:/";
         }
     }
+
 }

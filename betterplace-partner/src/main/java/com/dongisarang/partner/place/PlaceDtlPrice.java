@@ -24,4 +24,7 @@ public class PlaceDtlPrice {
     @Column
     private Integer timeprice; // 시간당가격
 
+
+
+
 }
