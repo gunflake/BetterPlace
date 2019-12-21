@@ -40,6 +40,8 @@ public class DummyData implements ApplicationRunner {
         Customer customer = new Customer();
         customer.setCustomerId("gunflake09");
         customer.setCustomerPassword("1234");
+        customer.setNickname("gunflake");
+        customer.setEmail("gunflake09@gmail.com");
         customerService.signUpCustomer(customer);
 
     }

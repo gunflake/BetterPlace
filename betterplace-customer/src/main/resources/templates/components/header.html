@@ -45,7 +45,7 @@
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <div id="profile" class="sidenav_cont profile">
-        <img src="image/img_avatar.png" alt="profile" class="img_profile">
+        <img th:src="@{/image/img_avatar.png}" alt="profile" class="img_profile" >
         <a sec:authorize="isAnonymous()" th:href="@{/login}" style="position: relative;width:100px;display: inline-block;">Login</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/}" style="position: relative;width:100px;display: inline-block;">Edit Profile</a>
       </div>
