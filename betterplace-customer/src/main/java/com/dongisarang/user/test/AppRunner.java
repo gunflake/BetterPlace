@@ -15,7 +15,7 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        vincent();
+        //vincent();
         hskim();
     }
 
