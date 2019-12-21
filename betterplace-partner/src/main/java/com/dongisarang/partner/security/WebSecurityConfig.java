@@ -42,14 +42,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/templates/**", "/css/**");
+        web.ignoring().mvcMatchers("/templates/**");
+        web.ignoring().antMatchers("/css/**", "/script/**", "/image/**", "/fonts/**", "/lib/**", "/js/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/","/auth/**").permitAll()
+                .antMatchers("/", "/auth/**").permitAll()
                 .anyRequest().authenticated()
         .and()
                 .formLogin()
