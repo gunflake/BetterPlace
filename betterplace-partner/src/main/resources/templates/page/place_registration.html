@@ -5,10 +5,10 @@
 </th:block>
 
 <th:block th:fragment="body">
-    <div class="bg-scroll pt-10 bg-gray-100">
+    <div class="bg-scroll bg-gray-100">
         <div class="container mx-auto flex-1 flex flex-col items-center justify-center px-2" >
             <div class="w-2/3" >
-                <h1 class="mb-8 text-2xl text-center">공간 등록하기</h1>
+                <h1 class="mt-8 mb-8 text-2xl text-center">공간 등록하기</h1>
                 <form th:action="@{/place/registration}" th:object="${place}" method="POST">
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">

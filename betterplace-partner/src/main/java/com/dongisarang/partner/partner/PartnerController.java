@@ -114,7 +114,7 @@ public class PartnerController {
         // 새 비밀번호 등록
         partnerService.changePassword(partner,changePassword);
 
-        return "redirect:/";
+        return "redirect:/mypage";
     }
 
 }
