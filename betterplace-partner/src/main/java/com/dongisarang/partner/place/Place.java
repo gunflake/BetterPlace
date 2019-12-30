@@ -6,7 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,6 +18,23 @@ public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer placeNo; // 공간번호
+
+    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
+    private List<PlaceDtl> placeDtls;
+
+    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
+    private List<PlaceRefund> placeRefunds;
+
+    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
+    private List<PlaceInfo> placeInfos;
+
+
+    public boolean addPlaceDtl (PlaceDtl placeDtl) {
+        if(placeDtls == null){
+            placeDtls = new ArrayList<>();
+        }
+        return this.placeDtls.add(placeDtl);
+    }
 
     @Column
     private String placeName; // 공간명

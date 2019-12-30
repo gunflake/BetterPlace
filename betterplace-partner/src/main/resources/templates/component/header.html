@@ -1,26 +1,125 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-    <header class="bg-white shadow">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between py-4">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-purple-600" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M14.5,16 C14.2238576,16 14,15.7761424 14,15.5 L14,9.5 C14,9.22385763 14.2238576,9 14.5,9 L16,9 C17.1045695,9 18,9.8954305 18,11 C18,11.4116588 17.8756286,11.7942691 17.6624114,12.1123052 C18.4414283,12.3856578 19,13.1275982 19,14 C19,15.1045695 18.1045695,16 17,16 L14.5,16 Z M15,15 L17,15 C17.5522847,15 18,14.5522847 18,14 C18,13.4477153 17.5522847,13 17,13 L15,13 L15,15 Z M15,12 L16,12 C16.5522847,12 17,11.5522847 17,11 C17,10.4477153 16.5522847,10 16,10 L15,10 L15,12 Z M12.9499909,4 L19.5,4 C20.8807119,4 22,5.11928813 22,6.5 L22,19.5 C22,20.8807119 20.8807119,22 19.5,22 L13.5,22 C12.2700325,22 11.2475211,21.1117749 11.0389093,19.9417682 C10.8653433,19.9799013 10.6850188,20 10.5,20 L4.5,20 C3.11928813,20 2,18.8807119 2,17.5 L2,4.5 C2,3.11928813 3.11928813,2 4.5,2 L10.5,2 C11.709479,2 12.7183558,2.85887984 12.9499909,4 Z M13,5 L13,17.5 C13,18.3179089 12.6072234,19.0440799 12,19.5001831 C12.0000989,20.3285261 12.6716339,21 13.5,21 L19.5,21 C20.3284271,21 21,20.3284271 21,19.5 L21,6.5 C21,5.67157288 20.3284271,5 19.5,5 L13,5 Z M8.56005566,11.4964303 C8.54036595,11.4987873 8.52032459,11.5 8.5,11.5 L6.5,11.5 C6.47967541,11.5 6.45963405,11.4987873 6.43994434,11.4964303 L5.96423835,12.6856953 C5.86168164,12.9420871 5.57069642,13.066795 5.31430466,12.9642383 C5.0579129,12.8616816 4.93320495,12.5706964 5.03576165,12.3143047 L7.03576165,7.31430466 C7.20339081,6.89523178 7.79660919,6.89523178 7.96423835,7.31430466 L9.96423835,12.3143047 C10.066795,12.5706964 9.9420871,12.8616816 9.68569534,12.9642383 C9.42930358,13.066795 9.13831836,12.9420871 9.03576165,12.6856953 L8.56005566,11.4964303 Z M8.16148352,10.5 L7.5,8.8462912 L6.83851648,10.5 L8.16148352,10.5 Z M10.5,3 L4.5,3 C3.67157288,3 3,3.67157288 3,4.5 L3,17.5 C3,18.3284271 3.67157288,19 4.5,19 L10.5,19 C11.3284271,19 12,18.3284271 12,17.5 L12,4.5 C12,3.67157288 11.3284271,3 10.5,3 Z M6.5,18 C6.22385763,18 6,17.7761424 6,17.5 C6,17.2238576 6.22385763,17 6.5,17 L8.5,17 C8.77614237,17 9,17.2238576 9,17.5 C9,17.7761424 8.77614237,18 8.5,18 L6.5,18 Z M15.5,20 C15.2238576,20 15,19.7761424 15,19.5 C15,19.2238576 15.2238576,19 15.5,19 L17.5,19 C17.7761424,19 18,19.2238576 18,19.5 C18,19.7761424 17.7761424,20 17.5,20 L15.5,20 Z"/>
-                    </svg>
-                </div>
-                <div class="autocomplete_wrap" >
-                    <th:block th:insert="~{component/search :: content}"></th:block>
-                </div>
-                <div class="hidden sm:flex sm:items-center">
-                    <a th:href="@{/auth/login}"  sec:authorize="isAnonymous()" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">로그인</a>
-                    <a th:href="@{/auth/signup}" sec:authorize="isAnonymous()" class="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600">회원가입</a>
-                    <a th:href="@{/mypage}" sec:authorize="isAuthenticated()" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">마이페이지</a>
-                    <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600">로그아웃</a>
-                </div>
-            </div>
+    <!-- This is an example component -->
+  <header class="w-full bg-teal-400 fixed z-50" th:fragment="header">
+    <nav class="flex justify-between w-full bg-blue-600 text-white py-4 px-6">
+      <div class="flex w-7/12 items-center">
+        <!-- logo -->
+        <div class="font-bold mr-6 text-xl tracking-tight">
+          <a href="/">BetterPlace</a>
         </div>
-    </header>
-</div>
+        <!-- search -->
+        <div class="flex w-full items-center bg-white  border-b border-b-2 border-teal-500 py-2">
+          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-4 leading-tight focus:outline-none" type="text" placeholder="원하는 공간을 입력하세요.">
+          <a href="/#">
+          <svg version="1.1" class="h-4 mr-4 text-dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               viewBox="0 0 52.966 52.966" style="enable-background:new 0 0 52.966 52.966;" xml:space="preserve">
+            <path d="M51.704,51.273L36.845,35.82c3.79-3.801,6.138-9.041,6.138-14.82c0-11.58-9.42-21-21-21s-21,9.42-21,21s9.42,21,21,21
+            c5.083,0,9.748-1.817,13.384-4.832l14.895,15.491c0.196,0.205,0.458,0.307,0.721,0.307c0.25,0,0.499-0.093,0.693-0.279
+            C52.074,52.304,52.086,51.671,51.704,51.273z M21.983,40c-10.477,0-19-8.523-19-19s8.523-19,19-19s19,8.523,19,19
+            S32.459,40,21.983,40z"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+        <div class="w-5/12 md:items-center md:w-auto flex">
+          <div class="md:flex hidden">
+            <a class="block text-white text-xl font-base mr-4" href="/">기획전</a>
+            <a class="block text-white text-xl font-base mr-4" href="/place/registration">공간 등록하기</a>
+          </div>
+          <div class="flex text-sm" v-else>
+          	<span style="font-size:30px;cursor:pointer;float:right" onclick="openNav()">&#9776;</span>
+          </div>
+        </div>
+    </nav>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div id="profile" class="sidenav_cont profile">
+        <img th:src="@{/image/img_avatar.png}" alt="profile" class="img_profile">
+        <a sec:authorize="isAnonymous()" th:href="@{/auth/login}" style="position: relative;width:100px;display: inline-block;">로그인</a>
+        <div sec:authorize="isAuthenticated()" sec:authentication="principal.username"  style="position: relative;width:100px;display: inline-block;"></div>
+        <a sec:authorize="isAuthenticated()" th:href="@{/mypage}" style="position: relative;width:100px;display: inline-block;">프로필 관리</a>
+      </div>
+      <div id="menu_top" class="sidenav_cont menu_top">
+        <a href="/" class="border-solid border-r border-gray-500 text-center">
+          <i class="fas fa-clipboard"></i>
+          <br>
+          <span style="font-size: 15px">예약 리스트</span>
+        </a>
+        <a href="/" class="border-solid border-r border-gray-500 text-center">
+          <i class="fas fa-edit"></i>
+          <br>
+          <span style="font-size: 15px">이용후기<br>Q&A관리</span>
+        </a>
+        <a href="/" class="text-center">
+          <i class="fas fa-home"></i>
+          <br>
+          <span style="font-size: 15px">찜한 공간</span>
+        </a>
+      </div>
+      <div id="title" class="sidenav_cont title">
+        <a>
+          <span>&nbsp;&nbsp;이 달의 기획전</span>
+        </a>
+      </div>
+      <div id="menu" class="sidenav_cont menu">
+        <div class="bg-white shadow w-64 my-2" style="width:100%;">
+          <ul class="list-reset">
+            <li>
+              <a href="#" class="block p-4 text-grey-darker font-bold border-purple hover:bg-grey-lighter border-r-4">Better Place Home</a>
+            </li>
+            <li>
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">써 본 사람</a>
+            </li>
+            <li>
+              <a href="/notice" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">공지사항</a>
+            </li>
+            <li >
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">도움말</a>
+            </li>
+            <li>
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">1:1문의</a>
+            </li>
+            <li>
+              <a href="#" class="block p-4 text-grey-darker font-bold border-grey-lighter hover:border-purple-light hover:bg-grey-lighter border-r-4">서비스 정보</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="sidenav_footer" class="sidenav_cont sidenav_footer">
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="text-center">로그인</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="text-center">로그아웃</a>
+        <span>The Better Place Corp.</span>
+      </div>
+      <a class="text-center align-middle" href="/" style="background-color:#b3d9ff;height:70px;">
+        <span>호스트 센터로 이동</span>
+        <i class="fas fa-angle-right text-right"></i>
+      </a>
+    </div>
+
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "300px";
+        document.getElementById("main").style.marginRight = "0";
+
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginRight= "0"; // div id="main" 지정 아직 못함, 이미지 파일 음영 불가
+
+        document.body.style.backgroundColor = "white";
+      }
+    </script>
+  </header>
+
 </body>
 </html>
+
