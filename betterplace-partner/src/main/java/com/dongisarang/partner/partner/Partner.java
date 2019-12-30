@@ -1,6 +1,7 @@
 package com.dongisarang.partner.partner;
 
 import com.dongisarang.partner.place.Place;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -51,6 +52,7 @@ public class Partner {
 
     //양방향 연관관계 매핑
     @OneToMany(mappedBy = "partner")
+    @JsonManagedReference
     private List<Place> places = new ArrayList<>();
 
 }

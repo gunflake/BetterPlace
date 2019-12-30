@@ -1,6 +1,7 @@
 package com.dongisarang.partner.place;
 
 import com.dongisarang.partner.partner.Partner;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -22,6 +23,7 @@ public class Place {
     private Integer placeNo; // 공간번호
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "partnerNo")
     private Partner partner;
 
