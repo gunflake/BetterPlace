@@ -7,7 +7,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,7 +27,7 @@ public class Place {
     @Column(length = 50)
     private String placeName;
 
-    @Column(length = 100)
+    @Column
     @Lob
     private String intro; // 공간 소개
 
@@ -40,6 +42,7 @@ public class Place {
     private String convenience; //편의시설
 
     @Column
+    @Lob
     private String notice; //예약시 주의사항
 
     @Column(length = 100)
@@ -70,6 +73,9 @@ public class Place {
 
     @Column
     private Integer defaultPrice;
+
+    @OneToMany(mappedBy = "place", fetch = FetchType.EAGER)
+    private List<PlaceDetail> placeDetails = new ArrayList<>();
 
     public void setPartner(Partner partner){
 
