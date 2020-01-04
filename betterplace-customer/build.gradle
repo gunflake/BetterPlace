@@ -31,12 +31,6 @@ repositories {
 }
 
 dependencies {
-
-    compile('com.querydsl:querydsl-apt:4.2.1')
-    compile('com.querydsl:querydsl-sql:4.2.1')
-    compile('com.querydsl:querydsl-sql-spring:4.2.1')
-    compile('com.querydsl:querydsl-jpa:4.2.1')
-
     compile("org.springframework.boot:spring-boot-starter-jdbc")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile('org.springframework.boot:spring-boot-starter')
@@ -48,7 +42,10 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     runtime('mysql:mysql-connector-java')
-    compile('org.projectlombok:lombok')
+
+    //lombock
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
     // 기존 프로젝트 항목
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -58,9 +55,8 @@ dependencies {
     // 기존 프로젝트 항목
 
     testRuntime('com.h2database:h2')
-    testCompile('org.dbunit:dbunit:2.5.1')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-
+    testCompile('org.junit.jupiter:junit-jupiter:5.4.2')
 }
 
 def queryDslDir = "./out/production/classes/generated"
@@ -83,16 +79,8 @@ dependencies {
     )
 }
 
-dependencies {
-    compile "org.projectlombok:lombok:1.18.4"
-    annotationProcessor "org.projectlombok:lombok:1.18.4"
-}
-
-dependencies {
-    testCompile "org.projectlombok:lombok:1.18.4"
-    testAnnotationProcessor(
-            "org.projectlombok:lombok:1.18.4"
-    )
+test {
+    useJUnitPlatform()
 }
 
 compileJava.doFirst {

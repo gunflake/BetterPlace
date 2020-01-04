@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"  th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
+
+<th:block th:fragment="head">
+    <!--Replace with your tailwind.css once created-->
+    <!--Regular Datatables CSS-->
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/notice_wk.css}">
+</th:block>
+<th:block th:fragment="body">
+
+    <!--Container-->
+    <div class="pt-24 bg-gray-100 text-gray-900 tracking-wider leading-normal">
+
+
+        <div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
+
+            <!--Title-->
+            <h1 class="flex items-center font-sans font-bold break-normal text-indigo-500 px-2 py-8 text-xl md:text-2xl">
+                공지 사항
+            </h1>
+
+
+            <!--Card-->
+            <div id="" class="p-8 mt-6 lg:mt-0 rounded shadow bg-white" style="border: 4px solid #704de4;">
+                <div class="flex">
+                    <div class="w-2/12">
+                        <label class="text-grey-darker font-bold mb-2">
+                            카테고리 선택
+                        </label>
+                    </div>
+                    <div class="w-7/12">
+                        <label class="text-grey-darker font-bold mb-2">
+                            공지사항 검색
+                        </label>
+                    </div>
+                    <div class="w-1/4">
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="w-2/12 pt-2 mr-2 relative mx-auto ">
+                        <select class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" id="grid-state">
+                            <option>전체</option>
+                            <option>회원</option>
+                            <option>예약 및 결제</option>
+                            <option>취소 및 환불</option>
+                            <option>공간이용 및 후기</option>
+                            <option>기타</option>
+                        </select>
+                    </div>
+                    <!-- This is an example component -->
+                    <div class="w-7/12 pt-2 relative mx-auto">
+                        <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="검색어를 입력해주세요.">
+                    </div>
+                    <div class="w-1/4 pt-2 relative mx-auto">
+                        <button class="ml-2 flex w-full bg-purple-500 text-center hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                            <div>
+                                <svg class="text-white h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                </svg>
+                            </div>
+                            <div>
+                                검색
+                            </div>
+                        </button>
+                    </div>
+            </div>
+            <!--/Card-->
+            </div>
+            <br>
+            <br>
+            <!--Card-->
+            <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                    <thead style="display: none;">
+                    <tr>
+                        <th class="w-1/4"></th>
+                        <th class="w-3/4"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="tab w-full overflow-hidden border-t">
+                                공지사항
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tab w-full overflow-hidden border-t">
+                                <input class="absolute opacity-0" id="tab-single-one" type="radio" name="tabs2">
+                                <label class="block p-5 leading-normal cursor-pointer" for="tab-single-one">공지사항1</label>
+                                <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                    <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            공지사항
+                        </td>
+                        <td>
+                            <div class="tab w-full overflow-hidden border-t">
+                                <input class="absolute opacity-0" id="tab-single-two" type="radio" name="tabs2">
+                                <label class="block p-5 leading-normal cursor-pointer" for="tab-single-two">공지사항2</label>
+                                <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                    <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            공지사항
+                        </td>
+                        <td>
+                            <div class="tab w-full overflow-hidden border-t">
+                                <input class="absolute opacity-0" id="tab-single-three" type="radio" name="tabs2">
+                                <label class="block p-5 leading-normal cursor-pointer" for="tab-single-three">공지사항3</label>
+                                <div class="tab-content overflow-hidden bg-gray-100 border-indigo-500 leading-normal">
+                                    <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
+                    </tbody>
+                </table>
+            </div>
+            <!--/Card-->
+
+
+        </div>
+        <!--/container-->
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+        <!--Datatables -->
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        <script>
+            $(document).ready(function() {
+
+                var table = $('#example').DataTable( {
+                    responsive : true,
+                    searching  : false,
+                    select     : false,
+                    lengthChange : false
+                } )
+                    .columns.adjust()
+                    .responsive.recalc();
+            } );
+            /* Optional Javascript to close the radio button version by clicking it again */
+            var myRadios = document.getElementsByName('tabs2');
+            var setCheck;
+            var x = 0;
+            for(x = 0; x < myRadios.length; x++){
+                myRadios[x].onclick = function(){
+                    if(setCheck != this){
+                        setCheck = this;
+                    }else{
+                        this.checked = false;
+                        setCheck = null;
+                    }
+                };
+            }
+        </script>
+    </div>
+
+</th:block>
+</html>

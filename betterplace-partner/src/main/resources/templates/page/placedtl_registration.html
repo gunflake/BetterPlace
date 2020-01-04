@@ -1,0 +1,91 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
+<th:block th:fragment="head">
+
+    <script type="application/javascript">
+        function mincount_updown (kind) {
+
+            var count = document.getElementsByName('mincount')[0].value.substring(0,1);
+
+            if (kind == "-")
+            {
+                if(count <= 1) {
+                    alert("최소 인원은 1명입니다.");
+                    return true;
+                }
+
+                document.getElementsByName('mincount')[0].value = (count--) + "명";
+                alert(document.getElementsByName('mincount')[0].value = (count--) + "명");
+
+            }
+            if (kind == "+")
+            {
+                document.getElementsByName('mincount')[0].value = (count++) + "명";
+                alert(document.getElementsByName('mincount')[0].value = (count++) + "명");
+            }
+            return true;
+        }
+    </script>
+</th:block>
+
+<th:block th:fragment="body">
+    <div class="bg-scroll pt-10 bg-gray-100">
+        <div class="container mx-auto flex-1 flex flex-col items-center justify-center px-2" >
+            <div class="w-2/3" >
+                <h1 class="mb-8 text-2xl text-center">세부 공간 등록하기</h1>
+                <form th:object="${placedtl}" method="POST">
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placedtlname">
+                                세부 공간명
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placedtlname" name="placedtlname"  type="text" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placedtlintro">
+                                세부 공간 소개
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placedtlintro"  name="placedtlintro"  type="text" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="mincount">
+                                최소예약인원
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="mincount" name="mincount" value="1" type="text" placeholder="1"></textarea>
+
+                            <!--
+                            <div class="inline-flex">
+                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onclick="return mincount_updown('-');">
+                                    -
+                                </button>
+                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onclick="return mincount_updown('+');">
+                                    +
+                                </button>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="maxcount">
+                                최대예약인원
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="maxcount" name="maxcount" value="1" type="text" placeholder="1"></textarea>
+                        </div>
+                    </div>
+
+                    <button
+                            type="submit"
+                            class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
+                    >세부 공간 등록</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

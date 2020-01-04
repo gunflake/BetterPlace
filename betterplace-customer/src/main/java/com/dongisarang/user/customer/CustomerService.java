@@ -4,29 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.Optional;
-
 @Service
 public class CustomerService {
 
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    PasswordEncoder pwEncoder;
+    private PasswordEncoder passwordEncoder;
 
     public void signUpCustomer(Customer customer) {
-        String encryptPw = pwEncoder.encode(customer.getCustomerPassword());
+        String encryptPw = passwordEncoder.encode(customer.getCustomerPassword());
 
         customer.setCustomerPassword(encryptPw);
 
         customerRepository.save(customer);
-    }
-
-    public boolean loginCustomer(Customer customer) {
-        return false;
     }
 
     public boolean changePassword(String currentPassword, String changePassword) {

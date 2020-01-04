@@ -2,7 +2,7 @@
       th:replace="~{layout/divide2 :: layout (~{::links}, ~{::top}, ~{::left}, ~{::right})}" lang="ko">
 
 <th:block th:fragment="links">
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </th:block>
 
 <th:block th:fragment="top">

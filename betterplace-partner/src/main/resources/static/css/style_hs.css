@@ -1,0 +1,92 @@
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.sidenav a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 100px;
+    z-index: 3;
+}
+
+.sidenav .sidenav_cont {
+    text-decoration: none;
+    width: 100%;
+    position: relative;
+    transition: 0.3s;
+}
+
+.sidenav .profile {
+    height: 25%;
+    top:0;
+    padding-top: 50px;
+    background-color: #b3d9ff;
+    display: inline-block;
+    text-align: center;
+}
+
+.sidenav .menu_top {
+    height: 10%;
+    background-color: #ffffff;
+    display: inline-block;
+}
+
+.sidenav .title {
+    height: 10%;
+    background-color: #b3d9ff;
+    display: inline-block;
+}
+
+.sidenav .menu {
+    height: auto;
+    background-color: #ffffff;
+    display: block;
+    border-bottom: #cccccc;
+}
+
+.sidenav .sidenav_footer {
+    height: 20%;
+    background-color: #e6e6e6;
+    display: block;
+    text-align: center;
+    padding-top: 5%;
+}
+
+.img_profile {
+    display: inline-block;
+    border-radius: 50%;
+    width: 100px;
+}
+
+.sidenav .menu_top a {
+    display: inline-block;
+    height: 100%;
+    width: 32.3%;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}

@@ -1,0 +1,111 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
+<th:block th:fragment="head">
+    <!--<link rel -->
+</th:block>
+
+<th:block th:fragment="body">
+    <div class="bg-scroll bg-gray-100">
+        <div class="container mx-auto flex-1 flex flex-col items-center justify-center px-2" >
+            <div class="w-2/3" >
+                <h1 class="mt-8 mb-8 text-2xl text-center">공간 등록하기</h1>
+                <form th:action="@{/place/registration}" th:object="${place}" method="POST">
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeName">
+                                공간명
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeName" name="placeName"  type="text" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="intro">
+                                공간 소개
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="intro"  name="intro"  type="text" placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."></textarea>
+                        </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="tag">
+                                공간 태그
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="tag" name="tag" type="text" placeholder="태그를 입력해 주세요.">
+                        </textarea></div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="info">
+                                시설안내
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="info" name="info" type="text" placeholder="최대 10개까지 작성가능합니다.">
+                        </textarea></div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="convenience">
+                                편의시설
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="convenience"  name="convenience" type="text" placeholder="최대 10개까지 작성가능합니다.">
+                        </textarea></div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="notice">
+                                예약 시 주의사항
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="notice" name="notice" type="text" placeholder="최대 10개까지 작성가능합니다.">
+                        </textarea></div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="website">
+                                웹사이트
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="website" name="website" type="text" placeholder="웹사이트 URL을 입력해 주세요.">
+                        </textarea></div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="text-xs block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="image">
+                                대표이미지
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="image"  name="image" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)">
+                        </textarea></div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="text-xs block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="address">
+                                주소(위치)
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="address" name="address" type="text" placeholder="주소를 입력해주세요.">
+                        </textarea></div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="text-xs block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="email">
+                                이메일
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="email"  name="email" type="text" placeholder="이메일을 입력해주세요.">
+                       </textarea> </div>
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="text-xs block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="phone">
+                                대표전화번호
+                            </label>
+                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="phone" name="phone" type="text" placeholder="이메일을 입력해주세요.">
+                      </textarea>  </div>
+                    </div>
+                    <button
+                            type="submit"
+                            class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
+                    >공간 등록</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

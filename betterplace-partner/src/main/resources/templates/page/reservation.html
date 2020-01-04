@@ -1,0 +1,32 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
+
+<th:block th:fragment="head">
+</th:block>
+
+<th:block th:fragment="body">
+    <div class="items-center justify-center h-screen">
+        <div class="container mx-24 my-6 bg-white rounded shadow-lg">
+            <div class="px-12 py-2">
+                <div class="text-center">
+                    <div class="w-full text-center">
+                        <h1> 예약 관리 리스트 </h1> <!--폰트 사이즈 수정 예정-->
+                        <form action="#">
+                            <div class="max-w-sm mx-auto p-1 pr-0 flex items-center">
+                                <input type="email" placeholder="예약번호 또는 예약자명"
+                                       class="flex-1 appearance-none rounded shadow p-3 text-grey-dark mr-2 focus:outline-none">
+                                <button type="submit"
+                                        class="appearance-none bg-indigo text-white bg-purple-600 text-base font-semibold tracking-wide uppercase p-3 rounded shadow hover:bg-indigo-light">
+                                    검색
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>
+
+
