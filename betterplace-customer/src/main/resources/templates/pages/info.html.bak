@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"  th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org">
 
-<th:block th:fragment="head">
-    <!--Replace with your tailwind.css once created-->
-    <!--Regular Datatables CSS-->
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!--Responsive Extension Datatables CSS-->
-    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/notice_wk.css}">
+<header>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script th:inline="javascript">
 
         $(document).ready(function() {
             var formObj = $("#movePage");
+
+            $(".pager a").click(function(e) {
+
+                e.preventDefault();
+
+                formObj.find('[name="page"]').val( $(this).attr('href') );
+
+                formObj.submit();
+            });
 
             $("#searchBtn").click(function (e) {
                 var keywordStr = $("#searchKeyword").val();
@@ -22,43 +27,23 @@
 
                 formObj.find("[name='type']").val(typeStr);
                 formObj.find("[name='keyword']").val(keywordStr);
+                formObj.find("[name='page']").val("1");
                 formObj.submit();
             });
+
         });
+
     </script>
-</th:block>
-<th:block th:fragment="body">
+</header>
+<body>
+<header>
+    <h1>Notice</h1>
+</header>
 
-    <!--Container-->
-    <div class="pt-24 bg-gray-100 text-gray-900 tracking-wider leading-normal">
-
-
-        <div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
-
-            <!--Title-->
-            <h2 class="items-center text-center font-sans font-bold text-black px-2 py-8 md:text-4xl">
-                공지 사항
-            </h2>
-
-
-            <!--Card-->
-            <div id="" class="p-8 mt-6 lg:mt-0 rounded shadow bg-white" style="border: 4px solid #704de4;">
-                <div class="flex">
-                    <div class="w-2/12">
-                        <label class="text-grey-darker font-sans font-bold mb-2">
-                            카테고리 선택
-                        </label>
-                    </div>
-                    <div class="w-7/12">
-                        <label class="text-grey-darker font-sans font-bold mb-2">
-                            공지사항 검색
-                        </label>
-                    </div>
-                    <div class="w-1/4">
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="w-2/12 pt-2 mr-2 relative mx-auto ">
+<div>
+    List Page
+</div>
+<div>
     <select id="searchType">
         <option value="0" th:selected="${pageVO.type} == 0">--</option>
         <option value="1" th:selected="${pageVO.type} == 1">회원</option>

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/board/")
 @Log
@@ -26,16 +29,13 @@ public class BoardController {
 
         log.info("notice call");
 
-        Pageable page = vo.makePageable("boardNo");
+        Iterable<Board> search = repo.findAll(repo.makePredicateNotice(vo.getType(), vo.getKeyword()));
 
-        Page<Board> result = repo.findAll(repo.makePredicateNotice(vo.getType(), vo.getKeyword()), page);
+        List<Board> result = new ArrayList<>();
+        search.forEach(result::add);
 
-        log.info("" + page);
-        log.info("" + result);
-
-        log.info("total page number" + result.getTotalPages());
-
-        model.addAttribute("result", new PageMaker<>(result) );
+        log.info(""+result.size());
+        model.addAttribute("result", result);
 
         return "pages/notice";
     }
@@ -44,21 +44,18 @@ public class BoardController {
     public String goInfo(@ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("notice call");
 
-        Pageable page = vo.makePageable("boardNo");
-
         if(vo.getType() == null) {
             vo.setType(0);
         }
 
-        Page<Board> result = repo.findAll(repo.makePredicateInfo(vo.getType(), vo.getKeyword()), page);
+        Iterable<Board> search = repo.findAll(repo.makePredicateInfo(vo.getType(), vo.getKeyword()));
 
-        log.info(""+vo.getType());
-        log.info("" + page);
-        log.info("" + result);
+        List<Board> result = new ArrayList<>();
+        search.forEach(result::add);
 
-        log.info("total page number" + result.getTotalPages());
+        log.info(""+result.size());
+        model.addAttribute("result", result);
 
-        model.addAttribute("result", new PageMaker<>(result) );
         return "pages/info";
     }
 }
