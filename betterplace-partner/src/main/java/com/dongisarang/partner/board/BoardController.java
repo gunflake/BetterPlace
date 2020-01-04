@@ -1,4 +1,4 @@
-package com.dongisarang.partner.partner;
+package com.dongisarang.partner.board;
 
 import com.dongisarang.partner.page.PageVO;
 import lombok.extern.java.Log;
@@ -7,19 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
 @Log
-public class NoticeController {
+@RequestMapping("/board")
+public class BoardController {
     @Autowired
     BoardRepository repo;
 
     @GetMapping("/notice")
     public String goNotice(@ModelAttribute("pageVO") PageVO vo, Model model) {
         List<Board> result = repo.findAll();
-        for(int i=0;i<10;i++)
+        for(int i=0;i<40;i++)
         {
             Board tmpBoard = new Board();
             tmpBoard.setBoardNo(i);
@@ -33,7 +35,6 @@ public class NoticeController {
             result.add(tmpBoard);
         }
         model.addAttribute("result", result);
-        System.out.println("result size : "  +  result.size());
         return "page/notice";
     }
 }

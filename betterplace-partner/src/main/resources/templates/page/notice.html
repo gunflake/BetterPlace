@@ -2,7 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"  th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
 
 <th:block th:fragment="head">
-    <!--Replace with your tailwind.css once created-->
     <!--Regular Datatables CSS-->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
     <!--Responsive Extension Datatables CSS-->
@@ -75,17 +74,24 @@
             <!--Card-->
             <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
                 <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
-                    <tr th:each="res : ${result}">
-                        <td>
-                            <div class="tab w-full overflow-hidden">
-                                <input class="absolute opacity-0" th:id="'board' + ${res.boardNo}" type="radio" name="tabs2">
-                                <label class="block p-5 leading-normal cursor-pointer" th:for="'board' + ${res.boardNo}" th:text="${res.title}"></label>
-                                <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
-                                    <p class="p-5" th:text="${res.content}"></p>
+                    <thead>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="res : ${result}">
+                            <td>
+                                <div class="tab w-full overflow-hidden">
+                                    <input class="absolute opacity-0" th:id="'board' + ${res.boardNo}" type="radio" name="tabs2">
+                                    <label class="block p-5 leading-normal cursor-pointer" th:for="'board' + ${res.boardNo}" th:text="${res.title}"></label>
+                                    <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                        <p class="p-5" th:text="${res.content}"></p>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <!--/Card-->
