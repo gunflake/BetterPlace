@@ -1,9 +1,12 @@
 package com.dongisarang.user.place;
 
+import com.dongisarang.user.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,6 +30,9 @@ public class PlaceDetail {
     private Short minCount;
 
     private Short maxCount;
+
+    @OneToMany(mappedBy = "placeDetail", fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
 
     public void setPlace(Place place){
 

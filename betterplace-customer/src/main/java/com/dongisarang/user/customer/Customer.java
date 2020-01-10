@@ -1,11 +1,14 @@
 package com.dongisarang.user.customer;
 
+import com.dongisarang.user.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -44,6 +47,9 @@ public class Customer {
 
     @Column
     private Boolean emailReceptionAgree; //이메일 수신동의
+
+    @OneToMany(mappedBy = "customer")
+    private List<Reservation> reservations = new ArrayList<>();
 
     //비밀번호 변경시 필요한 데이터
     @Transient

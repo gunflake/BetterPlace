@@ -1,10 +1,12 @@
 package com.dongisarang.user.place;
 
 import com.dongisarang.user.partner.Partner;
+import com.dongisarang.user.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class Place {
     private Date registerDate;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date updateDate;
 
     @Column
@@ -76,6 +79,9 @@ public class Place {
 
     @OneToMany(mappedBy = "place", fetch = FetchType.EAGER)
     private List<PlaceDetail> placeDetails = new ArrayList<>();
+
+    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
 
     public void setPartner(Partner partner){
 

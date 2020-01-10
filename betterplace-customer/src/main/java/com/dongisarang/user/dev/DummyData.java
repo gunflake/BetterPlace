@@ -1,6 +1,7 @@
 package com.dongisarang.user.dev;
 
 import com.dongisarang.user.customer.Customer;
+import com.dongisarang.user.customer.CustomerRepository;
 import com.dongisarang.user.customer.CustomerService;
 import com.dongisarang.user.partner.Partner;
 import com.dongisarang.user.partner.PartnerRepository;
@@ -8,6 +9,8 @@ import com.dongisarang.user.place.Place;
 import com.dongisarang.user.place.PlaceDetail;
 import com.dongisarang.user.place.PlaceDetailRepository;
 import com.dongisarang.user.place.PlaceRepository;
+import com.dongisarang.user.reservation.Reservation;
+import com.dongisarang.user.reservation.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -22,6 +25,12 @@ import java.util.List;
 @Component
 @Transactional
 public class DummyData implements ApplicationRunner {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @Autowired
     private PartnerRepository partnerRepository;
@@ -41,6 +50,55 @@ public class DummyData implements ApplicationRunner {
         savePlace();
         savePlaceDetail();
         saveCustomer();
+        saveReservation();
+        saveReservation1();
+    }
+
+    private void saveReservation() {
+        Reservation reservation = new Reservation();
+        reservation.setCustomerCount((byte) 3);
+        reservation.setReservationDate("20200110");
+        reservation.setStartTime((byte) 6);
+        reservation.setEndTime((byte) 10);
+
+        Place place = placeRepository.findByPlaceNameLike("%썸띵%").orElseThrow();
+        reservation.setPlace(place);
+        //기본 가격 * (사용 시간) * 인원수
+        int reservationPrice = place.getDefaultPrice() * (10 - 6) * 3;
+        reservation.setPrice(reservationPrice);
+
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09");
+        reservation.setCustomer(gunflake09);
+
+        PlaceDetail placeDetail = placeDetailRepository.findByPlaceAndPlaceDetailName(place, "스터디룸 A [4인실]").orElseThrow();
+        reservation.setPlaceDetail(placeDetail);
+
+        reservationRepository.save(reservation);
+
+
+
+    }
+
+    private void saveReservation1() {
+        Reservation reservation = new Reservation();
+        reservation.setCustomerCount((byte) 3);
+        reservation.setReservationDate("20200110");
+        reservation.setStartTime((byte) 12);
+        reservation.setEndTime((byte) 22);
+
+        Place place = placeRepository.findByPlaceNameLike("%썸띵%").orElseThrow();
+        reservation.setPlace(place);
+        //기본 가격 * (사용 시간) * 인원수
+        int reservationPrice = place.getDefaultPrice() * (10 - 6) * 3;
+        reservation.setPrice(reservationPrice);
+
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09");
+        reservation.setCustomer(gunflake09);
+
+        PlaceDetail placeDetail = placeDetailRepository.findByPlaceAndPlaceDetailName(place, "스터디룸 A [4인실]").orElseThrow();
+        reservation.setPlaceDetail(placeDetail);
+
+        reservationRepository.save(reservation);
     }
 
     private void savePlaceDetail() {

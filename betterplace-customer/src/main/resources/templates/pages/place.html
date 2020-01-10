@@ -51,6 +51,8 @@
 
     <script th:inline="javascript">
 
+        // ThymeLeaf 데이터 Javascript에 매핑
+
         /*<![CDATA[*/
         var address = /*[[ ${place.getAddress()} ]]*/;
         var placeName = /*[[ ${place.getPlaceName()} ]]*/;
@@ -153,6 +155,7 @@
         </div>
     </div>
 </th:block>
+<!-- 상세 공간 선택 페이지 -->
 <th:block th:fragment="right">
 
 
@@ -166,7 +169,7 @@
                 <div  th:each="placeDetail : ${place.getPlaceDetails()}">
                     <div class="border-0 border-grey-light border-b border-solid py-4">
                         <label>
-                            <input type="radio" name="selectPlace" value="" th:text="${placeDetail.getPlaceDetailName()}"/>
+                            <input type="radio" name="selectPlace" th:value="${placeDetail.getPlaceDetailNo()}" th:text="${placeDetail.getPlaceDetailName()}"/>
                         </label>
                     </div>
                 </div>
@@ -179,7 +182,6 @@
             </div>
 
         </div>
-
 
 </th:block>
 
