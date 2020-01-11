@@ -1,12 +1,15 @@
 package com.dongisarang.partner.place;
 
 import lombok.extern.java.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log
@@ -21,6 +24,9 @@ public class PlaceController {
 
     @Autowired
     PlaceService placeService;
+
+    private static final Logger log = LoggerFactory.getLogger(PlaceController.class);
+
 
     //@Autowired
     //PlaceService placeService;
@@ -56,14 +62,48 @@ public class PlaceController {
     }
 
     /* 공간 등록 후 세부 공간 등록페이지로 이동한다.*/
-            @PostMapping("/place/registration")
-            public String processPlaceRegistration(Place place, BindingResult result){
-                //TODO: 유효성 추가
-                if(result.hasErrors()){
-                    return "/";
-                }else{
-                    int placeno = placeService.createPlace(place);
-                    return "redirect:/placeDtl/registration/" + placeno;
+    @PostMapping("/place/registration")
+    public String processPlaceRegistration(Place place, BindingResult result){
+        //TODO: 유효성 추가
+        if(result.hasErrors()){
+            return "/";
+        }else{
+
+            // TAG
+            ArrayList<String> tags = place.getTags();
+            String joinTag = "";
+
+            for (String tag: tags
+                 ) {
+                joinTag+=tag+";";
+            }
+            place.setTag(joinTag.substring(0, joinTag.length()-1));
+
+
+            // INFO
+            ArrayList<String> infos = place.getInfos();
+            String infoTag = "";
+
+            for (String info: infos
+            ) {
+                infoTag+=info+";";
+            }
+            place.setInfo(infoTag.substring(0, infoTag.length()-1));
+
+
+            // NOTICE
+            ArrayList<String> notices = place.getNotices();
+            String noticeTag = "";
+
+            for (String notice: notices
+            ) {
+                noticeTag+=notice+";";
+            }
+            place.setNotice(noticeTag.substring(0, noticeTag.length()-1));
+
+            // 공간 등록하기
+            int placeno = placeService.createPlace(place);
+            return "redirect:/placeDtl/registration/" + placeno;
         }
     }
 

@@ -19,18 +19,18 @@ public class Place {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer placeNo; // 공간번호
 
-    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
     private List<PlaceDtl> placeDtls;
 
-    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
     private List<PlaceRefund> placeRefunds;
 
-    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
     private List<PlaceInfo> placeInfos;
 
 
-    public boolean addPlaceDtl (PlaceDtl placeDtl) {
-        if(placeDtls == null){
+    public boolean addPlaceDtl(PlaceDtl placeDtl) {
+        if (placeDtls == null) {
             placeDtls = new ArrayList<>();
         }
         return this.placeDtls.add(placeDtl);
@@ -78,4 +78,15 @@ public class Place {
     @Column
     private Byte state; //상태
 
+    @Column
+    private Integer defaultPrice; //금액
+
+    @Transient
+    private ArrayList<String> tags;
+
+    @Transient
+    private ArrayList<String> infos;
+
+    @Transient
+    private ArrayList<String> notices;
 }
