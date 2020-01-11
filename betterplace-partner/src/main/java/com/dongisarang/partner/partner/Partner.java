@@ -8,40 +8,41 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-/*@ToString( exclude = )*/
 @ToString
 public class Partner {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer partnerNo; //파트너번호(자동 증가값)
+    @Id @GeneratedValue
+    private Integer partnerNo;
 
-    @OneToMany(mappedBy = "partner", cascade = CascadeType.ALL)
-    private List<Place> places;
-
-    @Column
-    private String partnerId; //아이디 (이메일형식)
+    @Column(length = 45)
+    private String partnerId;
 
     @Column
-    private String partnerPassword; //비밀번호
+    private String partnerPassword;
 
-    @Column
-    private String nickname; //닉네임
+    @Column(length = 50)
+    private String email;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
-    private Date registerDate; //등록일
+    private Date registerDate;
 
-    @UpdateTimestamp
-    private Date updateDate; //수정일
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updateDate;
 
     @Column
-    private Byte state; //상태
+    private Byte state;
+
+    //양방향 연관관계 매핑
+    @OneToMany(mappedBy = "partner")
+    private List<Place> places = new ArrayList<>();
 
     @Transient
     private String changePassword; // 변경 비밀번호

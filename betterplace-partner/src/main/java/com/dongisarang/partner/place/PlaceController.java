@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.ArrayList;
 
-@Log
 @Controller
 public class PlaceController {
 
@@ -21,7 +20,7 @@ public class PlaceController {
     PlaceRepository placeRepository;
 
     @Autowired
-    PlaceDtlRepository placeDtlRepository;
+    PlaceDetailRepository placeDetailRepository;
 
     @Autowired
     PlaceService placeService;
@@ -134,7 +133,7 @@ public class PlaceController {
 
     /* 공간 상세 등록 */
     @PostMapping("/placeDtl/registration/{placeNo}")
-    public String processPlaceDtlRegistration(@PathVariable("placeNo") int placeNo, PlaceDtl placedtl, BindingResult result){
+    public String processPlaceDtlRegistration(@PathVariable("placeNo") int placeNo, PlaceDetail placedtl, BindingResult result){
         //TODO: 유효성 추가
         log.info("placeNo"+ placeNo);
         if(result.hasErrors()){
@@ -142,9 +141,9 @@ public class PlaceController {
         }else{
 
             Place place = placeRepository.findPlaceByPlaceNo(placeNo);
-            PlaceDtl placeDtlAdd = new PlaceDtl(place, placedtl.getPlacedtlname(), placedtl.getPlacedtlintro(), placedtl.getMincount(), placedtl.getMaxcount());
+            PlaceDetail placeDetailAdd = new PlaceDetail(place, placedtl.getPlaceDetailName(), placedtl.getPlaceDetailIntro(), placedtl.getMinCount(), placedtl.getMaxCount());
 
-            placeDtlRepository.save(placeDtlAdd);
+            placeDetailRepository.save(placeDetailAdd);
             return "redirect:/";
         }
     }

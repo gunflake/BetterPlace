@@ -28,7 +28,7 @@ public class PartnerService {
      * @return
      */
     public Partner findPartner(String partnerId){
-        return partnerRepository.findByPartnerId(partnerId);
+        return partnerRepository.findByPartnerId(partnerId).orElseThrow();
     }
 
     /**
