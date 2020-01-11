@@ -1,0 +1,265 @@
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{layout/divide2 :: layout (~{::links}, ~{::top}, ~{::left}, ~{::right})}" lang="ko">
+
+<th:block th:fragment="links">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</th:block>
+
+<th:block th:fragment="top">
+    <div class="text-2xl font-bold pb-16">
+        예약하기
+    </div>
+</th:block>
+
+<th:block th:fragment="left">
+
+    <!-- 예약공간 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">예약 공간</div>
+        <div class="p-8 bg-gray-100">
+            <!-- Img, 공간 설명-->
+            <div class="pb-8 border-b border-gray-400 flex">
+                <div class="w-1/4 ">
+                    <img src="https://images.unsplash.com/photo-1523214969941-40a37196fd31?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2251&q=80" >
+                </div>
+                <div class="w-3/4 pl-8">
+                    <div class="flex pb-4 border-gray-300 border-b">
+                        <div class="text-xl font-bold pb-4">
+                            소셜팩토리 2호점
+                        </div>
+                        <div class="text-xl text-blue-700 ml-1">
+                            [스터디룸 A호점]
+                        </div>
+                    </div>
+                    <div class="text-base pt-4">
+                        최소 3명~최대 8명 이용 가능한 단독 공간입니다. 소규모 회의, 스터디, 모임, 원데이 클래스를 진행하기 좋습니다.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 예약 인원-->
+            <div class="py-4 border-b border-gray-400 flex">
+                <div class="w-1/4">
+                    <div class="text-base text-gray-500">
+                        예약 인원
+                    </div>
+                </div>
+                <div class="w-3/4 pl-8">
+                    <div class="text-base">
+                        최소 3명 ~ 최대 8명
+                    </div>
+                </div>
+            </div>
+
+            <!-- 편의 시설 -->
+            <div>
+                <ul class="flex flex-wrap" >
+                    <li class="flex px-4 pt-4" th:each="num: ${#numbers.sequence(1,9)}">
+                        <div class="ico_table"></div>
+                        <span class="pl-4 pt-2 text-gray-400">
+                            의자/테이블
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 예약정보 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">예약 정보</div>
+        <div class="px-8 bg-gray-100">
+            <!-- 예약 날짜-->
+            <div class="py-4 border-b border-gray-400 flex">
+                <div class="w-1/4">
+                    <div class="text-base text-gray-500">
+                        예약 날짜
+                    </div>
+                </div>
+                <div class="w-3/4 pl-8">
+                    <div class="text-base text-right">
+                        2019.11.25 (월) 10시 ~ 13시
+                    </div>
+                </div>
+            </div>
+            <!-- 예약 인원-->
+            <div class="py-4 flex">
+                <div class="w-1/4">
+                    <div class="text-base text-gray-500">
+                        예약 인원
+                    </div>
+                </div>
+                <div class="w-3/4 pl-8">
+                    <div class="text-base text-right">
+                        3명
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 예약자 정보 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">예약자 정보</div>
+        <div class="px-8 bg-gray-100">
+            <!-- 예약자 -->
+            <div th:insert="~{components/reserve/inputBox :: inputBox('예약자', 'booker', 'text')}" ></div>
+            <!-- 연락처 -->
+            <div th:insert="~{components/reserve/inputBox :: inputBox('연락처', 'phone', 'text')}" ></div>
+            <!-- 이메일 -->
+            <div th:insert="~{components/reserve/inputBox :: inputBox('이메일', 'email', 'email')}" ></div>
+            <!-- 요청사항 -->
+            <div th:insert="~{components/reserve/inputBox :: inputBox('요청사항', 'requests', 'text')}" ></div>
+        </div>
+        <div class="w-full p-2 text-sm text-gray-700">
+            예약자 정보로 알림톡과 이메일이 발송됩니다. 정확한 정보인지 확인해주세요.
+        </div>
+    </div>
+
+    <!-- 결제 방법 선택 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">결제 방법 선택</div>
+        <div class="p-8 bg-gray-100">
+            <label th:insert="~{components/reserve/radioButton :: radioButton('신용카드', 'payment', 'checked')}"></label>
+            <label th:insert="~{components/reserve/radioButton :: radioButton('실시간 계좌이체', 'payment', null)}"></label>
+            <label th:insert="~{components/reserve/radioButton :: radioButton('카카오 페이', 'payment', null)}"></label>
+            <label th:insert="~{components/reserve/radioButton :: radioButton('네이버 페이', 'payment', null)}"></label>
+        </div>
+        <div class="w-full p-2 text-sm text-red-600 font-semibold">
+            계좌이체의 경우, 모바일에서는 네이버페이 계좌 간편결제만 가능합니다!(일반 계좌이체는 PC에서만 지원)
+        </div>
+    </div>
+
+    <!-- 서비스 동의 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">서비스 동의</div>
+        <div class="p-8 bg-gray-100">
+            <label th:insert="~{components/reserve/checkBox :: checkBox('위 공간의 예약 조건 확인 및 결제 진행 동의', 'rule1', true)}"></label>
+            <label th:insert="~{components/reserve/checkBox :: checkBox('환불규정 안내에 대한 동의', 'rule1', true)}"></label>
+            <label th:insert="~{components/reserve/checkBox :: checkBox('개인정보 제3자 제공 동의', 'rule1', true)}"></label>
+            <label th:insert="~{components/reserve/checkBox :: checkBox('개인정보 수집 및 이용 동의', 'rule1', false)}"></label>
+        </div>
+        <div class="w-full p-2 text-sm text-red-600 font-semibold">
+            서비스 이용약관 동의는 필수입니다.
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="right">
+
+    <!-- 예약정보 -->
+    <div class="pb-20">
+        <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">결제 예정 금액</div>
+        <div class="px-4 bg-gray-100">
+            <!-- 예약 날짜-->
+            <div th:insert="~{components/reserve/textLabel :: label('예약 날짜', '2019.11.25 (월)')}"></div>
+            <!-- 예약 시간-->
+            <div th:insert="~{components/reserve/textLabel :: label('예약 시간', '10시 ~ 13시 3시간')}"></div>
+            <!-- 예약 인원-->
+            <div th:insert="~{components/reserve/textLabel :: label('예약 인원', '3명')}"></div>
+        </div>
+        <!-- 결제 버튼 -->
+        <button class="modal-open w-full mt-1 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2  border border-blue-500 hover:border-transparent rounded">
+            결제하기
+        </button>
+
+        <!--Modal-->
+        <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+            <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+            <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+                <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+                    <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                    </svg>
+                </div>
+
+                <!-- Add margin if you want to see some of the overlay behind the modal-->
+                <div class="modal-content text-left">
+                    <!-- Modal Header -->
+                    <div class="flex justify-between items-center bg-blue-600 p-4">
+                        <p class="text-xl font-bold text-white">결제</p>
+                        <div class="modal-close cursor-pointer z-50">
+                            <svg class="fill-current text-white font-extrabold" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Modal Body-->
+                    <div class="p-8">
+                        <!--Title-->
+                        <div class="text-2xl text-center font-semibold border-blue-600 border-b pb-6">
+                            결제하시겠습니까?
+                        </div>
+                        <!-- 예약공간 -->
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 공간', '소셜팩토리 1호점 A룸(2-4인실)')}"></div>
+                        <!-- 예약 날짜-->
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 날짜', '2019.11.25 (월)')}"></div>
+                        <!-- 예약 시간-->
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 시간', '10시 ~ 13시 3시간')}"></div>
+                        <!-- 예약 인원-->
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 인원', '3명')}"></div>
+                        <!-- 결제 예정금액-->
+                        <div th:insert="~{components/reserve/textLabel :: label('결제 예정금액', '₩9,000')}"></div>
+
+                        <!-- 환불 규정 -->
+                        <div class="w-full py-4 text-sm text-gray-700">
+                            결제 후 2시간이 지난 후 예약 취소시, 호스트가 설정한 환불기준에 따라 환불이 진행됩니다.
+                        </div>
+                        <div class="w-full pt-2 pb-4 text-sm text-red-600 font-semibold">
+                            결제 전에, 환불기준과 예약내용을 반드시 확인해주세요!
+                        </div>
+
+                        <!-- Button -->
+                        <button class="modal-open w-full mt-1 hover:bg-transparent bg-blue-500 hover:text-blue-700 font-semibold text-white py-2  border border-blue-500 border-transparent rounded" onclick="location.href='/reserved'">
+                            결제하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let openmodal = document.querySelectorAll('.modal-open');
+        for (let i = 0; i < openmodal.length; i++) {
+            openmodal[i].addEventListener('click', function(event){
+                event.preventDefault();
+                toggleModal()
+            })
+        }
+
+        const overlay = document.querySelector('.modal-overlay');
+        overlay.addEventListener('click', toggleModal);
+
+        let closemodal = document.querySelectorAll('.modal-close');
+        for (let i = 0; i < closemodal.length; i++) {
+            closemodal[i].addEventListener('click', toggleModal)
+        }
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            let isEscape = false;
+            if ("key" in evt) {
+                isEscape = (evt.key === "Escape" || evt.key === "Esc")
+            } else {
+                isEscape = (evt.keyCode === 27)
+            }
+            if (isEscape && document.body.classList.contains('modal-active')) {
+                toggleModal()
+            }
+        };
+
+        function toggleModal () {
+            const body = document.querySelector('body');
+            const modal = document.querySelector('.modal');
+            modal.classList.toggle('opacity-0');
+            modal.classList.toggle('pointer-events-none');
+            body.classList.toggle('modal-active');
+        }
+    </script>
+
+</th:block>
+
+</html>

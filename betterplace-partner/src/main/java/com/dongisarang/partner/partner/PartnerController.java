@@ -7,10 +7,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class PartnerController {
@@ -21,7 +24,7 @@ public class PartnerController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    private static final Logger logger = LoggerFactory.getLogger(PartnerController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PartnerController.class);
 
     /**
      * 메인 페이지로 이동
@@ -60,7 +63,12 @@ public class PartnerController {
     public String processSignupForm(@Valid Partner partner, BindingResult result){
         //TODO: 유효성 추가
         if(result.hasErrors()){
-            return "/";
+            LOG.error("회원 정보가 유효하지 않습니다.");
+            List<ObjectError> errorLists = result.getAllErrors();
+            for (ObjectError error : errorLists) {
+                LOG.error(error.toString());
+            }
+            return "redirect:/auth/signup";
         }else{
             partnerService.createPartner(partner);
             return "redirect:/auth/login";

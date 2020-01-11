@@ -1,12 +1,18 @@
 package com.dongisarang.partner.place;
 
+import com.dongisarang.partner.partner.Partner;
+import com.dongisarang.partner.partner.PartnerService;
 import lombok.extern.java.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@Log
+import java.security.Principal;
+import java.util.ArrayList;
+
 @Controller
 public class PlaceController {
 
@@ -18,6 +24,12 @@ public class PlaceController {
 
     @Autowired
     PlaceService placeService;
+
+    @Autowired
+    PartnerService partnerService;
+
+    private static final Logger log = LoggerFactory.getLogger(PlaceController.class);
+
 
     //@Autowired
     //PlaceService placeService;
@@ -51,12 +63,50 @@ public class PlaceController {
         return "page/place_registration";
     }
 
+    /* 공간 등록 후 세부 공간 등록페이지로 이동한다.*/
     @PostMapping("/place/registration")
-    public String processPlaceRegistration(Place place, BindingResult result){
+    public String processPlaceRegistration(Place place, BindingResult result, Principal principal){
         //TODO: 유효성 추가
         if(result.hasErrors()){
             return "/";
         }else{
+
+            // TAG
+            ArrayList<String> tags = place.getTags();
+            String joinTag = "";
+
+            for (String tag: tags
+                 ) {
+                joinTag+=tag+";";
+            }
+            place.setTag(joinTag.substring(0, joinTag.length()-1));
+
+
+            // INFO
+            ArrayList<String> infos = place.getInfos();
+            String infoTag = "";
+
+            for (String info: infos
+            ) {
+                infoTag+=info+";";
+            }
+            place.setInfo(infoTag.substring(0, infoTag.length()-1));
+
+
+            // NOTICE
+            ArrayList<String> notices = place.getNotices();
+            String noticeTag = "";
+
+            for (String notice: notices
+            ) {
+                noticeTag+=notice+";";
+            }
+            place.setNotice(noticeTag.substring(0, noticeTag.length()-1));
+
+            Partner partner =  partnerService.findPartner(principal.getName());
+            place.setPartner(partner);
+
+            // 공간 등록하기
             int placeno = placeService.createPlace(place);
             return "redirect:/placeDtl/registration/" + placeno;
         }
@@ -99,7 +149,7 @@ public class PlaceController {
         }else{
 
             Place place = placeRepository.findPlaceByPlaceNo(placeNo);
-            PlaceDetail placeDetailAdd = new PlaceDetail(place, placedtl.getPlacedtlname(), placedtl.getPlacedtlintro(), placedtl.getMincount(), placedtl.getMaxcount());
+            PlaceDetail placeDetailAdd = new PlaceDetail(place, placedtl.getPlaceDetailName(), placedtl.getPlaceDetailIntro(), placedtl.getMinCount(), placedtl.getMaxCount());
 
             placeDetailRepository.save(placeDetailAdd);
             return "redirect:/";

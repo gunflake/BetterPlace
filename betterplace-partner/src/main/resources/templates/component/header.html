@@ -79,7 +79,7 @@
         </div>
       </div>
       <div id="sidenav_footer" class="sidenav_cont sidenav_footer">
-        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="text-center">로그인</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/auth/login}" class="text-center">로그인</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="text-center">로그아웃</a>
         <span>The Better Place Corp.</span>
       </div>

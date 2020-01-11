@@ -5,23 +5,42 @@
     <script type="application/javascript">
         function mincount_updown (kind) {
 
-            var count = document.getElementsByName('mincount')[0].value.substring(0,1);
+            let minValue = document.getElementsByName('mincount')[0].value;
+            let minCount = parseInt(minValue.substring(0, minValue.length-1));
+
+            if (kind == "-")
+            {
+                if(minCount <= 1) {
+                    alert("최소 인원은 1명입니다.");
+                    return false;
+                }
+
+                document.getElementsByName('mincount')[0].value = (--minCount) + "명";
+            }
+            else if (kind == "+")
+            {
+                document.getElementsByName('mincount')[0].value = (++minCount) + "명";
+            }
+            return true;
+        }
+
+        function maxcount_updown (kind) {
+
+            let maxValue = document.getElementsByName('maxcount')[0].value;
+            let maxCount = parseInt(maxValue.substring(0, maxValue.length-1));
 
             if (kind == "-")
             {
                 if(count <= 1) {
                     alert("최소 인원은 1명입니다.");
-                    return true;
+                    return false;
                 }
-
-                document.getElementsByName('mincount')[0].value = (count--) + "명";
-                alert(document.getElementsByName('mincount')[0].value = (count--) + "명");
+                document.getElementsByName('maxcount')[0].value = (--maxCount) + "명";
 
             }
             if (kind == "+")
             {
-                document.getElementsByName('mincount')[0].value = (count++) + "명";
-                alert(document.getElementsByName('mincount')[0].value = (count++) + "명");
+                document.getElementsByName('maxcount')[0].value = (++maxCount) + "명";
             }
             return true;
         }
@@ -36,53 +55,60 @@
                 <form th:object="${placedtl}" method="POST">
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placedtlname">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="placedtlname">
                                 세부 공간명
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placedtlname" name="placedtlname"  type="text" placeholder=""></textarea>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="placedtlname" id="placedtlname" type="text" placeholder=""/>
                         </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placedtlintro">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="placedtlintro">
                                 세부 공간 소개
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placedtlintro"  name="placedtlintro"  type="text" placeholder=""></textarea>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="placedtlintro" id="placedtlintro" type="text" placeholder=""/>
                         </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="mincount">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="mincount">
                                 최소예약인원
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="mincount" name="mincount" value="1" type="text" placeholder="1"></textarea>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="1명" name="mincount" id="mincount" type="text" readonly/>
 
-                            <!--
                             <div class="inline-flex">
-                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onclick="return mincount_updown('-');">
+                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onclick="mincount_updown('-');">
                                     -
                                 </button>
-                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onclick="return mincount_updown('+');">
+                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onclick="mincount_updown('+');">
                                     +
                                 </button>
                             </div>
-                            -->
                         </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="maxcount">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="maxcount">
                                 최대예약인원
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="maxcount" name="maxcount" value="1" type="text" placeholder="1"></textarea>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="1명" name="maxcount" id="maxcount" type="text" readonly/>
+
+                            <div class="inline-flex">
+                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onclick="maxcount_updown('-');">
+                                    -
+                                </button>
+                                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onclick="maxcount_updown('+');">
+                                    +
+                                </button>
+                            </div>
+
                         </div>
                     </div>
-
-                    <button
-                            type="submit"
-                            class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
-                    >세부 공간 등록</button>
-
+                    <div class="flex content-center justify-between">
+                        <button class="bg-blue-500 mb-6 hover:bg-blue-700 text-white font-bold py-2 w-full rounded focus:outline-none focus:shadow-outline" type="submit">
+                            세부 공간 등록
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

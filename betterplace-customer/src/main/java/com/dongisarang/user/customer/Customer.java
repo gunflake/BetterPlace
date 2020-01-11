@@ -1,131 +1,59 @@
 package com.dongisarang.user.customer;
 
+import com.dongisarang.user.reservation.Reservation;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
+@Getter
+@Setter
 public class Customer {
 
     @Id
     @GeneratedValue
     private Integer customerNo; //유저번호
 
-    @Column(length = 20, unique = true)
+    @Column(length = 20, unique = true, nullable = false)
     private String customerId; //유저아이디
 
-    @Column(length = 60)
+    @Column(length = 255, nullable = false)
     private String customerPassword; //비밀번호
 
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private String nickname; //닉네임
 
-    @Column(length = 13)
+    @Column(length = 12)
     private String phone; //휴대폰
 
-
-    @Column(length = 50)
+    @Column(length = 100, nullable = false)
     private String email; //이메일
 
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date registerDate; //등록날짜
 
-    @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate; //수정날짜
 
     @Column
     private Byte state; //상태
 
     @Column
-    private Boolean emailReceptionAgree;
+    private Boolean emailReceptionAgree; //이메일 수신동의
 
+    @OneToMany(mappedBy = "customer")
+    private List<Reservation> reservations = new ArrayList<>();
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getNickName() {
-        return nickname;
-    }
-
-    public void setNickName(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getCustomerPassword() {
-        return customerPassword;
-    }
-
-    public void setCustomerPassword(String customerPassword) {
-        this.customerPassword = customerPassword;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Byte getState() {
-        return state;
-    }
-
-    public void setState(Byte state) {
-        this.state = state;
-    }
-
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Boolean getEmailReceptionAgree() {
-        return emailReceptionAgree;
-    }
-
-    public void setEmailReceptionAgree(Boolean emailReceptionAgree) {
-        this.emailReceptionAgree = emailReceptionAgree;
-    }
-
-
-
+    //비밀번호 변경시 필요한 데이터
+    @Transient
+    private String changePassword;
 
     public Customer() {
     }
