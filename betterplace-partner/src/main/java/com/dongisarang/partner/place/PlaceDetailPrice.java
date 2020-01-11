@@ -4,15 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+
 @Entity
 @Getter
 @Setter
-public class PlaceDtlPrice {
+public class PlaceDetailPrice {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="placedetailno")
-    private PlaceDtl placeDtl;
+    private PlaceDetail placeDetail;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

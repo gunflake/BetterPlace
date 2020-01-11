@@ -32,9 +32,9 @@ public class DummyData implements ApplicationRunner {
 
     private void savePartner(){
         Partner partner1 = new Partner();
-        partner1.setPartnerId("gunflake09");
-        partner1.setNickname("gunflake09");
-        partner1.setPartnerPassword("1234");
+        partner1.setPartnerId("123");
+        partner1.setNickname("황현지");
+        partner1.setPartnerPassword("123");
         partnerService.createPartner(partner1);
     }
     private void savePlace() {

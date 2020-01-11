@@ -1,5 +1,8 @@
 package com.dongisarang.partner.reservation;
 
+import com.dongisarang.partner.place.Place;
+import com.dongisarang.partner.place.PlaceDetail;
+import com.dongisarang.user.customer.Customer;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,38 +24,26 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer reservationNo;
 
-    @Column
-    public Integer placeNo;
+    @ManyToOne
+    @JoinColumn(name = "placeNo")
+    public Place place;
+
+    @ManyToOne
+    @JoinColumn(name="customerNo")
+    public Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "placeDetailNo")
+    public PlaceDetail placeDetail;
 
     @Column
-    public Integer placeDetailNo;
+    public Byte customerCount;
 
-    @Column
-    public Integer userCount;
-
-    @Column
-    public Integer customerNo;
-
-    @Column
-    public Integer paymentNo;
-
-    //총결제금액
-    @Column
-    public Double totalPrice;
-
-    //지불금액
     @Column
     public Double price;
 
-    //쿠폰사용금액
-    @Column
-    public Double couponUsedPrice;
-
-    @Column
-    public String startDate;
-
-    @Column
-    public String endDate;
+    @Column(length = 8)
+    public String reservationDate;
 
     @Column
     public String startTime;
@@ -63,9 +54,11 @@ public class Reservation {
     @Column
     public Byte state;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date registerDate;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Date updateDate;
 

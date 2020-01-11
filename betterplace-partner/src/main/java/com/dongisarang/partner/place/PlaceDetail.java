@@ -11,14 +11,14 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class PlaceDtl {
+public class PlaceDetail {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="placeNo")
     private Place place;
 
     @OneToMany (mappedBy = "placeDtl", cascade = CascadeType.ALL)
-    private List<PlaceDtlPrice> placeDtlPrices;
+    private List<PlaceDetailPrice> placeDetailPrices;
 
 
     @Id
@@ -38,9 +38,9 @@ public class PlaceDtl {
     private Integer maxcount; // 최대예약인원
 
     // 기본 생성자
-    public PlaceDtl () {}
+    public PlaceDetail() {}
 
-    public PlaceDtl(Place place, String placedtlname, String placedtlintro, Integer mincount, Integer maxcount)
+    public PlaceDetail(Place place, String placedtlname, String placedtlintro, Integer mincount, Integer maxcount)
     {
         this.place          = place;
         this.placedtlname   = placedtlname;

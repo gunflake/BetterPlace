@@ -1,5 +1,6 @@
 package com.dongisarang.partner.place;
 
+import com.dongisarang.partner.partner.Partner;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,7 +21,7 @@ public class Place {
     private Integer placeNo; // 공간번호
 
     @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
-    private List<PlaceDtl> placeDtls;
+    private List<PlaceDetail> placeDetails;
 
     @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
     private List<PlaceRefund> placeRefunds;
@@ -29,12 +30,16 @@ public class Place {
     private List<PlaceInfo> placeInfos;
 
 
-    public boolean addPlaceDtl (PlaceDtl placeDtl) {
-        if(placeDtls == null){
-            placeDtls = new ArrayList<>();
+    public boolean addPlaceDtl (PlaceDetail placeDetail) {
+        if(placeDetails == null){
+            placeDetails = new ArrayList<>();
         }
-        return this.placeDtls.add(placeDtl);
+        return this.placeDetails.add(placeDetail);
     }
+
+    @ManyToOne
+    @JoinColumn(name = "partnerNo")
+    private Partner partner;
 
     @Column
     private String placeName; // 공간명
