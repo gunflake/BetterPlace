@@ -1,0 +1,7 @@
+package com.dongisarang.partner.customer;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class CustomerService {
+}

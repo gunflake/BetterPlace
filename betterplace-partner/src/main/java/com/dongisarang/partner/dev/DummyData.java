@@ -1,24 +1,31 @@
 package com.dongisarang.partner.dev;
 
-import com.dongisarang.partner.exception.PartnerNotFound;
+import com.dongisarang.partner.customer.Customer;
+import com.dongisarang.partner.customer.CustomerRepository;
 import com.dongisarang.partner.partner.Partner;
 import com.dongisarang.partner.partner.PartnerRepository;
-import com.dongisarang.partner.partner.PartnerService;
 import com.dongisarang.partner.place.Place;
+import com.dongisarang.partner.place.PlaceDetail;
+import com.dongisarang.partner.place.PlaceDetailRepository;
 import com.dongisarang.partner.place.PlaceRepository;
+import com.dongisarang.partner.reservation.Reservation;
+import com.dongisarang.partner.reservation.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-
-/*
-* 개발용도로 사용하는 사전 데이터
-* */
+import java.util.List;
 @Component
 @Transactional
 public class DummyData implements ApplicationRunner {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @Autowired
     private PartnerRepository partnerRepository;
@@ -27,12 +34,121 @@ public class DummyData implements ApplicationRunner {
     private PlaceRepository placeRepository;
 
     @Autowired
-    private PartnerService partnerService;
+    private PlaceDetailRepository placeDetailRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         savePartner();
         savePlace();
+        savePlaceDetail();
+        saveCustomer();
+        saveReservation();
+        saveReservation1();
+    }
+
+    private void saveReservation() {
+        Reservation reservation = new Reservation();
+        reservation.setCustomerCount((byte) 3);
+        reservation.setReservationDate("20200110");
+        reservation.setStartTime((byte) 6);
+        reservation.setEndTime((byte) 10);
+
+        Place place = placeRepository.findByPlaceNameLike("%썸띵%").orElseThrow();
+        reservation.setPlace(place);
+        //기본 가격 * (사용 시간) * 인원수
+        int reservationPrice = place.getDefaultPrice() * (10 - 6) * 3;
+        reservation.setPrice(reservationPrice);
+
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09");
+        reservation.setCustomer(gunflake09);
+
+        PlaceDetail placeDetail = placeDetailRepository.findByPlaceAndPlaceDetailName(place, "스터디룸 A [4인실]").orElseThrow();
+        reservation.setPlaceDetail(placeDetail);
+
+        reservationRepository.save(reservation);
+
+
+
+    }
+
+    private void saveCustomer() {
+        Customer customer = new Customer();
+        customer.setCustomerId("gunflake09");
+        customer.setCustomerPassword("1234");
+        customer.setNickname("gunflake");
+        customer.setEmail("gunflake09@gmail.com");
+        customerRepository.save(customer);
+
+    }
+
+    private void saveReservation1() {
+        Reservation reservation = new Reservation();
+        reservation.setCustomerCount((byte) 3);
+        reservation.setReservationDate("20200110");
+        reservation.setStartTime((byte) 12);
+        reservation.setEndTime((byte) 22);
+
+        Place place = placeRepository.findByPlaceNameLike("%썸띵%").orElseThrow();
+        reservation.setPlace(place);
+        //기본 가격 * (사용 시간) * 인원수
+        int reservationPrice = place.getDefaultPrice() * (10 - 6) * 3;
+        reservation.setPrice(reservationPrice);
+
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09");
+        reservation.setCustomer(gunflake09);
+
+        PlaceDetail placeDetail = placeDetailRepository.findByPlaceAndPlaceDetailName(place, "스터디룸 A [4인실]").orElseThrow();
+        reservation.setPlaceDetail(placeDetail);
+
+        reservationRepository.save(reservation);
+    }
+
+    private void savePlaceDetail() {
+
+        List<Place> all = placeRepository.findAll();
+
+        for (Place place: all) {
+            PlaceDetail placeDetail1 = new PlaceDetail();
+            placeDetail1.setMinCount((short) 1);
+            placeDetail1.setMaxCount((short) 4);
+            placeDetail1.setPlaceDetailName("스터디룸 A [4인실]");
+            placeDetail1.setPlaceDetailIntro("슈퍼스타트의 4인실 스터디룸입니다.\n" +
+                    "소규모 회의 및 토론 면접연습이 가능합니다.");
+            placeDetail1.setPlace(place);
+
+            PlaceDetail placeDetail2 = new PlaceDetail();
+            placeDetail2.setMinCount((short) 2);
+            placeDetail2.setMaxCount((short) 6);
+            placeDetail2.setPlaceDetailName("스터디룸 B [6인실]");
+            placeDetail2.setPlaceDetailIntro("슈퍼스타트의 6인실 스터디룸입니다.\n" +
+                    "소규모 회의 및 토론 면접연습이 가능합니다.");
+            placeDetail2.setPlace(place);
+
+            PlaceDetail placeDetail3 = new PlaceDetail();
+            placeDetail3.setMinCount((short) 4);
+            placeDetail3.setMaxCount((short) 8);
+            placeDetail3.setPlaceDetailName("스터디룸 C [8인실]");
+            placeDetail3.setPlaceDetailIntro("슈퍼스타트의 8인실 스터디룸입니다.\n" +
+                    "대규모 회의 및 토론 면접연습이 가능합니다.");
+            placeDetail3.setPlace(place);
+
+            PlaceDetail placeDetail4 = new PlaceDetail();
+            placeDetail4.setMinCount((short) 6);
+            placeDetail4.setMaxCount((short) 10);
+            placeDetail4.setPlaceDetailName("스터디룸 D [10인실]");
+            placeDetail4.setPlaceDetailIntro("슈퍼스타트의 10인실 스터디룸입니다.\n" +
+                    "대규모 회의 및 강의가 가능합니다.");
+            placeDetail4.setPlace(place);
+
+            placeDetailRepository.save(placeDetail1);
+            placeDetailRepository.save(placeDetail2);
+            placeDetailRepository.save(placeDetail3);
+            placeDetailRepository.save(placeDetail4);
+
+        }
+
+
+
     }
 
     private void savePlace() {
@@ -54,9 +170,10 @@ public class DummyData implements ApplicationRunner {
         place1.setWebsite("https://www.stsomething.com");
         place1.setPhone("050409059329");
         place1.setImage("https://moplqfgeemqv2103108.cdn.ntruss.com/pstatic-scloud/20171123_122/15114354285970aKDL_JPEG/2%2525C3%2525FE_%2525C0%2525FC%2525BD%2525C3%2525C0%2525E5_1.jpg?type=m&w=900&h=900&autorotate=true&quality=90");
+        place1.setNotice("예약 변경사항은 꼭 사전에 연락 주시기 바랍니다.;101~103호 최소인원은 3명입니다.;104호 최소인원은 5명입니다.;모니터 사용을 희망하시는 분은 사전에 메모 혹은 전화문의 부탁드립니다.;외부 음식 반입은 가능하나 음식물 쓰레기는 직접 치워주셔야 하니 유의해주세요.;주류는 반입 불가입니다.;월요일과 화요일 예약은 전화 및 카카오톡 플러스 친구(소셜팩토리 홍대2호점)로 문의해주세요.");
         place1.setDefaultPrice(1500);
 
-        place1.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow(() -> new PartnerNotFound("PartnerId: gunflake09 is not found.")));
+        place1.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow());
 
         Place place2 = new Place();
         place2.setPlaceName("슈퍼스타트 홍대점");
@@ -82,8 +199,9 @@ public class DummyData implements ApplicationRunner {
         place2.setPhone("050409053184");
         place2.setImage("https://moplqfgeemqv2103108.cdn.ntruss.com/service/157607491_b5a886ed9bdbcef40a77870fcf4c865c.jpg?type=m&w=900&h=900&autorotate=true&quality=90");
         place2.setDefaultPrice(2000);
+        place2.setNotice("예약 변경사항은 꼭 사전에 연락 주시기 바랍니다.;101~103호 최소인원은 3명입니다.;104호 최소인원은 5명입니다.;모니터 사용을 희망하시는 분은 사전에 메모 혹은 전화문의 부탁드립니다.;외부 음식 반입은 가능하나 음식물 쓰레기는 직접 치워주셔야 하니 유의해주세요.;주류는 반입 불가입니다.;월요일과 화요일 예약은 전화 및 카카오톡 플러스 친구(소셜팩토리 홍대2호점)로 문의해주세요.");
 
-        place2.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow(() -> new PartnerNotFound("PartnerId: gunflake09 is not found.")));
+        place2.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow());
 
         Place place3 = new Place();
         place3.setPlaceName("[1958년] 다락방구구(독채)");
@@ -115,7 +233,8 @@ public class DummyData implements ApplicationRunner {
         place3.setPhone("050409055431");
         place3.setImage("https://iepdybgueong2014375.cdn.ntruss.com/pstatic-scloud/20160927_200/1474972997013BLaT8_PNG/%25B1%25D7%25B8%25B24.png");
         place3.setDefaultPrice(1000);
-        place3.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow(() -> new PartnerNotFound("PartnerId: gunflake09 is not found.")));
+        place3.setNotice("예약 변경사항은 꼭 사전에 연락 주시기 바랍니다.;101~103호 최소인원은 3명입니다.;104호 최소인원은 5명입니다.;모니터 사용을 희망하시는 분은 사전에 메모 혹은 전화문의 부탁드립니다.;외부 음식 반입은 가능하나 음식물 쓰레기는 직접 치워주셔야 하니 유의해주세요.;주류는 반입 불가입니다.;월요일과 화요일 예약은 전화 및 카카오톡 플러스 친구(소셜팩토리 홍대2호점)로 문의해주세요.");
+        place3.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow());
 
         Place place4 = new Place();
         place4.setPlaceName("TRYGROUND-스터디룸,클래스");
@@ -132,7 +251,8 @@ public class DummyData implements ApplicationRunner {
         place4.setPhone("050409055431");
         place4.setImage("https://moplqfgeemqv2103108.cdn.ntruss.com/service/157495291_18e2999891374a475d0687ca9f989d83.jpg?type=m&w=900&h=900&autorotate=true&quality=90");
         place4.setDefaultPrice(2000);
-        place4.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow(() -> new PartnerNotFound("PartnerId: gunflake09 is not found.")));
+        place4.setNotice("예약 변경사항은 꼭 사전에 연락 주시기 바랍니다.;101~103호 최소인원은 3명입니다.;104호 최소인원은 5명입니다.;모니터 사용을 희망하시는 분은 사전에 메모 혹은 전화문의 부탁드립니다.;외부 음식 반입은 가능하나 음식물 쓰레기는 직접 치워주셔야 하니 유의해주세요.;주류는 반입 불가입니다.;월요일과 화요일 예약은 전화 및 카카오톡 플러스 친구(소셜팩토리 홍대2호점)로 문의해주세요.");
+        place4.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow());
 
         Place place5 = new Place();
         place5.setPlaceName("스터디카페두드림 Do dream");
@@ -148,7 +268,8 @@ public class DummyData implements ApplicationRunner {
         place5.setPhone("050409055431");
         place5.setImage("https://moplqfgeemqv2103108.cdn.ntruss.com/pstatic-scloud/20170809_92/1502247571583oHUiX_JPEG/KakaoTalk_20170803_113048101.jpg?type=m&w=900&h=900&autorotate=true&quality=90");
         place5.setDefaultPrice(3000);
-        place5.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow(() -> new PartnerNotFound("PartnerId: gunflake09 is not found.")));
+        place5.setNotice("예약 변경사항은 꼭 사전에 연락 주시기 바랍니다.;101~103호 최소인원은 3명입니다.;104호 최소인원은 5명입니다.;모니터 사용을 희망하시는 분은 사전에 메모 혹은 전화문의 부탁드립니다.;외부 음식 반입은 가능하나 음식물 쓰레기는 직접 치워주셔야 하니 유의해주세요.;주류는 반입 불가입니다.;월요일과 화요일 예약은 전화 및 카카오톡 플러스 친구(소셜팩토리 홍대2호점)로 문의해주세요.");
+        place5.setPartner(partnerRepository.findByPartnerId("gunflake09").orElseThrow());
 
         placeRepository.save(place1);
         placeRepository.save(place2);
@@ -160,8 +281,9 @@ public class DummyData implements ApplicationRunner {
     private void savePartner(){
         Partner partner1 = new Partner();
         partner1.setPartnerId("gunflake09");
-        partner1.setNickname("gunflake09");
-        partner1.setPartnerPassword("1234");
-        partnerService.createPartner(partner1);
+        partner1.setEmail("gunflake09@naver.com");
+        partner1.setPartnerPassword("{bcrypt}$2a$10$ojPDvv8tIBJyeH6kp9lTgOm8URDorcS/7jHAhE/jH05FcaWzQqAOy");
+
+        partnerRepository.save(partner1);
     }
 }

@@ -1,6 +1,5 @@
 package com.dongisarang.partner.partner;
 
-import com.dongisarang.partner.exception.PartnerNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class PartnerService {
      * @return
      */
     public Partner findPartner(String partnerId){
-        return partnerRepository.findByPartnerId(partnerId).orElseThrow(() -> new PartnerNotFound("PartnerId: " + partnerId +" is not found."));
+        return partnerRepository.findByPartnerId(partnerId).orElseThrow();
     }
 
     /**

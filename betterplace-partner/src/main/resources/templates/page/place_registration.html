@@ -2,6 +2,71 @@
       th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
 <th:block th:fragment="head">
     <!--<link rel -->
+    <script type="application/javascript">
+        function addTagList() {
+            let tagcount = parseInt(document.getElementById("tagcount").value);
+
+            if (tagcount < 5)
+            {
+
+                let input = document.createElement('input');
+
+                input.className   = "mb-4 shadow text-sm appearance-none w-full border rounded py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+                input.placeholder = "태그를 입력해 주세요.";
+                input.type        = "text";
+                input.name        = "tags";
+
+                document.getElementById('taglist').appendChild(input);
+                document.getElementById("tagcount").value = ++tagcount;
+            }
+            else
+            {
+                alert("태그는 최대 5개 입력 가능합니다.")
+            }
+        }
+
+        function addInfoList() {
+            let infocount = parseInt(document.getElementById("infocount").value);
+
+            if (infocount < 10)
+            {
+                let input = document.createElement('input');
+
+                input.className   = "mb-4 shadow text-sm appearance-none w-full border rounded py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+                input.placeholder = "최대 10개까지 작성 가능합니다.";
+                input.type        = "text";
+                input.name        = "infos";
+
+                document.getElementById('infolist').appendChild(input);
+                document.getElementById("infocount").value = ++infocount;
+            }
+            else
+            {
+                alert("최대 10개까지 작성 가능합니다.")
+            }
+        }
+
+        function addNoticeList() {
+            let noticecount = parseInt(document.getElementById("noticecount").value);
+
+            if (noticecount < 10)
+            {
+                let input = document.createElement('input');
+
+                input.className   = "mb-4 shadow text-sm appearance-none w-full border rounded py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+                input.placeholder = "최대 10개까지 작성 가능합니다.";
+                input.type        = "text";
+                input.name        = "notices";
+
+                document.getElementById('noticelist').appendChild(input);
+                document.getElementById("noticecount").value = ++noticecount;
+            }
+            else
+            {
+                alert("최대 10개까지 작성 가능합니다.")
+            }
+        }
+    </script>
 </th:block>
 
 <th:block th:fragment="body">
@@ -12,97 +77,136 @@
                 <form th:action="@{/place/registration}" th:object="${place}" method="POST">
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="placeName">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="placeName">
                                 공간명
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="placeName" name="placeName"  type="text" placeholder=""></textarea>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="placeName" id="placeName" type="text"/>
                         </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="intro">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="intro">
                                 공간 소개
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="intro"  name="intro"  type="text" placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."></textarea>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="intro" id="intro" type="text"  placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."/>
                         </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="tag">
+                            <input type="hidden" value="1" id="tagcount">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="tag">
                                 공간 태그
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="tag" name="tag" type="text" placeholder="태그를 입력해 주세요.">
-                        </textarea></div>
+                            <div class="flex">
+                                <div class="w-5/6" id="taglist">
+                                    <input class="mb-4 shadow text-sm appearance-none w-full border rounded py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tags" id="tag" type="text" placeholder="태그를 입력해 주세요."/>
+                                </div>
+                                <div class="w-1/6 ml-4">
+                                    <button type="button" onclick="addTagList()" class="text-base bg-green-500 hover:bg-green-700 text-white font-bold w-full  align-middle py-2 px-4 rounded">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="info">
+                            <input type="hidden" value="1" id="infocount">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="infos">
                                 시설안내
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="info" name="info" type="text" placeholder="최대 10개까지 작성가능합니다.">
-                        </textarea></div>
+                            <div class="flex">
+                                <div class="w-5/6" id="infolist">
+                                    <input class="mb-4 shadow text-sm appearance-none w-full border rounded py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="infos" id="infos" type="text" placeholder="최대 10개까지 작성 가능합니다."/>
+                                </div>
+                                <div class="w-1/6 ml-4">
+                                    <button type="button" onclick="addInfoList()" class="text-base bg-green-500 hover:bg-green-700 text-white font-bold w-full  align-middle py-2 px-4 rounded">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="convenience">
-                                편의시설
-                            </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="convenience"  name="convenience" type="text" placeholder="최대 10개까지 작성가능합니다.">
-                        </textarea></div>
-                    </div>
-                    <div class="-mx-3 md:flex mb-6">
-                        <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="notice">
+                            <input type="hidden" value="1" id="noticecount">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="notice">
                                 예약 시 주의사항
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="notice" name="notice" type="text" placeholder="최대 10개까지 작성가능합니다.">
-                        </textarea></div>
+                            <div class="flex">
+                                <div class="w-5/6" id="noticelist">
+                                    <input class="mb-4 shadow text-sm appearance-none w-full border rounded py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="notices" id="notice" type="text" placeholder="최대 10개까지 작성 가능합니다."/>
+                                </div>
+                                <div class="w-1/6 ml-4">
+                                    <button type="button" onclick="addNoticeList()" class="text-base bg-green-500 hover:bg-green-700 text-white font-bold w-full  align-middle py-2 px-4 rounded">
+                                        +
+                                    </button>
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="convenience">
+                                편의시설
+                            </label>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="convenience" id="convenience" type="text" placeholder="최대 10개까지 작성가능합니다."/>
+                        </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="website">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="website">
                                 웹사이트
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="website" name="website" type="text" placeholder="웹사이트 URL을 입력해 주세요.">
-                        </textarea></div>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="website" id="website" type="text" placeholder="웹사이트 URL을 입력해 주세요."/>
+                        </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="text-xs block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="image">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
                                 대표이미지
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="image"  name="image" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)">
-                        </textarea></div>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="image" id="image" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)"/>
+                        </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="text-xs block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="address">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
                                 주소(위치)
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="address" name="address" type="text" placeholder="주소를 입력해주세요.">
-                        </textarea></div>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="address" id="address" type="text" placeholder="주소를 입력해주세요."/>
+                        </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="text-xs block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="email">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                                 이메일
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="email"  name="email" type="text" placeholder="이메일을 입력해주세요.">
-                       </textarea> </div>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" id="email" type="text" placeholder="이메일을 입력해주세요."/>
+                        </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="text-xs block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="phone">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
                                 대표전화번호
                             </label>
-                            <textarea class="text-xs appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="phone" name="phone" type="text" placeholder="이메일을 입력해주세요.">
-                      </textarea>  </div>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="phone" id="phone" type="text" placeholder="이메일을 입력해주세요."/>
+                        </div>
                     </div>
-                    <button
-                            type="submit"
-                            class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
-                    >공간 등록</button>
-
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="defaultprice">
+                                금액
+                            </label>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="defaultprice" id="defaultprice" type="text" placeholder="금액을 입력해주세요."/>
+                        </div>
+                    </div>
+                    <div class="flex content-center justify-between">
+                        <button class="bg-blue-500 mb-6 hover:bg-blue-700 text-white font-bold py-2 w-full rounded focus:outline-none focus:shadow-outline" type="submit">
+                            공간 등록
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package com.dongisarang.partner.place;
 
 import com.dongisarang.partner.partner.Partner;
+import com.dongisarang.partner.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -18,79 +19,78 @@ import java.util.List;
 public class Place {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer placeNo; // 공간번호
+    @GeneratedValue
+    private Integer placeNo;
 
     @ManyToOne
     @JoinColumn(name = "partnerNo")
     private Partner partner;
 
-    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
-    private List<PlaceDtl> placeDtls;
-
-    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
-    private List<PlaceRefund> placeRefunds;
-
-    @OneToMany (mappedBy = "place", cascade = CascadeType.ALL)
-    private List<PlaceInfo> placeInfos;
-
-
-    public boolean addPlaceDtl (PlaceDtl placeDtl) {
-        if(placeDtls == null){
-            placeDtls = new ArrayList<>();
-        }
-        return this.placeDtls.add(placeDtl);
-    }
-
     @Column(length = 50)
-    private String placeName; // 공간명
+    private String placeName;
 
     @Column
     @Lob
     private String intro; // 공간 소개
 
     @Column(length = 50)
-    private String tag; // 태그
+    private String tag;
 
     @Column
     @Lob
-    private String info; // 시설 안내
+    private String info; //시설 안내
 
     @Column(length = 45)
     private String convenience; //편의시설
 
     @Column
-    private String notice; // 예약 시 주의사항
+    @Lob
+    private String notice; //예약시 주의사항
 
     @Column(length = 100)
     private String address; // 주소
 
     @Column(length = 100)
-    private String website; // 웹사이트
+    private String website;
 
     @Column(length = 50)
-    private String email; // 이메일
+    private String email;
 
     @Column(length = 12)
-    private String phone; // 대표전화번호
+    private String phone; //대표 전화
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
-    private Date registerDate; //등록일
+    private Date registerDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
-    private Date updateDate; //수정일
-
-    @Column(length = 255)
-    private String image; // 대표이미지
+    private Date updateDate;
 
     @Column
     @ColumnDefault("1")
-    private Byte state; //상태
+    private Byte state;
+
+    @Column(length = 255)
+    private String image;
 
     @Column
     private Integer defaultPrice;
+
+    @OneToMany(mappedBy = "place", fetch = FetchType.EAGER)
+    private List<PlaceDetail> placeDetails = new ArrayList<>();
+
+    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    @Transient
+    private ArrayList<String> tags;
+
+    @Transient
+    private ArrayList<String> infos;
+
+    @Transient
+    private ArrayList<String> notices;
 
     public void setPartner(Partner partner){
 
@@ -102,4 +102,11 @@ public class Place {
         partner.getPlaces().add(this);
     }
 
+    @Override
+    public String toString() {
+        return "Place{" +
+                "placeNo=" + placeNo +
+                ", placeName='" + placeName + '\'' +
+                '}';
+    }
 }

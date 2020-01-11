@@ -6,5 +6,4 @@ import java.util.Optional;
 
 public interface PartnerRepository extends JpaRepository<Partner, Integer> {
     Optional<Partner> findByPartnerId(String partnerId);
-
 }
