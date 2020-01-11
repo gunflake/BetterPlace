@@ -1,5 +1,7 @@
 package com.dongisarang.partner.place;
 
+import com.dongisarang.partner.partner.Partner;
+import com.dongisarang.partner.partner.PartnerService;
 import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,9 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
-import java.util.List;
 
 @Log
 @Controller
@@ -24,6 +25,9 @@ public class PlaceController {
 
     @Autowired
     PlaceService placeService;
+
+    @Autowired
+    PartnerService partnerService;
 
     private static final Logger log = LoggerFactory.getLogger(PlaceController.class);
 
@@ -63,7 +67,7 @@ public class PlaceController {
 
     /* 공간 등록 후 세부 공간 등록페이지로 이동한다.*/
     @PostMapping("/place/registration")
-    public String processPlaceRegistration(Place place, BindingResult result){
+    public String processPlaceRegistration(Place place, BindingResult result, Principal principal){
         //TODO: 유효성 추가
         if(result.hasErrors()){
             return "/";
@@ -100,6 +104,9 @@ public class PlaceController {
                 noticeTag+=notice+";";
             }
             place.setNotice(noticeTag.substring(0, noticeTag.length()-1));
+
+            Partner partner =  partnerService.findPartner(principal.getName());
+            place.setPartner(partner);
 
             // 공간 등록하기
             int placeno = placeService.createPlace(place);

@@ -1,5 +1,6 @@
 package com.dongisarang.partner.place;
 
+import com.dongisarang.partner.partner.Partner;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,6 +19,10 @@ public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer placeNo; // 공간번호
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "partnerNo")
+    private Partner partner;
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
     private List<PlaceDtl> placeDtls;
