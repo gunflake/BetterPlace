@@ -28,12 +28,8 @@ public class Partner {
 	@Column
     private String nickname; //닉네임
 
-    @Column
-    private String partnerPassword;
-
     @Column(length = 50)
     private String email;
-    private String nickname; //닉네임
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

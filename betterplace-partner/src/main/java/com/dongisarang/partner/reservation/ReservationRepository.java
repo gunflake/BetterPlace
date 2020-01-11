@@ -12,5 +12,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     // 사용자가 방금 예약한것중 가장 최근꺼를 가져온다. << 수정 필요할 수 있음...
     Optional<Reservation> findByCustomerOrderByRegisterDateDesc(Customer customer);
     List<Reservation> findByPlaceAndPlaceDetailAndReservationDateOrderByStartTime(Place place, PlaceDetail placeDetail, String reservationDate);
-    Optional<Reservation> findAllByPartnerId(String partnerId);
+//    Optional<Reservation> findAllByPartnerId(String partnerId);
 }

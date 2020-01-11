@@ -53,7 +53,7 @@ public class ReservationController {
 
     @GetMapping("/test/reservation")
     public Reservation getReservation(){
-        Reservation reservation = reservationRepository.findAllByPartnerId("123").orElseThrow();
-        return reservation;
+        //Reservation reservation = reservationRepository.findAllByPartnerId("123").orElseThrow();
+        return null;
     }
 }

@@ -1,10 +1,12 @@
 package com.dongisarang.partner.place;
 
+import com.dongisarang.partner.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,41 +15,48 @@ import java.util.List;
 @ToString
 public class PlaceDetail {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="placeNo")
+    @Id
+    @GeneratedValue
+    private Integer placeDetailNo;
+
+    @ManyToOne
+    @JoinColumn(name = "placeNo")
     private Place place;
 
-    @OneToMany (mappedBy = "placeDtl", cascade = CascadeType.ALL)
-    private List<PlaceDetailPrice> placeDetailPrices;
+    @Column(length = 255)
+    private String placeDetailName;
 
+    @Column(length = 50)
+    private String placeDetailIntro;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer placedetailno; // 세부공간번호
+    private Short minCount;
 
-    @Column
-    private String placedtlname; // 세부공간명 1호, 2호, 회의실 등
+    private Short maxCount;
 
-    @Column
-    private String placedtlintro; // 세부공간소개
+    @OneToMany(mappedBy = "placeDetail", fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
 
-    @Column
-    private Integer mincount; // 최소예약인원
+    public void setPlace(Place place) {
 
-    @Column
-    private Integer maxcount; // 최대예약인원
+        if (this.place != null) {
+            this.place.getPlaceDetails().remove(this);
+        }
 
-    // 기본 생성자
-    public PlaceDetail() {}
-
-    public PlaceDetail(Place place, String placedtlname, String placedtlintro, Integer mincount, Integer maxcount)
-    {
-        this.place          = place;
-        this.placedtlname   = placedtlname;
-        this.placedtlintro  = placedtlintro;
-        this.mincount       = mincount;
-        this.maxcount       = maxcount;
+        this.place = place;
+        place.getPlaceDetails().add(this);
     }
 
+    public PlaceDetail(){
+
+    }
+
+    public PlaceDetail(Place place, String placedtlname, String placedtlintro, Short mincount, Short maxcount) {
+        this.place = place;
+        this.placeDetailName = placedtlname;
+        this.placeDetailIntro = placedtlintro;
+        this.minCount = mincount;
+        this.maxCount = maxcount;
+        setPlace(place);
+    }
 
 }
