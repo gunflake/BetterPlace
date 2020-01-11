@@ -1,13 +1,17 @@
 package com.dongisarang.user.place;
 
 import com.dongisarang.user.partner.Partner;
+import com.dongisarang.user.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,7 +29,7 @@ public class Place {
     @Column(length = 50)
     private String placeName;
 
-    @Column(length = 100)
+    @Column
     @Lob
     private String intro; // 공간 소개
 
@@ -40,6 +44,7 @@ public class Place {
     private String convenience; //편의시설
 
     @Column
+    @Lob
     private String notice; //예약시 주의사항
 
     @Column(length = 100)
@@ -59,6 +64,7 @@ public class Place {
     private Date registerDate;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date updateDate;
 
     @Column
@@ -70,6 +76,12 @@ public class Place {
 
     @Column
     private Integer defaultPrice;
+
+    @OneToMany(mappedBy = "place", fetch = FetchType.EAGER)
+    private List<PlaceDetail> placeDetails = new ArrayList<>();
+
+    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
 
     public void setPartner(Partner partner){
 

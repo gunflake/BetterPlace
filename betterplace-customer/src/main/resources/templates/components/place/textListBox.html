@@ -3,12 +3,12 @@
 <html lang="ko" xmlns:th="https://www.thymeleaf.org">
 <body>
 
-<div class="text_box" th:fragment="textBox (title, facility)">
+<div class="text_box" th:fragment="textBox (title, lists)">
     <h4 class="h_intro" th:text="${title}"></h4>
-    <ol class="info_list" th:each="facility : ${facility}">
+    <ol class="info_list" th:each="list, index : ${#strings.arraySplit(lists,';')}">
         <li>
-            <strong class="tit" th:text="${facilityStat.index}+1"></strong>
-            <span class="data" th:text="${facility}"></span>
+            <strong class="tit" th:text="${index.index}+1"></strong>
+            <span class="data" th:text="${list}"></span>
         </li>
     </ol>
 </div>

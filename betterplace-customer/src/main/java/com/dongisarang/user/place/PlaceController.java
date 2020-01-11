@@ -1,5 +1,6 @@
 package com.dongisarang.user.place;
 
+import com.dongisarang.user.exception.NotFoundPlaceDtlException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +41,27 @@ public class PlaceController {
 
     @GetMapping("/place/{placeNo}")
     public String initCreationPlaceForm(@PathVariable("placeNo") int placeNo, Model model){
-        // TODO : RestAPI Partner에서 Place 정보 호출...
+        Place getPlace = placeRepository.findById(placeNo).orElseThrow(() -> new NotFoundPlaceDtlException("해당 플레이스 정보를 찾을 수 없습니다."));
 
-        //String uri = "http://localhost:8080/partner/getA";
-        RestTemplate restTemplate = new RestTemplate();
-        //Place getPlace = restTemplate.getForObject(uri, Place.class);
+        //공간 제목 가져오기
+        String placeName = getPlace.getPlaceName();
+
+        //공간 테그 가져오기
+        String tags = getPlace.getTag();
+
+        //공간 이미지 가져오기
+        String imgSrc = getPlace.getImage();
+
+        //공간 시설 안내 가져오기
+        String[] information = getPlace.getInfo().split(";");
+
+        //예약 시 주의사항 내용 DB에서 가져오기
+        String[] notice = getPlace.getNotice().split(";");
+
+        //공간 소개 가져오기
+        String introduction = getPlace.getIntro();
+
+        model.addAttribute("place", getPlace);
 
         return "pages/place";
     }

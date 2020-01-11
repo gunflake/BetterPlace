@@ -9,22 +9,24 @@
 </th:block>
 
 <th:block th:fragment="left">
-    <p class="text-4xl font-extrabold">소셜팩토리 2호점</p>
-    <p class="text-2xl font-thin">홍대에서 스터디·파티·모임·회의·세미나·강연·교육</p>
-
-    <br/>
+    <div class="text-4xl font-extrabold" th:text="${place.getPlaceName()}"></div>
+    <div class="relative mt-2 mb-4">
+        <temp th:each="tag : ${#strings.arraySplit(place.getTag(),',')}">
+            <a class="inline bg-gray-200 py-1 px-2 rounded-full text-sm lowercase text-gray-700" href="#" th:text="${#strings.concat('#', tag)}"></a>
+        </temp>
+    </div>
 
     <div class="bg-gray-400">
-       <img class="object-cover h-64 w-full" src="https://images.unsplash.com/photo-1556742393-d75f468bfcb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80">
+       <img class="object-cover h-64 w-full" th:src="${place.getImage()}">
     </div>
 
     <br/>
 
-    <div th:replace="~{components/place/textDetailBox :: textBox('공간 소개', ${information}, '10~22시', '일요일')}"></div>
+    <div th:replace="~{components/place/textDetailBox :: textBox('공간 소개', ${place.getIntro()}, '10~22시', '일요일')}"></div>
 
-    <div th:replace="~{components/place/textListBox :: textBox('시설 안내', ${facility})}"></div>
+    <div th:replace="~{components/place/textListBox :: textBox('시설 안내', ${place.getInfo()})}"></div>
 
-    <div th:replace="~{components/place/textListBox :: textBox('예약시 주의사항', ${reservation})}"></div>
+    <div th:replace="~{components/place/textListBox :: textBox('예약시 주의사항', ${place.getNotice()})}"></div>
 
     <!-- 지도 -->
     <div class="max-w-6xl mx-auto">
@@ -33,9 +35,9 @@
                 <div class="bg-white shadow-xl rounded-lg overflow-hidden">
 
                     <div class="p-4">
-                        <p class="text-2xl font-bold">소셜팩토리 2호점</p>
-                        <p class="text-lg text-gray-900">서울특별시 마포구 연남동 565-11 지하 1층 소셜팩토리 홍대 2호점 (신주소 = 마포구 연남로3길 43)</p>
-                        <p class="text-lg text-gray-700">http://www.socialfactory.co.kr</p>
+                        <div class="text-2xl font-bold" th:text="${place.getPlaceName()}"></div>
+                        <div class="text-lg text-gray-900" th:text="${place.getAddress()}"></div>
+                        <div class="text-lg text-gray-700" th:text="${place.getWebsite()}"></div>
                     </div>
 
                     <div class="bg-cover bg-center p-4" style="height: 70vh;">
@@ -47,7 +49,15 @@
         </div>
     </div>
 
-    <script>
+    <script th:inline="javascript">
+
+        // ThymeLeaf 데이터 Javascript에 매핑
+
+        /*<![CDATA[*/
+        var address = /*[[ ${place.getAddress()} ]]*/;
+        var placeName = /*[[ ${place.getPlaceName()} ]]*/;
+        /*]]>*/
+
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -55,6 +65,34 @@
             };
 
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch(address, function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">' + placeName + '</div>'
+                });
+                infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
+        });
 
         // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
         var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -117,6 +155,7 @@
         </div>
     </div>
 </th:block>
+<!-- 상세 공간 선택 페이지 -->
 <th:block th:fragment="right">
 
 
@@ -127,10 +166,10 @@
                 예약할 공간을 선택해주세요.
             </div>
             <div>
-                <div  th:each="placeDtl : ${placeDtls}">
+                <div  th:each="placeDetail : ${place.getPlaceDetails()}">
                     <div class="border-0 border-grey-light border-b border-solid py-4">
                         <label>
-                            <input type="radio" name="selectPlace" value="" th:text="${placeDtl}"/>
+                            <input type="radio" name="selectPlace" th:value="${placeDetail.getPlaceDetailNo()}" th:text="${placeDetail.getPlaceDetailName()}"/>
                         </label>
                     </div>
                 </div>
@@ -143,7 +182,6 @@
             </div>
 
         </div>
-
 
 </th:block>
 
