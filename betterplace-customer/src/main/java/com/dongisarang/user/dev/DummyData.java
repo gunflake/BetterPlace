@@ -1,5 +1,7 @@
 package com.dongisarang.user.dev;
 
+import com.dongisarang.user.board.Board;
+import com.dongisarang.user.board.BoardRepository;
 import com.dongisarang.user.customer.Customer;
 import com.dongisarang.user.customer.CustomerService;
 import com.dongisarang.user.partner.Partner;
@@ -35,12 +37,29 @@ public class DummyData implements ApplicationRunner {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private BoardRepository boardRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         savePartner();
         savePlace();
         savePlaceDetail();
         saveCustomer();
+        saveBoard();
+    }
+
+    private void saveBoard() {
+        for(int i=0; i < 6; i++) {
+            for(int j=0; j < 50; j++) {
+                Board tmp = new Board();
+                tmp.setTitle("Title0"+(j+1));
+                tmp.setContent("Content0"+(j+1));
+                tmp.setBoardType(i);
+
+                boardRepository.save(tmp);
+            }
+        }
     }
 
     private void savePlaceDetail() {

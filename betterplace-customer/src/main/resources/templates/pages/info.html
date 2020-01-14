@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"  th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
 
 <th:block th:fragment="head">
     <!--Replace with your tailwind.css once created-->
@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script th:inline="javascript">
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             var formObj = $("#movePage");
 
             $("#searchBtn").click(function (e) {
@@ -37,7 +37,7 @@
 
             <!--Title-->
             <h2 class="items-center text-center font-sans font-bold text-black px-2 py-8 md:text-4xl">
-                공지 사항
+                도움말
             </h2>
 
 
@@ -59,48 +59,113 @@
                 </div>
                 <div class="flex">
                     <div class="w-2/12 pt-2 mr-2 relative mx-auto ">
-    <select id="searchType">
-        <option value="0" th:selected="${pageVO.type} == 0">--</option>
-        <option value="1" th:selected="${pageVO.type} == 1">회원</option>
-        <option value="2" th:selected="${pageVO.type} == 2">예약 및 결제</option>
-        <option value="3" th:selected="${pageVO.type} == 3">취소 및 환불</option>
-        <option value="4" th:selected="${pageVO.type} == 4">공간이용 및 후기</option>
-        <option value="5" th:selected="${pageVO.type} == 5">기타</option>
-    </select>
-    <label>
-        <input type="text" id="searchKeyword" th:value="${pageVO.keyword}">
-    </label>
-    <button id="searchBtn">검색</button>
-</div>
-<form id="movePage" th:action="@{info}" method="get">
-    <input type="hidden" name="page" th:value="${result.currentPageNum}">
-    <input type="hidden" name="type" th:value="${pageVO.type}">
-    <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
-</form>
-<div>
-    <p>[[${result}]]</p>
-    <div th:with="result=${result.result}">
-        <ul>
-            <li th:each="board:${result.content}">
-                [[${board}]]
-            </li>
-        </ul>
+                        <select id="searchType"
+                                class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none">
+                            <option value="0" th:selected="${pageVO.type} == 0">--</option>
+                            <option value="1" th:selected="${pageVO.type} == 1">회원</option>
+                            <option value="2" th:selected="${pageVO.type} == 2">예약 및 결제</option>
+                            <option value="3" th:selected="${pageVO.type} == 3">취소 및 환불</option>
+                            <option value="4" th:selected="${pageVO.type} == 4">공간이용 및 후기</option>
+                            <option value="5" th:selected="${pageVO.type} == 5">기타</option>
+                        </select>
+                    </div>
+                    <div class="w-7/12 pt-2 relative mx-auto">
+                        <input id="searchKeyword"
+                               class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                               type="search" name="search" placeholder="검색어를 입력해주세요." th:value="${pageVO.keyword}">
+                    </div>
+                    <div class="w-1/4 pt-2 relative mx-auto">
+                        <button id="searchBtn"
+                                class="ml-2 flex w-full bg-purple-500 text-center hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                            <div class="w-1/4">
+                                <svg class="text-white h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
+                                     y="0px" viewBox="0 0 56.966 56.966"
+                                     style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                     width="512px" height="512px">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                                </svg>
+                            </div>
+                            <div class="w-3/4">
+                                검색
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!--/Card-->
+            </div>
+            <br>
+            <form id="movePage" th:action="@{info}" method="get">
+                <input type="hidden" name="type" th:value="${pageVO.type}">
+                <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+            </form>
+            <br>            <!--Card-->
+            <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                <table id="example" class="stripe hover"
+                       style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                    <thead>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="res : ${result}">
+                        <td>
+                            <div class="tab w-full overflow-hidden">
+                                <input class="absolute opacity-0" th:id="'board' + ${res.boardNo}" type="radio"
+                                       name="tabs2">
+                                <label class="block p-5 leading-normal cursor-pointer"
+                                       th:for="'board' + ${res.boardNo}"
+                                       th:text="${res.title}"></label>
+                                <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                    <p class="p-5" th:text="${res.content}"></p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--/Card-->
+
+
+        </div>
+        <!--/container-->
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+        <!--Datatables -->
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                var table = $('#example').DataTable({
+                    responsive: true,
+                    searching: false,
+                    select: false,
+                    lengthChange: false
+                })
+                    .columns.adjust()
+                    .responsive.recalc();
+            });
+            /* Optional Javascript to close the radio button version by clicking it again */
+            var myRadios = document.getElementsByName('tabs2');
+            var setCheck;
+            var x = 0;
+            for (x = 0; x < myRadios.length; x++) {
+                myRadios[x].onclick = function () {
+                    if (setCheck != this) {
+                        setCheck = this;
+                    } else {
+                        this.checked = false;
+                        setCheck = null;
+                    }
+                };
+            }
+        </script>
     </div>
-</div>
-<nav>
-    <div>
-        <ul class="pager">
-            <li th:if="${result.prevPage}">
-                <a th:href="${result.prevPage.pageNumber} + 1">PREV [[${result.prevPage.pageNumber} + 1 ]]</a>
-            </li>
-            <li th:each="p:${result.pageList}">
-                <a th:href="${p.pageNumber} + 1">[[${p.pageNumber} + 1]]</a>
-            </li>
-            <li th:if="${result.nextPage}">
-                <a th:href="${result.nextPage.pageNumber} + 1">NEXT [[${result.nextPage.pageNumber} + 1 ]]</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-</body>
+
+</th:block>
 </html>
