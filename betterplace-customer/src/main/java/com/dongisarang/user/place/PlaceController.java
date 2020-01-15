@@ -14,7 +14,6 @@ import java.util.List;
 
 @Controller
 public class PlaceController {
-
     @Autowired
     private PlaceRepository placeRepository;
 
@@ -64,6 +63,16 @@ public class PlaceController {
         model.addAttribute("place", getPlace);
 
         return "pages/place";
+    }
+
+    @GetMapping("/place/test")
+    public String processCreationMainForm(Model model){
+        //TODO : 추천 공간 3가지마 가지고오기... (어떤 기준으로 3개 가지고 올지 논의하기)
+        List<Place> allPlaces = placeRepository.findAll();
+
+        model.addAttribute("allPlaces",  allPlaces);
+
+        return "pages/main :: more_list";
     }
 
 }
