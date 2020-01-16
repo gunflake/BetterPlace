@@ -40,11 +40,6 @@ public class CustomerController {
         return "pages/notice";
     }
 
-    @GetMapping("/reserve")
-    public String goReserve(){
-        return "pages/reserve";
-    }
-
     @GetMapping("/reserved")
     public String goReserved(){
         return "pages/reserved";

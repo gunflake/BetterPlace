@@ -4,16 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class NotFoundPlaceDtlException extends RuntimeException {
-    public NotFoundPlaceDtlException() {
+public class NotFoundPlaceDetailException extends RuntimeException {
+    public NotFoundPlaceDetailException() {
         super();
     }
 
-    public NotFoundPlaceDtlException(String message) {
+    public NotFoundPlaceDetailException(String message) {
         super(message);
     }
 
-    public NotFoundPlaceDtlException(String message, Throwable cause) {
+    public NotFoundPlaceDetailException(String message, Throwable cause) {
         super(message, cause);
     }
 
