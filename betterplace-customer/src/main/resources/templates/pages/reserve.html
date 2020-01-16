@@ -26,7 +26,7 @@
                     <div class="flex pb-4 border-gray-300 border-b">
                         <div class="text-xl font-bold pb-4" th:text="${place.getPlaceName()}">
                         </div>
-                        <div class="text-xl text-blue-700 ml-1" th:text="${placeDetail.getPlaceDetailName()}">
+                        <div class="text-xl text-blue-700 ml-1" th:text="' ' + ${placeDetail.getPlaceDetailName()}">
                         </div>
                     </div>
                     <div class="text-base pt-4" th:text="${placeDetail.getPlaceDetailIntro()}">
@@ -97,13 +97,13 @@
         <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">예약자 정보</div>
         <div class="px-8 bg-gray-100">
             <!-- 예약자 -->
-            <div th:insert="~{components/reserve/inputBox :: inputBox('예약자', 'booker', 'text')}" ></div>
+            <div th:insert="~{components/reserve/inputBox :: inputBox('예약자', 'booker', 'text', '')}" ></div>
             <!-- 연락처 -->
-            <div th:insert="~{components/reserve/inputBox :: inputBox('연락처', 'phone', 'text')}" ></div>
+            <div th:insert="~{components/reserve/inputBox :: inputBox('연락처', 'phone', 'text', ${currentUser.getPhone()})}" ></div>
             <!-- 이메일 -->
-            <div th:insert="~{components/reserve/inputBox :: inputBox('이메일', 'email', 'email')}" ></div>
+            <div th:insert="~{components/reserve/inputBox :: inputBox('이메일', 'email', 'email', ${currentUser.getEmail()})}" ></div>
             <!-- 요청사항 -->
-            <div th:insert="~{components/reserve/inputBox :: inputBox('요청사항', 'requests', 'text')}" ></div>
+            <div th:insert="~{components/reserve/inputBox :: inputBox('요청사항', 'requests', 'text', '')}" ></div>
         </div>
         <div class="w-full p-2 text-sm text-gray-700">
             예약자 정보로 알림톡과 이메일이 발송됩니다. 정확한 정보인지 확인해주세요.

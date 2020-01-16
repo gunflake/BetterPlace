@@ -10,7 +10,7 @@ public class NotFoundPlaceDetailException extends RuntimeException {
     }
 
     public NotFoundPlaceDetailException(String message) {
-        super(message);
+        super(message + " PlaceDetail 정보를 찾을 수 없습니다.");
     }
 
     public NotFoundPlaceDetailException(String message, Throwable cause) {

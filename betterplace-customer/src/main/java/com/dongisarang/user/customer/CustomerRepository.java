@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     Customer findByCustomerIdAndCustomerPassword(String customerId, String customerPassword);
-    Customer findByCustomerId(String customerId);
+    Optional<Customer> findByCustomerId(String customerId);
 
 }

@@ -1,5 +1,8 @@
 package com.dongisarang.user.reservation;
 
+import com.dongisarang.user.customer.Customer;
+import com.dongisarang.user.customer.CustomerRepository;
+import com.dongisarang.user.exception.NotFoundCustomerException;
 import com.dongisarang.user.exception.NotFoundPlaceDetailException;
 import com.dongisarang.user.exception.NotFoundPlaceException;
 import com.dongisarang.user.place.Place;
@@ -14,12 +17,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
 public class ReservationController {
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Autowired
     private ReservationRepository reservationRepository;
@@ -39,6 +46,7 @@ public class ReservationController {
                                           @RequestParam String startTime,  // 예약 시작 시간
                                           @RequestParam String useTime,    // 예약 사용 시간 (3시간 등)
                                           @RequestParam String count,     // 예약 인원
+                                          Principal principal,
                                           Model model){
         //Place 정보 받아서 넘기기
         Place place = placeRepository.findById(Integer.parseInt(placeNo)).orElseThrow(() -> new NotFoundPlaceException("플레이스 정보를 찾을 수 없습니다."));
@@ -50,12 +58,7 @@ public class ReservationController {
 
         //예약 날짜, 예약 시작 시간, 예약 사용 시간, 예약 인원
 
-        //RequestParma 정보 제대로 가지고오는지 로그 찍어서 확인
-        logger.info(placeDetailNo);
-        logger.info(reservationDate);
-        logger.info(startTime);
-        logger.info(useTime);
-        logger.info(count);
+        Customer currentUser = customerRepository.findByCustomerId(principal.getName()).orElseThrow(() -> new NotFoundCustomerException(principal.getName()));
 
         int endTime = Integer.parseInt(startTime) + Integer.parseInt(useTime);
 
@@ -80,6 +83,7 @@ public class ReservationController {
         model.addAttribute("useTime", useTime);
         model.addAttribute("count", count);
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("currentUser", currentUser);
 
 
         return "pages/reserve";
