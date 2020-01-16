@@ -189,11 +189,16 @@
             let form = document.createElement("form");
             form.method = "POST";
 
+            // Place No 설정
+            let placeNo = document.createElement("input");
+            placeNo.name = "placeNo";
+            placeNo.value = /*[[ ${place.getPlaceNo()} ]]*/;
+            form.appendChild(placeNo);
+
             // Place DetailNo 설정
             let placeDetail = document.createElement("input")
             placeDetail.name = "placeDetailNo";
             placeDetail.value = document.querySelector('input[name="selectPlace"]:checked').value;
-            console.log(placeDetail.value);
             form.appendChild(placeDetail);
 
             // 예약 날짜
@@ -220,7 +225,7 @@
             useTime.value = "3";
             form.appendChild(useTime);
 
-            // Place id + Place Detail id + 원하는 날짜 + 시간
+            form.action = '/reserve';
             document.body.appendChild(form);
             form.submit();
         }
