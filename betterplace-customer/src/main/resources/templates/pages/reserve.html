@@ -3,6 +3,7 @@
 
 <th:block th:fragment="links">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </th:block>
 
 <th:block th:fragment="top">
@@ -208,7 +209,7 @@
                         </div>
 
                         <!-- Button -->
-                        <button class="modal-open w-full mt-1 hover:bg-transparent bg-blue-500 hover:text-blue-700 font-semibold text-white py-2  border border-blue-500 border-transparent rounded" onclick="location.href='/reserved'">
+                        <button class="modal-open w-full mt-1 hover:bg-transparent bg-blue-500 hover:text-blue-700 font-semibold text-white py-2  border border-blue-500 border-transparent rounded" onclick="processReserve()">
                             결제하기
                         </button>
                     </div>
@@ -254,6 +255,18 @@
             modal.classList.toggle('pointer-events-none');
             body.classList.toggle('modal-active');
         }
+
+        function processReserve() {
+                $.ajax({
+                    method: 'GET',
+                    url: '/reserve/pg/kakaopay',
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+        }
+
+
     </script>
 
 </th:block>
