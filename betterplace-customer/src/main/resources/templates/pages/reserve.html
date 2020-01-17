@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="w-3/4 pl-8">
-                    <div class="text-base text-right" th:text="${count}">
+                    <div class="text-base text-right" th:text="${count}+'명'">
                     </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@
             <!-- 예약 시간-->
             <div th:insert="~{components/reserve/textLabel :: label('예약 시간',  ${reserveTime} + ' ' + ${useTime} +'시간')}"></div>
             <!-- 예약 인원-->
-            <div th:insert="~{components/reserve/textLabel :: label('예약 인원', ${count})}"></div>
+            <div th:insert="~{components/reserve/textLabel :: label('예약 인원', ${count} + '명')}"></div>
         </div>
         <!-- 결제 버튼 -->
         <button class="modal-open w-full mt-1 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2  border border-blue-500 hover:border-transparent rounded">
@@ -196,7 +196,7 @@
                         <!-- 예약 시간-->
                         <div th:insert="~{components/reserve/textLabel :: label('예약 시간', ${reserveTime} + ' ' + ${useTime} +'시간')}"></div>
                         <!-- 예약 인원-->
-                        <div th:insert="~{components/reserve/textLabel :: label('예약 인원', ${count})}"></div>
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 인원', ${count} +'명')}"></div>
                         <!-- 결제 예정금액-->
                         <div th:insert="~{components/reserve/textLabel :: label('결제 예정금액', '₩' + ${totalPrice})}"></div>
 
@@ -218,7 +218,7 @@
         </div>
     </div>
 
-    <script>
+    <script th:inline="javascript">
         let openmodal = document.querySelectorAll('.modal-open');
         for (let i = 0; i < openmodal.length; i++) {
             openmodal[i].addEventListener('click', function(event){
@@ -257,13 +257,32 @@
         }
 
         function processReserve() {
+            let getData = reserverDataSetting();
+
                 $.ajax({
-                    method: 'GET',
                     url: '/reserve/pg/kakaopay',
+                    method: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(getData),
                     success: function (data) {
-                        console.log(data);
+                        location.href = data;
                     }
                 });
+        }
+
+        function reserverDataSetting() {
+            let reserveData = {
+                "placeNo": /*[[ ${place.getPlaceNo()} ]]*/,
+                "customerNo": /*[[ ${currentUser.getCustomerNo()} ]]*/,
+                "placeDetailNo": /*[[ ${placeDetail.getPlaceDetailNo()} ]]*/,
+                "customerCount": /*[[ ${count} ]]*/,
+                "reservationDate": /*[[ ${reservationDate} ]]*/,
+                "price": /*[[ ${totalPrice} ]]*/,
+                "startTime": /*[[ ${startTime} ]]*/,
+                "endTime": /*[[ ${endTime} ]]*/
+            };
+
+            return reserveData;
         }
 
 

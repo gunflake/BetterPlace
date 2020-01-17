@@ -41,11 +41,6 @@ public class CustomerController {
         return "pages/notice";
     }
 
-    @GetMapping("/reserved")
-    public String goReserved(){
-        return "pages/reserved";
-    }
-
     /** 회원가입 후 로그인 페이지로 이동한다. */
     @PostMapping(value="/join")
     public String setJoin(Customer customer) {

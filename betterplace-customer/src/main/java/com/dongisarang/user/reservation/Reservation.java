@@ -50,8 +50,7 @@ public class Reservation {
     private Byte endTime;
 
     @Column
-    @ColumnDefault("1")
-    private Byte state;
+    private Byte state; // 1: 예약 완료, 2: 예약 취소, 3: 예약 대기
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
@@ -60,6 +59,21 @@ public class Reservation {
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Date updateDate;
+
+    @Column(length = 50)
+    private String tid; // Payment에 정보 담기 위해서
+
+    @Column
+    private String message;
+
+    @Transient
+    private int placeNo;
+
+    @Transient
+    private int placeDetailNo;
+
+    @Transient
+    private int customerNo;
 
     public void setPlace(Place place) {
         if(this.place != null){
@@ -85,14 +99,23 @@ public class Reservation {
         placeDetail.getReservations().add(this);
     }
 
+    public Reservation() {
+        this.state = 3;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +
-                "place=" + place +
-                ", customer=" + customer +
-                ", placeDetail=" + placeDetail +
+                "customerCount=" + customerCount +
+                ", price=" + price +
+                ", reservationDate='" + reservationDate + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
+                ", state=" + state +
+                ", placeNo=" + placeNo +
+                ", placeDetailNo=" + placeDetailNo +
+                ", customerNo=" + customerNo +
                 '}';
     }
 }
+
