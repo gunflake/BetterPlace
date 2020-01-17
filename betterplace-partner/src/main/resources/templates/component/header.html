@@ -33,10 +33,10 @@
         <a sec:authorize="isAuthenticated()" th:href="@{/mypage}" style="position: relative;width:100px;display: inline-block;">프로필 관리</a>
       </div>
       <div id="menu_top" class="sidenav_cont menu_top">
-        <a href="/" class="border-solid border-r border-gray-500 text-center">
+        <a th:href="@{/auth/reservation}" class=" border-solid border-r border-gray-500 text-center">
           <i class="fas fa-clipboard"></i>
           <br>
-          <span th:href="@{/auth/reservation}">예약 리스트</span>
+          <span th:class="text-base">예약 리스트</span>
         </a>
         <a href="/" class="border-solid border-r border-gray-500 text-center">
           <i class="fas fa-edit"></i>
@@ -51,7 +51,7 @@
       </div>
       <div id="title" class="sidenav_cont title">
         <a>
-          <span>&nbsp;&nbsp;이 달의 기획전</span>
+          <span>이 달의 기획전</span>
         </a>
       </div>
       <div id="menu" class="sidenav_cont menu">
