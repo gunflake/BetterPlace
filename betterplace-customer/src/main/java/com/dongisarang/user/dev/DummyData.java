@@ -61,16 +61,17 @@ public class DummyData implements ApplicationRunner {
     }
 
     private void saveBoard() {
-        for(int i=0; i < 6; i++) {
-            for(int j=0; j < 50; j++) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 50; j++) {
                 Board tmp = new Board();
-                tmp.setTitle("Title0"+(j+1));
-                tmp.setContent("Content0"+(j+1));
+                tmp.setTitle("Title" + i + "" + (j + 1));
+                tmp.setContent("Content" + i + "" + (j + 1));
                 tmp.setBoardType(i);
 
                 boardRepository.save(tmp);
             }
         }
+    }
 
     private void saveReservation() {
         Reservation reservation = new Reservation();
@@ -127,20 +128,7 @@ public class DummyData implements ApplicationRunner {
             PlaceDetail placeDetail1 = new PlaceDetail();
             placeDetail1.setMinCount((short) 1);
             placeDetail1.setMaxCount((short) 4);
-            placeDetail1.setPlaceDetail        saveBoard();
-    }
-
-    private void saveBoard() {
-        for(int i=0; i < 6; i++) {
-            for(int j=0; j < 50; j++) {
-                Board tmp = new Board();
-                tmp.setTitle("Title0"+(j+1));
-                tmp.setContent("Content0"+(j+1));
-                tmp.setBoardType(i);
-
-                boardRepository.save(tmp);
-            }
-        }Name("스터디룸 A [4인실]");
+            placeDetail1.setPlaceDetailName("스터디룸 A [4인실]");
             placeDetail1.setPlaceDetailIntro("슈퍼스타트의 4인실 스터디룸입니다.\n" +
                     "소규모 회의 및 토론 면접연습이 가능합니다.");
             placeDetail1.setPlace(place);
