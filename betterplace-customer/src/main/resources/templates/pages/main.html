@@ -4,28 +4,6 @@
 <th:block th:fragment="head">
     <link rel="stylesheet" href="css/imageEffect.css">
     <script type = "text/javascript">
-        function displayNextImage() {
-            x = (x === images.length - 1) ? 0 : x + 1;
-            document.getElementById("img").src = images[x];
-        }
-
-        function displayPreviousImage() {
-            x = (x <= 0) ? images.length - 1 : x - 1;
-            document.getElementById("img").src = images[x];
-        }
-
-        function startTimer() {
-            setInterval(displayNextImage, 2000);
-        }
-
-        var images = [], x = -1;
-        images[0] = "https://images.unsplash.com/photo-1523214969941-40a37196fd31?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2251&q=80";
-        images[1] = "https://images.unsplash.com/photo-1547743052-3a5fec50cadf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80";
-        images[2] = "https://images.unsplash.com/photo-1556742393-d75f468bfcb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80";
-
-        window.onload = function () {
-            startTimer();
-        };
 
         function more() {
             $.ajax({

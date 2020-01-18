@@ -108,8 +108,8 @@ public class ReservationRestController {
             map.put("vat_amount", String.valueOf(reservation.getPrice()/10));
             map.put("tax_free_amount", "0");
             map.put("approval_url", "http://localhost:8080/reserved");
-            map.put("fail_url", "http://localhost:8080/reserved");
-            map.put("cancel_url", "http://localhost:8080/reserved");
+            map.put("fail_url", "http://localhost:8080/reserve/fail");
+            map.put("cancel_url", "http://localhost:8080/reserve/cancel");
 
             StringBuffer buffer = new StringBuffer();
 

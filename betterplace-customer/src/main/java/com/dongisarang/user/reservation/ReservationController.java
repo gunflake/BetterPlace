@@ -215,6 +215,18 @@ public class ReservationController {
         return "pages/reserved";
     }
 
+    @GetMapping("/reserve/fail")
+    public String initCreationReserveFailForm(Model model){
+        model.addAttribute("message", "결제에 실패했습니다. 다시 시도해주세요.");
+        return "pages/failReserve";
+    }
+
+    @GetMapping("/reserve/cancel")
+    public String initCreationReserveCancelForm(Model model){
+        model.addAttribute("message", "사용자 요청에 의해 결제가 취소 되었습니다. 결제를 원하시면 처음부터 다시 시작해주세요.");
+        return "pages/failReserve";
+    }
+
     private void setReservedModelAttribute(Model model, Reservation reservation) {
         // 시간 Format 변경
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
