@@ -5,6 +5,7 @@ import com.dongisarang.user.board.BoardRepository;
 import com.dongisarang.user.customer.Customer;
 import com.dongisarang.user.customer.CustomerRepository;
 import com.dongisarang.user.customer.CustomerService;
+import com.dongisarang.user.exception.NotFoundCustomerException;
 import com.dongisarang.user.partner.Partner;
 import com.dongisarang.user.partner.PartnerRepository;
 import com.dongisarang.user.place.Place;
@@ -86,7 +87,7 @@ public class DummyData implements ApplicationRunner {
         int reservationPrice = place.getDefaultPrice() * (10 - 6) * 3;
         reservation.setPrice(reservationPrice);
 
-        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09");
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09").orElseThrow(() -> new NotFoundCustomerException("gunflake09"));
         reservation.setCustomer(gunflake09);
 
         PlaceDetail placeDetail = placeDetailRepository.findByPlaceAndPlaceDetailName(place, "스터디룸 A [4인실]").orElseThrow();
@@ -111,7 +112,7 @@ public class DummyData implements ApplicationRunner {
         int reservationPrice = place.getDefaultPrice() * (10 - 6) * 3;
         reservation.setPrice(reservationPrice);
 
-        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09");
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09").orElseThrow(() -> new NotFoundCustomerException("gunflake09"));
         reservation.setCustomer(gunflake09);
 
         PlaceDetail placeDetail = placeDetailRepository.findByPlaceAndPlaceDetailName(place, "스터디룸 A [4인실]").orElseThrow();
@@ -174,6 +175,7 @@ public class DummyData implements ApplicationRunner {
         customer.setCustomerPassword("1234");
         customer.setNickname("gunflake");
         customer.setEmail("gunflake09@gmail.com");
+        customer.setPhone("01041177501");
         customerService.signUpCustomer(customer);
 
     }

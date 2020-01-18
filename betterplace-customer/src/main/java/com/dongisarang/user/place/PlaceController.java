@@ -1,6 +1,6 @@
 package com.dongisarang.user.place;
 
-import com.dongisarang.user.exception.NotFoundPlaceDtlException;
+import com.dongisarang.user.exception.NotFoundPlaceDetailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,9 @@ public class PlaceController {
 
     @Autowired
     private PlaceRepository placeRepository;
+
+    @Autowired
+    private PlaceDetailRepository placeDetailRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
 
@@ -41,29 +44,21 @@ public class PlaceController {
 
     @GetMapping("/place/{placeNo}")
     public String initCreationPlaceForm(@PathVariable("placeNo") int placeNo, Model model){
-        Place getPlace = placeRepository.findById(placeNo).orElseThrow(() -> new NotFoundPlaceDtlException("해당 플레이스 정보를 찾을 수 없습니다."));
-
-        //공간 제목 가져오기
-        String placeName = getPlace.getPlaceName();
-
-        //공간 테그 가져오기
-        String tags = getPlace.getTag();
-
-        //공간 이미지 가져오기
-        String imgSrc = getPlace.getImage();
-
-        //공간 시설 안내 가져오기
-        String[] information = getPlace.getInfo().split(";");
-
-        //예약 시 주의사항 내용 DB에서 가져오기
-        String[] notice = getPlace.getNotice().split(";");
-
-        //공간 소개 가져오기
-        String introduction = getPlace.getIntro();
+        Place getPlace = placeRepository.findById(placeNo).orElseThrow(() -> new NotFoundPlaceDetailException("해당 플레이스 정보를 찾을 수 없습니다."));
 
         model.addAttribute("place", getPlace);
 
         return "pages/place";
+    }
+
+    @GetMapping("/place/test")
+    public String processCreationMainForm(Model model){
+        //TODO : 추천 공간 3가지마 가지고오기... (어떤 기준으로 3개 가지고 올지 논의하기)
+        List<Place> allPlaces = placeRepository.findAll();
+
+        model.addAttribute("allPlaces",  allPlaces);
+
+        return "pages/main :: more_list";
     }
 
 }
