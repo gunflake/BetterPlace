@@ -1,0 +1,33 @@
+<html lang="ko" xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{layout/default :: layout (~{::head}, ~{::body})}">
+
+<th:block th:fragment="head">
+    <link rel="stylesheet" href="css/imageEffect.css">
+</th:block>
+
+<th:block th:fragment="body">
+
+    <!-- Main Image -->
+    <div class="mt-32">
+        <div class="ml-64 flex">
+            <div class="text-3xl text-blue-700 underline" th:text="${keyword}">
+                썸띵
+            </div>
+            <div class="text-3xl">
+                (으)로 검색한 결과입니다.
+            </div>
+        </div>
+    </div>
+
+    <div class="px-56 py-24">
+        <!-- 정렬 기능 -->
+
+        <!-- 검색 결과 -->
+        <div class="flex flex-wrap w-full" id="all-place">
+            <div class="w-1/3 px-3 mb-8" th:each="place : ${searchPlace}" th:fragment="more_list">
+                <div th:replace="~{components/card :: card(${place.getPlaceName()},${place.getAddress()}, ${place.getImage()}, ${place.getDefaultPrice()}, ${place.getTag()} ,${place.getPlaceNo()})}"></div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>
