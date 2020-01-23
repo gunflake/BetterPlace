@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:fragment="layout (head, template)">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:fragment="layout (head, template)" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="utf-8">
@@ -17,5 +17,8 @@
     <div class="pt-20">
         <th:block th:include="${template}"/>
     </div>
+   <!-- <th:block layout:fragment = "customJs" >
+    </th:block>-->
+    <script th:src="@{/js/common.js}"></script>
 </body>
 </html>

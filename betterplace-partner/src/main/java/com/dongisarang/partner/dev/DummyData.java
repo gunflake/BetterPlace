@@ -4,6 +4,7 @@ import com.dongisarang.partner.customer.Customer;
 import com.dongisarang.partner.customer.CustomerRepository;
 import com.dongisarang.partner.partner.Partner;
 import com.dongisarang.partner.partner.PartnerRepository;
+import com.dongisarang.partner.partner.PartnerService;
 import com.dongisarang.partner.place.Place;
 import com.dongisarang.partner.place.PlaceDetail;
 import com.dongisarang.partner.place.PlaceDetailRepository;
@@ -20,6 +21,9 @@ import java.util.List;
 @Component
 @Transactional
 public class DummyData implements ApplicationRunner {
+
+    @Autowired
+    private PartnerService partnerService;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -39,6 +43,7 @@ public class DummyData implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         savePartner();
+        savePartner1();
         savePlace();
         savePlaceDetail();
         saveCustomer();
@@ -66,7 +71,6 @@ public class DummyData implements ApplicationRunner {
         reservation.setPlaceDetail(placeDetail);
 
         reservationRepository.save(reservation);
-
 
 
     }
@@ -107,7 +111,7 @@ public class DummyData implements ApplicationRunner {
 
         List<Place> all = placeRepository.findAll();
 
-        for (Place place: all) {
+        for (Place place : all) {
             PlaceDetail placeDetail1 = new PlaceDetail();
             placeDetail1.setMinCount((short) 1);
             placeDetail1.setMaxCount((short) 4);
@@ -146,7 +150,6 @@ public class DummyData implements ApplicationRunner {
             placeDetailRepository.save(placeDetail4);
 
         }
-
 
 
     }
@@ -278,12 +281,21 @@ public class DummyData implements ApplicationRunner {
         placeRepository.save(place5);
     }
 
-    private void savePartner(){
+    private void savePartner() {
         Partner partner1 = new Partner();
         partner1.setPartnerId("gunflake09");
         partner1.setEmail("gunflake09@naver.com");
         partner1.setPartnerPassword("{bcrypt}$2a$10$ojPDvv8tIBJyeH6kp9lTgOm8URDorcS/7jHAhE/jH05FcaWzQqAOy");
 
         partnerRepository.save(partner1);
+    }
+
+
+    private void savePartner1() {
+        Partner partner1 = new Partner();
+        partner1.setPartnerId("123");
+        partner1.setNickname("황현지");
+        partner1.setPartnerPassword("123");
+        partnerService.createPartner(partner1);
     }
 }

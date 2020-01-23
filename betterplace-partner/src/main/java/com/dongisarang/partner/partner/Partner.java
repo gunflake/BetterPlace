@@ -18,14 +18,15 @@ import java.util.List;
 @ToString
 public class Partner {
 
+    @Column
+    private String partnerPassword; //비밀번호
     @Id @GeneratedValue
     private Integer partnerNo;
 
     @Column(length = 45)
     private String partnerId;
-
-    @Column
-    private String partnerPassword;
+	@Column
+    private String nickname; //닉네임
 
     @Column(length = 50)
     private String email;

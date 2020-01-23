@@ -47,7 +47,6 @@ public class PlaceController {
             log.info(""+place);
 
         // 출력
-
         List<PlaceDtl> placeDtlList = place.getPlaceDtls();
         if(!placeDtlList.isEmpty())
             placeDtlList.forEach(placeDtl -> {
@@ -112,6 +111,7 @@ public class PlaceController {
             return "redirect:/placeDtl/registration/" + placeno;
         }
     }
+    /* 공간 등록 후 세부 공간 등록페이지로 이동한다.*/
 
     /* 공간 환불 정보 등록 페이지로 이동 */
     @GetMapping("/placerefund/registration")
@@ -129,6 +129,14 @@ public class PlaceController {
     @GetMapping("/placeDtl/registration/{placeNo}")
     public String initPlaceDtlRegistForm(@PathVariable("placeNo") int placeNo){
         return "page/placedtl_registration";
+    }
+    /**
+     * 공간 관리 페이지로 이동
+     * @return
+     */
+    @GetMapping("/manage/place")
+    public String initManageForm(){
+        return "/";
     }
 
     /* 공간 상세 등록 */

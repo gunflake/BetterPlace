@@ -1,6 +1,7 @@
 package com.dongisarang.partner.reservation;
 
 import com.dongisarang.partner.customer.Customer;
+import com.dongisarang.partner.partner.Partner;
 import com.dongisarang.partner.place.Place;
 import com.dongisarang.partner.place.PlaceDetail;
 import lombok.Getter;
@@ -32,6 +33,10 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "placeDetailNo")
     private PlaceDetail placeDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "partnerNo")
+    private Partner partner;
 
     @Column
     private Byte customerCount;

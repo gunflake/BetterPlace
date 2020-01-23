@@ -58,4 +58,5 @@ public class PlaceDetail {
         this.maxCount = maxcount;
         setPlace(place);
     }
+
 }

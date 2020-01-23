@@ -1,32 +1,54 @@
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"  th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
 
 <th:block th:fragment="head">
+    <!--Replace with your tailwind.css once created-->
+    <!--Regular Datatables CSS-->
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/notice_wk.css}">
 </th:block>
-
 <th:block th:fragment="body">
-    <div class="items-center justify-center h-screen">
-        <div class="container mx-24 my-6 bg-white rounded shadow-lg">
-            <div class="px-12 py-2">
-                <div class="text-center">
-                    <div class="w-full text-center">
-                        <h1> 예약 관리 리스트 </h1> <!--폰트 사이즈 수정 예정-->
-                        <form action="#">
-                            <div class="max-w-sm mx-auto p-1 pr-0 flex items-center">
-                                <input type="email" placeholder="예약번호 또는 예약자명"
-                                       class="flex-1 appearance-none rounded shadow p-3 text-grey-dark mr-2 focus:outline-none">
-                                <button type="submit"
-                                        class="appearance-none bg-indigo text-white bg-purple-600 text-base font-semibold tracking-wide uppercase p-3 rounded shadow hover:bg-indigo-light">
-                                    검색
-                                </button>
-                            </div>
-                        </form>
+    <!--Container-->
+    <div class="pt-3 text-gray-900 tracking-wider leading-normal">
+        <div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
+            <!--Card-->
+            <div id="" class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                <div class="flex">
+                    <div class="w-3/12 pt-3 relative mx-auto sm:overflow-hidden">
+                        <label class="text-grey-darker font-bold mb-2 ">
+                            예약 정보 검색
+                        </label>
+                    </div>
+                    <!-- This is an example component -->
+                    <div class="w-7/12 pt-2 relative mx-auto">
+                        <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="예약번호 혹은 예약자명">
+                    </div>
+                    <div class="w-1/4 pt-2 relative mx-auto">
+                        <button class="ml-2 flex w-full bg-purple-500 text-center hover:bg-purple-700 text-white font-bold py-2 px-4 rounded text-center justify-center items-center">
+                            검색
+                        </button>
                     </div>
                 </div>
+                <!--/Card-->
+            </div>
+            <br>
+            <br>
+            <div>
+                <select class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" id="grid-state">
+                    <option>승인대기</option>
+                    <option>결제대기</option>
+                    <option>예약확정</option>
+                    <option>이용완료</option>
+                    <option>변경요청</option>
+
+
+                    <option>취소환불</option>
+                </select>
             </div>
         </div>
+        <!--/container-->
     </div>
-
 </th:block>
 </html>
-
-
