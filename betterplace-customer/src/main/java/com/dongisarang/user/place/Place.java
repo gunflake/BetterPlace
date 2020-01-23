@@ -83,6 +83,9 @@ public class Place {
     @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
     private List<Reservation> reservations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
+
     public void setPartner(Partner partner){
 
         if(this.partner != null){

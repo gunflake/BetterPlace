@@ -1,5 +1,6 @@
 package com.dongisarang.user.customer;
 
+import com.dongisarang.user.place.Comment;
 import com.dongisarang.user.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,6 +51,9 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
 
     //비밀번호 변경시 필요한 데이터
     @Transient
