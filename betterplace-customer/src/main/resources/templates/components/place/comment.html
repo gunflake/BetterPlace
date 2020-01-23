@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<div class="rlist" th:fragment="comment (userid, comment, regdate, imgSrc)">
+    <div class="flex">
+        <div class="w-2/12">
+            <img class="pf_img"
+                 th:src="@{/image/img_profile.png}">
+        </div>
+        <div class="w-10/12">
+            <div class="flex">
+                <div class="text-base font-bold" th:text="${userid}">userId</div>
+                <div class="text-sm ml-2 text-gray-700" th:text="${regdate}">2018.12.08 18:41:41</div>
+            </div>
+            <div class="text-base mt-2" th:text="${comment}">
+                평일은 예약이 다 찬건가요? 다 회색으로되어있네요..
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
