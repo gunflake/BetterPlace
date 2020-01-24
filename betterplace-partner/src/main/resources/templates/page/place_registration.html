@@ -3,6 +3,9 @@
 <th:block th:fragment="head">
     <!--<link rel -->
     <script type="application/javascript">
+
+        var selectedFile = null;
+
         function addTagList() {
             let tagcount = parseInt(document.getElementById("tagcount").value);
 
@@ -66,6 +69,67 @@
                 alert("최대 10개까지 작성 가능합니다.")
             }
         }
+
+        function  placecheck()
+        {
+            var tags = document.getElementsByName('tags').length;
+            var blankcheck = false;
+
+            for(var i = 0; i < tags; i++)
+            {
+                if(document.getElementsByName("tags")[i].value.length > 0) {
+                    blankcheck = true;
+                    break;
+                }
+            }
+
+            if(blankcheck == false)
+            {
+                alert("공간 태그를 입력해 주세요.");
+                return false;
+            }
+
+
+            var infos = document.getElementsByName('infos').length;
+            blankcheck = false;
+
+            for(var i = 0; i < infos; i++) {
+                if(document.getElementsByName("infos")[i].value.length > 0)
+                {
+                    blankcheck = true;
+                    break;
+                }
+            }
+
+            if(blankcheck == false)
+            {
+                alert("시설 안내를 입력해 주세요.");
+                return false;
+            }
+
+
+            var notices = document.getElementsByName('notices').length;
+            blankcheck = false;
+
+            for(var i = 0; i < notices; i++) {
+                if(document.getElementsByName("notices")[i].value.length > 0)
+                {
+                    blankcheck = true;
+                    break;
+                }
+            }
+
+            if(blankcheck == false)
+            {
+                alert("예약 시 주의사항를 입력해 주세요.");
+                return false;
+            }
+
+            return true;
+        }
+
+
+
     </script>
 </th:block>
 
@@ -74,7 +138,7 @@
         <div class="container mx-auto flex-1 flex flex-col items-center justify-center px-2" >
             <div class="w-2/3" >
                 <h1 class="mt-8 mb-8 text-2xl text-center">공간 등록하기</h1>
-                <form th:action="@{/place/registration}" th:object="${place}" method="POST">
+                <form th:action="@{/place/registration}" th:object="${place}" method="POST" enctype="multipart/form-data">
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="placeName">
@@ -164,10 +228,12 @@
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
                                 대표이미지
                             </label>
-                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="image" id="image" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)"/>
+                            <div class="flex">
+                                <input type="file" id="image" name="image" class="bg-white hover:bg-gray-100 text-gray-800 text-sm font-semibold py-2 px-4 border border-gray-400 rounded shadow"/>
+                            </div>
                         </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
@@ -196,14 +262,14 @@
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="defaultprice">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="defaultPrice">
                                 금액
                             </label>
-                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="defaultprice" id="defaultprice" type="text" placeholder="금액을 입력해주세요."/>
+                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="defaultPrice" id="defaultPrice" type="text" placeholder="금액을 입력해주세요."/>
                         </div>
                     </div>
                     <div class="flex content-center justify-between">
-                        <button class="bg-blue-500 mb-6 hover:bg-blue-700 text-white font-bold py-2 w-full rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button class="bg-blue-500 mb-6 hover:bg-blue-700 text-white font-bold py-2 w-full rounded focus:outline-none focus:shadow-outline" type="submit" onclick="return placecheck();">
                             공간 등록
                         </button>
                     </div>

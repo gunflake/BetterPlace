@@ -92,6 +92,10 @@ public class Place {
     @Transient
     private ArrayList<String> notices;
 
+    public Place() {
+        this.state =1;
+    }
+
     public void setPartner(Partner partner){
 
         if(this.partner != null){
