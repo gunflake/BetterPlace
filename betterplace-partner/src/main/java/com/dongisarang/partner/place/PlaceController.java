@@ -1,17 +1,19 @@
 package com.dongisarang.partner.place;
 
+import com.dongisarang.partner.exception.InvalidImageException;
 import com.dongisarang.partner.partner.Partner;
 import com.dongisarang.partner.partner.PartnerService;
-import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -43,7 +45,7 @@ public class PlaceController {
 
     /* 공간 등록 후 세부 공간 등록페이지로 이동한다.*/
     @PostMapping("/place/registration")
-    public String processPlaceRegistration(Place place, BindingResult result, Principal principal, @RequestParam("image") MultipartFile multipartFile) throws Exception{
+    public String processPlaceRegistration(Place place, BindingResult result, Principal principal, @RequestParam("imageFile") MultipartFile multipartFile) throws Exception{
         log.info(multipartFile.toString());
         //TODO: 유효성 추가
         if(result.hasErrors()){
@@ -88,17 +90,17 @@ public class PlaceController {
 
             log.info(multipartFile.getOriginalFilename());
 
-           //// 이미지 파일 등록
-           //Path fileNameAndPath = Paths.get("/image/", multipartFile.getOriginalFilename());
-           //try{
-           //    Files.write(fileNameAndPath, multipartFile.getBytes());
-           //}catch (IOException e){
-           //    e.printStackTrace();
-           //}
+            // 이미지 파일 등록
+            Path fileNameAndPath = Paths.get("./images/",multipartFile.getOriginalFilename());
+            try{
+                Files.write(fileNameAndPath, multipartFile.getBytes());
+            }catch (IOException e){
+                throw new InvalidImageException("이미지 업로드에 실패했습니다.");
+            }
 
             // 공간 등록하기
             int placeno = placeService.createPlace(place);
-            return "placeDtl/registration/" + placeno;
+            return "redirect:/placeDtl/registration/" + placeno;
         }
     }
 
