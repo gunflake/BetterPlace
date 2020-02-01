@@ -2,9 +2,9 @@
       th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
 <th:block th:fragment="head">
     <!--<link rel -->
-    <script type="application/javascript">
 
-        var selectedFile = null;
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="application/javascript">
 
         function addTagList() {
             let tagcount = parseInt(document.getElementById("tagcount").value);
@@ -70,7 +70,7 @@
             }
         }
 
-        function  placecheck()
+        function placecheck()
         {
             var tags = document.getElementsByName('tags').length;
             var blankcheck = false;
@@ -107,7 +107,6 @@
                 return false;
             }
 
-
             var notices = document.getElementsByName('notices').length;
             blankcheck = false;
 
@@ -128,7 +127,31 @@
             return true;
         }
 
+        function execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var addr = ''; // 주소 변수
+                    var extraAddr = ''; // 참고항목 변수
+
+                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                        addr = data.roadAddress;
+                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                        addr = data.jibunAddress;
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('zipcode').value = data.zonecode;
+                    document.getElementById("address").value = addr;
+                    // 커서를 상세주소 필드로 이동한다.
+                    document.getElementById("addressdetail").focus();
+                }
+            }).open();
+        }
 
     </script>
 </th:block>
@@ -206,7 +229,7 @@
                                         +
                                     </button>
                                 </div>
-                        </div>
+                            </div>
                         </div>
                     </div>
 
@@ -238,10 +261,25 @@
                     </div>
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
                                 주소(위치)
                             </label>
-                            <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="address" id="address" type="text" placeholder="주소를 입력해주세요."/>
+                            <div class="flex">
+                                <div class="w-2/6" >
+                                    <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="zipcode" id="zipcode" type="text" placeholder="우편번호 찾기"/>
+                                </div>
+                                <div class="w-1/6 ml-2">
+                                    <button type="button" onclick="execDaumPostcode()" class="text-base bg-green-500 hover:bg-green-700 text-white font-bold w-full  align-middle py-3 px-4 rounded">
+                                        우편번호 찾기
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="address" id="address"  type="text" placeholder="주소"/>
+                            </div>
+                            <div class="flex">
+                                <input class="mb-4 shadow text-sm appearance-none border rounded w-full py-4 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="addressdetail" id="addressdetail"  type="text" placeholder="상세주소"/>
+                            </div>
                         </div>
                     </div>
                     <div class="-mx-3 md:flex mb-6">
@@ -269,7 +307,7 @@
                         </div>
                     </div>
                     <div class="flex content-center justify-between">
-                        <button class="bg-blue-500 mb-6 hover:bg-blue-700 text-white font-bold py-2 w-full rounded focus:outline-none focus:shadow-outline" type="submit" >
+                        <button onclick="return placecheck();" class="bg-blue-500 mb-6 hover:bg-blue-700 text-white font-bold py-2 w-full rounded focus:outline-none focus:shadow-outline" type="submit" >
                             공간 등록
                         </button>
                     </div>

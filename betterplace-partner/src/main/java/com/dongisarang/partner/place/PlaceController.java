@@ -19,7 +19,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 @Controller
 public class PlaceController {
@@ -29,6 +32,9 @@ public class PlaceController {
 
     @Autowired
     PlaceDetailRepository placeDetailRepository;
+
+    @Autowired
+    PlaceInfoRepository placeInfoRepository;
 
     @Autowired
     PlaceService placeService;
@@ -45,13 +51,16 @@ public class PlaceController {
 
     /* 공간 등록 후 세부 공간 등록페이지로 이동한다.*/
     @PostMapping("/place/registration")
-    public String processPlaceRegistration(Place place, BindingResult result, Principal principal, @RequestParam("imageFile") MultipartFile multipartFile) throws Exception{
-        log.info(multipartFile.toString());
+    public String processPlaceRegistration(Place place, BindingResult result, Principal principal, @RequestParam("imageFile") MultipartFile multipartFile) {
+
         //TODO: 유효성 추가
         if(result.hasErrors()){
             return "/";
         }else{
 
+            if(multipartFile == null) {
+                return "fail upload";
+            }
             // TAG
             ArrayList<String> tags = place.getTags();
             String joinTag = "";
@@ -90,17 +99,45 @@ public class PlaceController {
 
             log.info(multipartFile.getOriginalFilename());
 
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, 1);
+            Date date = cal.getTime();
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMddhhmmss");
+
             // 이미지 파일 등록
-            Path fileNameAndPath = Paths.get("./images/",multipartFile.getOriginalFilename());
+            Path fileNameAndPath = Paths.get("./images/",multipartFile.getOriginalFilename().substring(0,multipartFile.getOriginalFilename().indexOf('.')) + format1.format((date)) + multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().indexOf('.'), multipartFile.getOriginalFilename().length()) );
             try{
                 Files.write(fileNameAndPath, multipartFile.getBytes());
             }catch (IOException e){
                 throw new InvalidImageException("이미지 업로드에 실패했습니다.");
             }
 
+            place.setImage(fileNameAndPath.toString());
             // 공간 등록하기
             int placeno = placeService.createPlace(place);
-            return "redirect:/placeDtl/registration/" + placeno;
+            return "redirect:/placeinfo/registration/" + placeno;
+        }
+    }
+
+    /* 공간 정보 등록 페이지로 이동  */
+    @GetMapping("/placeinfo/registration/{placeNo}")
+    public String initPlaceInfoRegistForm(@PathVariable("placeNo") int placeNo) {
+        return "page/placeinfo_registration";
+    }
+
+    /* 공간 정보 등록 */
+    @PostMapping("/placeinfo/registration/{placeNo}")
+    public String processPlaceInfoRegistration(@PathVariable("placeNo") int placeNo, PlaceInfo placeInfo, BindingResult result){
+        //TODO: 유효성 추가
+        if(result.hasErrors()){
+            return "/";
+        }else{
+
+            Place place = placeRepository.findPlaceByPlaceNo(placeNo);
+            PlaceInfo placeInfoAdd = new PlaceInfo(place, placeInfo.getDay(), placeInfo.getStarttime(), placeInfo.getEndtime());
+
+            placeInfoRepository.save(placeInfoAdd);
+            return "redirect:/placeDtl/registration/" + placeNo;
         }
     }
 
