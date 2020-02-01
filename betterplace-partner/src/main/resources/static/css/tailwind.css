@@ -8,6 +8,10 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
+body, h1, h2, h3, h4, h5, h6, li, a, textarea, button, strong, label, input, th {
+  font-family: "Noto Sans KR", sans-serif !important;
+}
+
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
