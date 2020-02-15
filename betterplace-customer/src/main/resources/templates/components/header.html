@@ -14,8 +14,8 @@
         </div>
         <!-- search -->
         <div class="flex w-full items-center bg-white  border-b border-b-2 border-teal-500 py-2">
-          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-4 leading-tight focus:outline-none" type="text" placeholder="원하는 공간을 입력하세요.">
-          <a href="/#">
+          <input id="search" name="search" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-4 leading-tight focus:outline-none" type="text" placeholder="원하는 공간을 입력하세요.">
+          <a href="#" onclick="searchPlace();">
           <svg version="1.1" class="h-4 mr-4 text-dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 52.966 52.966" style="enable-background:new 0 0 52.966 52.966;" xml:space="preserve">
             <path d="M51.704,51.273L36.845,35.82c3.79-3.801,6.138-9.041,6.138-14.82c0-11.58-9.42-21-21-21s-21,9.42-21,21s9.42,21,21,21
@@ -84,7 +84,7 @@
           <span>&nbsp;&nbsp;공지사항</span>
           <i class="fas fa-angle-right text-right"></i>
         </a>
-        <a href="/" class="border-solid border-b border-gray-500">
+        <a href="/board/info" class="border-solid border-b border-gray-500">
           <span>&nbsp;&nbsp;도움말</span>
           <i class="fas fa-angle-right text-right"></i>
         </a>
@@ -121,6 +121,11 @@
         document.getElementById("main").style.marginRight= "0"; // div id="main" 지정 아직 못함, 이미지 파일 음영 불가
 
         document.body.style.backgroundColor = "white";
+      }
+
+      function searchPlace() {
+        let keyword = document.getElementById("search").value;
+        location.href='/search?keyword=' + keyword;
       }
     </script>
   </header>

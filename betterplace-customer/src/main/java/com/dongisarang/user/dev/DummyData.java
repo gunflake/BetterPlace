@@ -1,14 +1,14 @@
 package com.dongisarang.user.dev;
 
+import com.dongisarang.user.board.Board;
+import com.dongisarang.user.board.BoardRepository;
 import com.dongisarang.user.customer.Customer;
 import com.dongisarang.user.customer.CustomerRepository;
 import com.dongisarang.user.customer.CustomerService;
+import com.dongisarang.user.exception.NotFoundCustomerException;
 import com.dongisarang.user.partner.Partner;
 import com.dongisarang.user.partner.PartnerRepository;
-import com.dongisarang.user.place.Place;
-import com.dongisarang.user.place.PlaceDetail;
-import com.dongisarang.user.place.PlaceDetailRepository;
-import com.dongisarang.user.place.PlaceRepository;
+import com.dongisarang.user.place.*;
 import com.dongisarang.user.reservation.Reservation;
 import com.dongisarang.user.reservation.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +44,53 @@ public class DummyData implements ApplicationRunner {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private BoardRepository boardRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         savePartner();
         savePlace();
         savePlaceDetail();
         saveCustomer();
+        saveBoard();
         saveReservation();
         saveReservation1();
+        saveComment();
+    }
+
+    private void saveComment() {
+        Place place = placeRepository.findByPlaceNameLike("%썸띵%").orElseThrow();
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09").orElseThrow(() -> new NotFoundCustomerException("gunflake09"));
+
+        Comment comment = new Comment();
+        comment.setComment("27일날 예약하려고 했는데 전부 회색으로 되어있네요. 예약이 꽉 찬건가요?");
+        comment.setPlace(place);
+        comment.setCustomer(gunflake09);
+        commentRepository.save(comment);
+
+        Comment comment1 = new Comment();
+        comment1.setComment("빔 프로젝트 제공되나요? 만약 제공되면 화면은 TV인가요?");
+        comment1.setPlace(place);
+        comment1.setCustomer(gunflake09);
+        commentRepository.save(comment1);
+
+    }
+
+    private void saveBoard() {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 50; j++) {
+                Board tmp = new Board();
+                tmp.setTitle("Title" + i + "" + (j + 1));
+                tmp.setContent("Content" + i + "" + (j + 1));
+                tmp.setBoardType(i);
+
+                boardRepository.save(tmp);
+            }
+        }
     }
 
     private void saveReservation() {
@@ -67,7 +106,7 @@ public class DummyData implements ApplicationRunner {
         int reservationPrice = place.getDefaultPrice() * (10 - 6) * 3;
         reservation.setPrice(reservationPrice);
 
-        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09");
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09").orElseThrow(() -> new NotFoundCustomerException("gunflake09"));
         reservation.setCustomer(gunflake09);
 
         PlaceDetail placeDetail = placeDetailRepository.findByPlaceAndPlaceDetailName(place, "스터디룸 A [4인실]").orElseThrow();
@@ -92,7 +131,7 @@ public class DummyData implements ApplicationRunner {
         int reservationPrice = place.getDefaultPrice() * (10 - 6) * 3;
         reservation.setPrice(reservationPrice);
 
-        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09");
+        Customer gunflake09 = customerRepository.findByCustomerId("gunflake09").orElseThrow(() -> new NotFoundCustomerException("gunflake09"));
         reservation.setCustomer(gunflake09);
 
         PlaceDetail placeDetail = placeDetailRepository.findByPlaceAndPlaceDetailName(place, "스터디룸 A [4인실]").orElseThrow();
@@ -155,6 +194,7 @@ public class DummyData implements ApplicationRunner {
         customer.setCustomerPassword("1234");
         customer.setNickname("gunflake");
         customer.setEmail("gunflake09@gmail.com");
+        customer.setPhone("01041177501");
         customerService.signUpCustomer(customer);
 
     }

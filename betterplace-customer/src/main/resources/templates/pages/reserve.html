@@ -3,6 +3,7 @@
 
 <th:block th:fragment="links">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </th:block>
 
 <th:block th:fragment="top">
@@ -20,19 +21,16 @@
             <!-- Img, 공간 설명-->
             <div class="pb-8 border-b border-gray-400 flex">
                 <div class="w-1/4 ">
-                    <img src="https://images.unsplash.com/photo-1523214969941-40a37196fd31?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2251&q=80" >
+                    <img th:src="${place.getImage()}" >
                 </div>
                 <div class="w-3/4 pl-8">
                     <div class="flex pb-4 border-gray-300 border-b">
-                        <div class="text-xl font-bold pb-4">
-                            소셜팩토리 2호점
+                        <div class="text-xl font-bold pb-4" th:text="${place.getPlaceName()}">
                         </div>
-                        <div class="text-xl text-blue-700 ml-1">
-                            [스터디룸 A호점]
+                        <div class="text-xl text-blue-700 ml-1" th:text="' ' + ${placeDetail.getPlaceDetailName()}">
                         </div>
                     </div>
-                    <div class="text-base pt-4">
-                        최소 3명~최대 8명 이용 가능한 단독 공간입니다. 소규모 회의, 스터디, 모임, 원데이 클래스를 진행하기 좋습니다.
+                    <div class="text-base pt-4" th:text="${placeDetail.getPlaceDetailIntro()}">
                     </div>
                 </div>
             </div>
@@ -45,8 +43,7 @@
                     </div>
                 </div>
                 <div class="w-3/4 pl-8">
-                    <div class="text-base">
-                        최소 3명 ~ 최대 8명
+                    <div class="text-base" th:text="'최소 ' + ${placeDetail.getMinCount()} + '명 ~ 최대 ' + ${placeDetail.getMaxCount()} + '명'">
                     </div>
                 </div>
             </div>
@@ -77,8 +74,7 @@
                     </div>
                 </div>
                 <div class="w-3/4 pl-8">
-                    <div class="text-base text-right">
-                        2019.11.25 (월) 10시 ~ 13시
+                    <div class="text-base text-right" th:text="${reserveDate} + ${reserveTime}">
                     </div>
                 </div>
             </div>
@@ -90,8 +86,7 @@
                     </div>
                 </div>
                 <div class="w-3/4 pl-8">
-                    <div class="text-base text-right">
-                        3명
+                    <div class="text-base text-right" th:text="${count}+'명'">
                     </div>
                 </div>
             </div>
@@ -103,13 +98,13 @@
         <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">예약자 정보</div>
         <div class="px-8 bg-gray-100">
             <!-- 예약자 -->
-            <div th:insert="~{components/reserve/inputBox :: inputBox('예약자', 'booker', 'text')}" ></div>
+            <div th:insert="~{components/reserve/inputBox :: inputBox('예약자', 'booker', 'text', '')}" ></div>
             <!-- 연락처 -->
-            <div th:insert="~{components/reserve/inputBox :: inputBox('연락처', 'phone', 'text')}" ></div>
+            <div th:insert="~{components/reserve/inputBox :: inputBox('연락처', 'phone', 'text', ${currentUser.getPhone()})}" ></div>
             <!-- 이메일 -->
-            <div th:insert="~{components/reserve/inputBox :: inputBox('이메일', 'email', 'email')}" ></div>
+            <div th:insert="~{components/reserve/inputBox :: inputBox('이메일', 'email', 'email', ${currentUser.getEmail()})}" ></div>
             <!-- 요청사항 -->
-            <div th:insert="~{components/reserve/inputBox :: inputBox('요청사항', 'requests', 'text')}" ></div>
+            <div th:insert="~{components/reserve/inputBox :: inputBox('요청사항', 'requests', 'text', '')}" ></div>
         </div>
         <div class="w-full p-2 text-sm text-gray-700">
             예약자 정보로 알림톡과 이메일이 발송됩니다. 정확한 정보인지 확인해주세요.
@@ -152,11 +147,11 @@
         <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">결제 예정 금액</div>
         <div class="px-4 bg-gray-100">
             <!-- 예약 날짜-->
-            <div th:insert="~{components/reserve/textLabel :: label('예약 날짜', '2019.11.25 (월)')}"></div>
+            <div th:insert="~{components/reserve/textLabel :: label('예약 날짜', ${reserveDate})}"></div>
             <!-- 예약 시간-->
-            <div th:insert="~{components/reserve/textLabel :: label('예약 시간', '10시 ~ 13시 3시간')}"></div>
+            <div th:insert="~{components/reserve/textLabel :: label('예약 시간',  ${reserveTime} + ' ' + ${useTime} +'시간')}"></div>
             <!-- 예약 인원-->
-            <div th:insert="~{components/reserve/textLabel :: label('예약 인원', '3명')}"></div>
+            <div th:insert="~{components/reserve/textLabel :: label('예약 인원', ${count} + '명')}"></div>
         </div>
         <!-- 결제 버튼 -->
         <button class="modal-open w-full mt-1 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2  border border-blue-500 hover:border-transparent rounded">
@@ -193,15 +188,17 @@
                             결제하시겠습니까?
                         </div>
                         <!-- 예약공간 -->
-                        <div th:insert="~{components/reserve/textLabel :: label('예약 공간', '소셜팩토리 1호점 A룸(2-4인실)')}"></div>
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 공간', ${place.getPlaceName()})}"></div>
+                        <!-- 예약상세공간 -->
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 상세 공간', ${placeDetail.getPlaceDetailName()})}"></div>
                         <!-- 예약 날짜-->
-                        <div th:insert="~{components/reserve/textLabel :: label('예약 날짜', '2019.11.25 (월)')}"></div>
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 날짜', ${reserveDate})}"></div>
                         <!-- 예약 시간-->
-                        <div th:insert="~{components/reserve/textLabel :: label('예약 시간', '10시 ~ 13시 3시간')}"></div>
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 시간', ${reserveTime} + ' ' + ${useTime} +'시간')}"></div>
                         <!-- 예약 인원-->
-                        <div th:insert="~{components/reserve/textLabel :: label('예약 인원', '3명')}"></div>
+                        <div th:insert="~{components/reserve/textLabel :: label('예약 인원', ${count} +'명')}"></div>
                         <!-- 결제 예정금액-->
-                        <div th:insert="~{components/reserve/textLabel :: label('결제 예정금액', '₩9,000')}"></div>
+                        <div th:insert="~{components/reserve/textLabel :: label('결제 예정금액', '₩' + ${totalPrice})}"></div>
 
                         <!-- 환불 규정 -->
                         <div class="w-full py-4 text-sm text-gray-700">
@@ -212,7 +209,7 @@
                         </div>
 
                         <!-- Button -->
-                        <button class="modal-open w-full mt-1 hover:bg-transparent bg-blue-500 hover:text-blue-700 font-semibold text-white py-2  border border-blue-500 border-transparent rounded" onclick="location.href='/reserved'">
+                        <button class="modal-open w-full mt-1 hover:bg-transparent bg-blue-500 hover:text-blue-700 font-semibold text-white py-2  border border-blue-500 border-transparent rounded" onclick="processReserve()">
                             결제하기
                         </button>
                     </div>
@@ -221,7 +218,7 @@
         </div>
     </div>
 
-    <script>
+    <script th:inline="javascript">
         let openmodal = document.querySelectorAll('.modal-open');
         for (let i = 0; i < openmodal.length; i++) {
             openmodal[i].addEventListener('click', function(event){
@@ -258,6 +255,37 @@
             modal.classList.toggle('pointer-events-none');
             body.classList.toggle('modal-active');
         }
+
+        function processReserve() {
+            let getData = reserverDataSetting();
+
+                $.ajax({
+                    url: '/reserve/pg/kakaopay',
+                    method: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(getData),
+                    success: function (data) {
+                        location.href = data;
+                    }
+                });
+        }
+
+        function reserverDataSetting() {
+            let reserveData = {
+                "placeNo": /*[[ ${place.getPlaceNo()} ]]*/,
+                "customerNo": /*[[ ${currentUser.getCustomerNo()} ]]*/,
+                "placeDetailNo": /*[[ ${placeDetail.getPlaceDetailNo()} ]]*/,
+                "customerCount": /*[[ ${count} ]]*/,
+                "reservationDate": /*[[ ${reservationDate} ]]*/,
+                "price": /*[[ ${totalPrice} ]]*/,
+                "startTime": /*[[ ${startTime} ]]*/,
+                "endTime": /*[[ ${endTime} ]]*/
+            };
+
+            return reserveData;
+        }
+
+
     </script>
 
 </th:block>

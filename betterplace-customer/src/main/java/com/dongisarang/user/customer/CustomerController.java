@@ -1,5 +1,6 @@
 package com.dongisarang.user.customer;
 
+import com.dongisarang.user.exception.NotFoundCustomerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,16 +41,6 @@ public class CustomerController {
         return "pages/notice";
     }
 
-    @GetMapping("/reserve")
-    public String goReserve(){
-        return "pages/reserve";
-    }
-
-    @GetMapping("/reserved")
-    public String goReserved(){
-        return "pages/reserved";
-    }
-
     /** 회원가입 후 로그인 페이지로 이동한다. */
     @PostMapping(value="/join")
     public String setJoin(Customer customer) {
@@ -63,7 +54,7 @@ public class CustomerController {
     @RequestMapping("/my")
     public String profileManageForm(Model model, @RequestParam(value ="message", defaultValue = "default")String message){
         //검증
-        Customer getCustomer = customerRepository.findByCustomerId("hskim");
+        Customer getCustomer = customerRepository.findByCustomerId("hskim").orElseThrow(() -> new NotFoundCustomerException("hskim"));
         System.out.println(getCustomer.getNickname());
 
         //로그인 정보 가지고 오기 > Customer 객체로 모델 담기

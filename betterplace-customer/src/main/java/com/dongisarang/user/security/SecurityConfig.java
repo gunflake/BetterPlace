@@ -2,6 +2,7 @@ package com.dongisarang.user.security;
 
 import com.dongisarang.user.customer.Customer;
 import com.dongisarang.user.customer.CustomerRepository;
+import com.dongisarang.user.exception.NotFoundCustomerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -36,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/join","/login","/board/**", "/place/**").permitAll()
+                .antMatchers("/","/join","/login","/board/**", "/place/**", "/search/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -65,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                Customer customer = customerRepository.findByCustomerId(username);
+                Customer customer = customerRepository.findByCustomerId(username).orElseThrow(() -> new NotFoundCustomerException(username));
                 HashSet<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
                 return new User(customer.getCustomerId(), customer.getCustomerPassword(), grantedAuthorities);

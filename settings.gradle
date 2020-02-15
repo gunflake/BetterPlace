@@ -1,5 +1,3 @@
 rootProject.name = 'betterplace'
 
-include 'betterplace-admin', 'betterplace-customer' ,'betterplace-partner'
-include 'betterplace-common'
-
+include 'betterplace-customer' ,'betterplace-partner'

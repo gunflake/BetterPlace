@@ -77,11 +77,14 @@ public class Place {
     @Column
     private Integer defaultPrice;
 
-    @OneToMany(mappedBy = "place", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
     private List<PlaceDetail> placeDetails = new ArrayList<>();
 
     @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
     private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
 
     public void setPartner(Partner partner){
 

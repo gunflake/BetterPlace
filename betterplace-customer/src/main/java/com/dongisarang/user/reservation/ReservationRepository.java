@@ -10,7 +10,8 @@ import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
     // 사용자가 방금 예약한것중 가장 최근꺼를 가져온다. << 수정 필요할 수 있음...
-    Optional<Reservation> findByCustomerOrderByRegisterDateDesc(Customer customer);
+    Optional<Reservation> findTop1ByCustomerOrderByReservationNoDesc(Customer customer);
 
     List<Reservation> findByPlaceAndPlaceDetailAndReservationDateOrderByStartTime(Place palce, PlaceDetail placeDetail, String registerDate);
+
 }
