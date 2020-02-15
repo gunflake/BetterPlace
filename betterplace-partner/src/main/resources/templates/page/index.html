@@ -2,12 +2,103 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"  th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
 
 <th:block th:fragment="head">
-    <!--<link rel -->
+    <style>
+        .section_cover {
+            height: auto;
+            color: #000;
+            text-align: center;
+        }
+        .header .nav_menu .ico_menu {
+            background-size: 657px 604px;
+            background-position: -627px -504px;
+            width: 24px;
+            height: 18px;
+            right: 25px;
+            top: 50%;
+            margin-top: -9px;
+        }
+    </style>
+    <style>
+        .slide_wrap{
+            transition: transform .3s ease,-webkit-transform .3s ease;
+        }
+        .carousel-open:checked + .carousel-item {
+            position: static;
+            opacity: 100;
+        }
+        .carousel-item {
+            -webkit-transition: opacity 0.6s ease-out;
+            transition: opacity 0.6s ease-out;
+        }
+        #carousel-1:checked ~ .control-1,
+        #carousel-2:checked ~ .control-2{
+            display: block;
+        }
+        .carousel-indicators {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            bottom: 2%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 10;
+        }
+        #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+        #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet {
+            color: #2b6cb0;  /*Set to match the Tailwind colour you want the active one to be */
+        }
+    </style>
 </th:block>
 <body>
-<br><br><br><br><br><br>
-<a href="/place/registration">클릭클릭</a><br>
-<a href="/notice">공지사항</a><br>
-<a href="/notice2">공지사항2</a>
+<div style="text-align: center;" class="mt-16 mb-16">
+    <div class="font-normal text-3xl m-1 px-6 py-2">
+        <h2>지금 바로 공간을 공유해보세요!</h2>
+    </div>
+    <div class="font-thin text-xs m-1 px-6 py-2">
+        <h6>스터디룸, 파티룸, 오피스등 등 다양한 모임&업무공간을 스페이스클라우드를 통해 공유해보세요!</h6>
+    </div>
+    <div class="flex justify-center">
+        <div class="m-3">
+            <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 border-blue-700 rounded">
+                공간 등록하기
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded">
+                공간 등록 메뉴얼
+            </button>
+        </div>
+    </div>
+    <div class="font-thin text-xs m-1 px-6 py-2">
+        <h6>궁금한 점이 있으신가요? <a href="#">1:1 문의하기</a></h6>
+    </div>
+</div>
+<div class="carousel relative shadow-2xl bg-white slide_wrap">
+    <div class="carousel-inner relative overflow-hidden w-full">
+        <!--Slide 1-->
+        <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
+        <div class="carousel-item absolute opacity-0" style="height:50vh;">
+            <div class="block h-full w-full bg-indigo-500 text-white text-5xl text-center" style="background-image: url('https://kr.object.ncloudstorage.com/scloud-service/service/157957648_f5ebf464b1d0e98e6846ea795c8b0f4a.png');"></div>
+        </div>
+        <label for="carousel-2" class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
+        <!--Slide 2-->
+        <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+        <div class="carousel-item absolute opacity-0" style="height:50vh;">
+            <div class="block h-full w-full bg-orange-500 text-white text-5xl text-center" style="background-image: url('https://kr.object.ncloudstorage.com/scloud-service/service/157162713_ced8e47d22f43cb1c03942bb71b0b7d5.png')"></div>
+        </div>
+        <label for="carousel-1" class="prev control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+
+        <!-- Add additional indicators for each slide-->
+        <ol class="carousel-indicators">
+            <li class="inline-block mr-3">
+                <label for="carousel-1" class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+            </li>
+            <li class="inline-block mr-3">
+                <label for="carousel-2" class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+            </li>
+        </ol>
+    </div>
+</div>
 </body>
 </html>
