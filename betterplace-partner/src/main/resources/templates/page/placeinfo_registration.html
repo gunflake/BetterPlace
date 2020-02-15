@@ -1,6 +1,15 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
 <th:block th:fragment="head">
+    <script type="application/javascript">
+        function checkholiday (string index)
+        {
+            document.getElementById("StartHour" + index).disabled = true;
+
+        }
+
+
+    </script>
 </th:block>
 
 <th:block th:fragment="body">
@@ -17,42 +26,551 @@
                                     <th class="w-3/4 px-4 py-2">운영 시간</th>
                                 </tr>
                                 <tr>
-                                    <td class="border px-4 py-2">월</td>
-                                    <td class="border px-4 py-2">
-                                        <div class="relative">
-                                            <select class="...">
-                                                <option>Indiana</option>
-                                                <option>Michigan</option>
-                                                <option>Ohio</option>
+                                    <td class="border px-4 py-2 text-center">월</td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <div class="inline-block relative w-32">
+                                            <select id="StartHour0" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9" selected>9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18">18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
                                             </select>
-                                            <div class="pointer-events-none ...">
-                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                                             </div>
+                                        </div>
+                                        ~
+                                        <div class="inline-block relative w-32">
+                                            <select id="EndHour0" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9">9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18" selected>18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="inline-block relative w-32">
+                                            <div class="md:w-1/3"></div>
+                                            <label class="md:w-2/3 block text-gray-500 font-bold">
+                                                <input class="mr-2 leading-tight" type="checkbox" onchange="checkholiday('0')">
+                                                <span class="text-sm">
+                                                    휴무일
+                                                </span>
+                                            </label>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="border px-4 py-2">화</td>
-                                    <td class="border px-4 py-2">Adam</td>
+                                    <td class="border px-4 py-2 text-center">화</td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <div class="inline-block relative w-32">
+                                            <select id="StartHour1" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9" selected>9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18">18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        ~
+                                        <div class="inline-block relative w-32">
+                                            <select id="EndHour1" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9">9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18" selected>18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="inline-block relative w-32">
+                                            <div class="md:w-1/3"></div>
+                                            <label class="md:w-2/3 block text-gray-500 font-bold">
+                                                <input class="mr-2 leading-tight" type="checkbox" onchange="checkholiday('1')">
+                                                <span class="text-sm">
+                                                    휴무일
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="border px-4 py-2">수</td>
-                                    <td class="border px-4 py-2">Adam</td>
+                                    <td class="border px-4 py-2 text-center">수</td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <div class="inline-block relative w-32">
+                                            <select id="StartHour2" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9" selected>9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18">18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        ~
+                                        <div class="inline-block relative w-32">
+                                            <select id="EndHour2" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9">9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18" selected>18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="inline-block relative w-32">
+                                            <div class="md:w-1/3"></div>
+                                            <label class="md:w-2/3 block text-gray-500 font-bold">
+                                                <input class="mr-2 leading-tight" type="checkbox" onchange="checkholiday('2')">
+                                                <span class="text-sm">
+                                                    휴무일
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="border px-4 py-2">목</td>
-                                    <td class="border px-4 py-2">Adam</td>
+                                    <td class="border px-4 py-2 text-center">목</td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <div class="inline-block relative w-32">
+                                            <select id="StartHour3" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9" selected>9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18">18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        ~
+                                        <div class="inline-block relative w-32">
+                                            <select id="EndHour3" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9">9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18" selected>18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="inline-block relative w-32">
+                                            <div class="md:w-1/3"></div>
+                                            <label class="md:w-2/3 block text-gray-500 font-bold">
+                                                <input class="mr-2 leading-tight" type="checkbox" onchange="checkholiday('3')">
+                                                <span class="text-sm">
+                                                    휴무일
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="border px-4 py-2">금</td>
-                                    <td class="border px-4 py-2">Adam</td>
+                                    <td class="border px-4 py-2 text-center">금</td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <div class="inline-block relative w-32">
+                                            <select id="StartHour4" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9" selected>9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18">18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        ~
+                                        <div class="inline-block relative w-32">
+                                            <select id="EndHour4" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9">9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18" selected>18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="inline-block relative w-32">
+                                            <div class="md:w-1/3"></div>
+                                            <label class="md:w-2/3 block text-gray-500 font-bold">
+                                                <input class="mr-2 leading-tight" type="checkbox" onchange="checkholiday('4')">
+                                                <span class="text-sm">
+                                                    휴무일
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="border px-4 py-2">토</td>
-                                    <td class="border px-4 py-2">Adam</td>
+                                    <td class="border px-4 py-2 text-center">토</td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <div class="inline-block relative w-32">
+                                            <select id="StartHour5" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9" selected>9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18">18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        ~
+                                        <div class="inline-block relative w-32">
+                                            <select id="EndHour5" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9">9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18" selected>18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="inline-block relative w-32">
+                                            <div class="md:w-1/3"></div>
+                                            <label class="md:w-2/3 block text-gray-500 font-bold">
+                                                <input class="mr-2 leading-tight" type="checkbox" onchange="checkholiday('5')">
+                                                <span class="text-sm">
+                                                    휴무일
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-4 py-2 text-center">일</td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <div class="inline-block relative w-32">
+                                            <select id="StartHour6" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9" selected>9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18">18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        ~
+                                        <div class="inline-block relative w-32">
+                                            <select id="EndHour6" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="0">0시</option>
+                                                <option value="1">1시</option>
+                                                <option value="2">2시</option>
+                                                <option value="3">3시</option>
+                                                <option value="4">4시</option>
+                                                <option value="5">5시</option>
+                                                <option value="6">6시</option>
+                                                <option value="7">7시</option>
+                                                <option value="8">8시</option>
+                                                <option value="9">9시</option>
+                                                <option value="10">10시</option>
+                                                <option value="11">11시</option>
+                                                <option value="12">12시</option>
+                                                <option value="13">13시</option>
+                                                <option value="14">14시</option>
+                                                <option value="15">15시</option>
+                                                <option value="16">16시</option>
+                                                <option value="17">17시</option>
+                                                <option value="18" selected>18시</option>
+                                                <option value="19">19시</option>
+                                                <option value="20">20시</option>
+                                                <option value="21">21시</option>
+                                                <option value="22">22시</option>
+                                                <option value="23">23시</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="inline-block relative w-32">
+                                            <div class="md:w-1/3"></div>
+                                            <label class="md:w-2/3 block text-gray-500 font-bold">
+                                                <input class="mr-2 leading-tight" type="checkbox" onchange="checkholiday('6')">
+                                                <span class="text-sm">
+                                                    휴무일
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="flex content-center justify-between">
+                        <button class="bg-blue-500 mb-6 hover:bg-blue-700 text-white font-bold py-2 w-full rounded focus:outline-none focus:shadow-outline" type="submit" >
+                            공간 정보 등록
+                        </button>
                     </div>
                 </form>
             </div>
