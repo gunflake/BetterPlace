@@ -30,4 +30,13 @@ public class PlaceInfo {
     @Column
     @CreationTimestamp
     private Date endtime;  // 종료시간
+
+
+    public PlaceInfo(Place place,  Integer day, Date starttime, Date endtime) {
+        this.place = place;
+        this.day = day;
+        this.starttime = starttime;
+        this.endtime = endtime;
+        setPlace(place);
+    }
 }

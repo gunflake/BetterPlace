@@ -50,6 +50,12 @@ public class Place {
     @Column(length = 100)
     private String address; // 주소
 
+    @Column(length = 6)
+    private String zipcode; // 우편주소
+
+    @Column(length = 100)
+    private String addressdetail; // 주소(상세)
+
     @Column(length = 100)
     private String website;
 
@@ -91,6 +97,10 @@ public class Place {
 
     @Transient
     private ArrayList<String> notices;
+
+    public Place() {
+        this.state = 1;
+    }
 
     public void setPartner(Partner partner){
 
