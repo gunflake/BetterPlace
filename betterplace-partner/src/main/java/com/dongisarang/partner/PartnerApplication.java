@@ -12,3 +12,4 @@ public class PartnerApplication {
         SpringApplication.run(PartnerApplication.class, args);
     }
 }
+
