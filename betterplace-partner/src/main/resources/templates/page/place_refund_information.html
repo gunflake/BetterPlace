@@ -1,0 +1,44 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/default :: layout (~{::head}, ~{::body})}">
+<th:block th:fragment="head">
+    <script type="application/javascript">
+        function saveRefund() {
+            //Refund Data settings
+            let form = document.createElement("form");
+            form.method = "POST";
+
+            for(let i=1; i<=7 ; i++){
+                let getId = 'day'+i;
+                let tempInput = document.createElement("input");
+                let getOption = document.getElementById(getId);
+
+                tempInput.setAttribute("name", getId);
+                tempInput.setAttribute("value", getOption.value);
+                form.appendChild(tempInput);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+
+        }
+    </script>
+</th:block>
+
+<th:block th:fragment="body">
+    <div class="bg-scroll pt-10 flex justify-center">
+        <div class="w-2/3 px-2">
+            <div class="mb-8 text-2xl text-center">환불 기준</div>
+
+            <div class="">
+                <th:block th:each="num : ${#numbers.sequence(0,6)}">
+                    <div th:replace="~{component/refund :: refund(7 - ${num})}"></div>
+                </th:block>
+            </div>
+            <div class="mt-4">
+                <button class="content-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-16 rounded-full">이전</button>
+                <button class="content-center ml-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-16 rounded-full" onclick="saveRefund()">저장</button>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

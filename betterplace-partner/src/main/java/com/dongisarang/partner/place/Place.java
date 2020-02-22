@@ -83,6 +83,9 @@ public class Place {
     @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
     private List<Reservation> reservations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
+    private List<PlaceRefund> placeRefunds = new ArrayList<>();
+
     @Transient
     private ArrayList<String> tags;
 
