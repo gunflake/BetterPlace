@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class PlaceController {
@@ -172,7 +173,7 @@ public class PlaceController {
 
         placeRefundRepository.saveAll(placeRefunds);
 
-        return "page/place_refund_information";
+        return "redirect:/";
     }
 
     /* 공간 환불 정보 등록 */
@@ -200,7 +201,7 @@ public class PlaceController {
             PlaceDetail placeDetailAdd = new PlaceDetail(place, placedtl.getPlaceDetailName(), placedtl.getPlaceDetailIntro(), placedtl.getMinCount(), placedtl.getMaxCount());
 
             placeDetailRepository.save(placeDetailAdd);
-            return "redirect:/";
+            return "redirect:/placerefund/registration/"+placeNo;
         }
     }
 
