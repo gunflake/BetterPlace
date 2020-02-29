@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,8 +50,13 @@ public class ReservationController {
 
     private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
 
-    @PostMapping("/reserve")
-    public String initCreationReserveForm(@RequestParam String placeNo,
+    @GetMapping("/reserve/{placeNo}")
+    public String initCreationReserveRedirect(@PathVariable("placeNo") int placeNo){
+        return "redirect:/place/" + placeNo;
+    }
+
+    @PostMapping("/reserve/{placeNo}")
+    public String initCreationReserveForm(@PathVariable("placeNo") String placeNo,
                                           @RequestParam String placeDetailNo,
                                           @RequestParam String reservationDate, // 예약 날짜
                                           @RequestParam String startTime,  // 예약 시작 시간
