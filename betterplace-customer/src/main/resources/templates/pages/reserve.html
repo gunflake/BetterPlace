@@ -115,10 +115,7 @@
     <div class="pb-20">
         <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">결제 방법 선택</div>
         <div class="p-8 bg-gray-100">
-            <label th:insert="~{components/reserve/radioButton :: radioButton('신용카드', 'payment', 'checked')}"></label>
-            <label th:insert="~{components/reserve/radioButton :: radioButton('실시간 계좌이체', 'payment', null)}"></label>
-            <label th:insert="~{components/reserve/radioButton :: radioButton('카카오 페이', 'payment', null)}"></label>
-            <label th:insert="~{components/reserve/radioButton :: radioButton('네이버 페이', 'payment', null)}"></label>
+            <label th:insert="~{components/reserve/radioButton :: radioButton('카카오 페이', 'payment', true)}"></label>
         </div>
         <div class="w-full p-2 text-sm text-red-600 font-semibold">
             계좌이체의 경우, 모바일에서는 네이버페이 계좌 간편결제만 가능합니다!(일반 계좌이체는 PC에서만 지원)
