@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<body>
+<th:block th:fragment="refund(day)">
+    <div class="">
+    <div class="flex flex-no-wrap content-center mb-3">
+        <div class="text-2xl font-bold" th:text="이용 + ' ' + ${day} + 일전"></div>
+        <div class="text-2xl ml-10">총 금액</div>
+        <select th:id="day + ${day}" class="form-select mt-1 block ml-4">
+            <option>100%</option>
+            <option>90%</option>
+            <option>80%</option>
+            <option>70%</option>
+            <option>60%</option>
+            <option>50%</option>
+            <option>40%</option>
+            <option>30%</option>
+            <option>20%</option>
+            <option>10%</option>
+            <option>0%</option>
+        </select>
+        <div class="text-2xl ml-4">환불</div>
+    </div>
+    </div>
+</th:block>
+</body>
+</html>

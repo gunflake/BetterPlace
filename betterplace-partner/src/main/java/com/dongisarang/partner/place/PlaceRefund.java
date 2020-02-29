@@ -10,20 +10,29 @@ import javax.persistence.*;
 @Setter
 public class PlaceRefund {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // 번호
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer placeRefundNo;
+
+    @ManyToOne
     @JoinColumn(name="placeNo")
     private Place place;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // 번호
-    private Integer placerefundno;
 
-    @Column
     // 이용전날짜
-    private Integer beforeday;
-
     @Column
+    private Integer beforeDay;
+
     // 환불%금액
-    private Integer refundpercent;
+    @Column
+    private Integer refundPercent;
+
+    public void setPlace(Place place) {
+        if(this.place != null){
+            this.place.getPlaceRefunds().remove(this);
+        }
+        this.place = place;
+        this.place.getPlaceRefunds().add(this);
+    }
 }

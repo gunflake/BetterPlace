@@ -1,6 +1,7 @@
 package com.dongisarang.partner.place;
 
 import com.dongisarang.partner.exception.InvalidImageException;
+import com.dongisarang.partner.exception.NotFoundPlaceException;
 import com.dongisarang.partner.partner.Partner;
 import com.dongisarang.partner.partner.PartnerService;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class PlaceController {
@@ -38,6 +40,9 @@ public class PlaceController {
 
     @Autowired
     PlaceService placeService;
+
+    @Autowired
+    private PlaceRefundRepository placeRefundRepository;
 
     @Autowired
     PartnerService partnerService;
@@ -142,9 +147,33 @@ public class PlaceController {
     }
 
     /* 공간 환불 정보 등록 페이지로 이동 */
-    @GetMapping("/placerefund/registration")
-    public String initPlaceRefundRegistForm(@RequestParam("placeNo") int placeNo){
-        return "page/place_refund";
+    @GetMapping("/placerefund/registration/{placeNo}")
+    public String initPlaceRefundRegisterForm(@PathVariable("placeNo") int placeNo){
+        return "page/place_refund_information";
+    }
+
+    /* 공간 환불 정보 등록 정보 처리 */
+    @PostMapping("/placerefund/registration/{placeNo}")
+    public String processPlaceRefundRegisterForm(@PathVariable("placeNo") int placeNo, RefundForm refundData){
+        log.info(refundData.getDay1());
+        log.info(refundData.getDay2());
+
+        List<PlaceRefund> placeRefunds = new ArrayList<>();
+        Place place = placeRepository.findById(placeNo).orElseThrow(() -> new NotFoundPlaceException(String.valueOf(placeNo)));
+        int [] days = refundData.getDaysIntArr();
+
+        for (int i = 1; i <= 7; i++) {
+            PlaceRefund placeRefund = new PlaceRefund();
+            placeRefund.setPlace(place);
+            // Todo Refund
+            placeRefund.setBeforeDay(i);
+            placeRefund.setRefundPercent(days[i-1]);
+            placeRefunds.add(placeRefund);
+        }
+
+        placeRefundRepository.saveAll(placeRefunds);
+
+        return "redirect:/";
     }
 
     /* 공간 환불 정보 등록 */
@@ -172,7 +201,7 @@ public class PlaceController {
             PlaceDetail placeDetailAdd = new PlaceDetail(place, placedtl.getPlaceDetailName(), placedtl.getPlaceDetailIntro(), placedtl.getMinCount(), placedtl.getMaxCount());
 
             placeDetailRepository.save(placeDetailAdd);
-            return "redirect:/";
+            return "redirect:/placerefund/registration/"+placeNo;
         }
     }
 
