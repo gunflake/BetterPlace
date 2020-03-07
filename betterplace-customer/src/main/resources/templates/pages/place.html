@@ -153,8 +153,49 @@
                 <div class="border-0 border-grey-light border-b border-solid py-4">
                     <label>
                         <input type="radio" name="selectPlace" th:value="${placeDetail.getPlaceDetailNo()}"
-                               th:text="${placeDetail.getPlaceDetailName()}"/>
+                               th:text="${placeDetail.getPlaceDetailName()}" onclick="showDateTimeArea(this)"/>
                     </label>
+                </div>
+            </div>
+        </div>
+        <div id="dateTimeArea" style="display:none;">
+            <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">날짜 선택</div>
+            <div id="selectedDate" class="border-0 border-grey-light border-b border-solid py-4 text-lg text-right font-bold text-blue-200">2020-01-16(수)</div>
+            <div id="dateArea" class="border-0 border-grey-light border-b border-solid py-4 text-lg font-bold">
+
+            </div>
+            <div class="w-full border-0 border-grey-light border-b border-solid py-4 inline-flex">
+                <div class="w-4/12">
+                    <span class="bg-gray-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;예약 불가</span>
+                </div>
+                <div class="w-4/12">
+                    <span class="bg-yellow-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;오늘</span>
+                </div>
+                <div class="w-4/12">
+                    <span class="bg-blue-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;선택</span>
+                </div>
+            </div>
+            <div id="timeArea" style="display:none;">
+                <div class="w-full p-2 text-lg font-bold border-blue-600 border-b">시간 선택</div>
+                <div id="selectedTime" class="border-0 border-grey-light border-b border-solid py-4 text-lg text-right font-bold text-blue-200"><span id="selectedTimeSum">0</span> 시간</div>
+                <div id="availTimeList" class="border-0 border-grey-light border-b border-solid py-4 text-lg font-bold">
+                </div>
+                <div class="w-full border-0 border-grey-light border-b border-solid py-4 inline-flex">
+                    <div class="w-4/12">
+                        <span class="bg-gray-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span>&nbsp;&nbsp;&nbsp;예약 불가</span>
+                    </div>
+                    <div class="w-4/12">
+                        <span class="bg-yellow-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span>&nbsp;&nbsp;&nbsp;가능</span>
+                    </div>
+                    <div class="w-4/12">
+                        <span class="bg-blue-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span>&nbsp;&nbsp;&nbsp;선택</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -239,6 +280,113 @@
             form.action = '/reserve/'+placeNo.value;
             document.body.appendChild(form);
             form.submit();
+        }
+
+        var urlArray;
+        var placeNo;
+        var placeDetailNo;
+        var availTime;
+
+        $(function() {
+            urlArray = window.location.href.split("/");
+            placeNo = urlArray[4];
+
+            $("#dateArea").datepicker({
+                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+                ,dayNamesMin:['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                ,dateFormat:"yy-mm-dd"
+                ,minDate:"0D"
+                ,maxDate:"+1M"
+                ,onSelect:function(dateText, inst) {
+                    console.log(placeNo);
+                    console.log(placeDetailNo);
+                    console.log(dateText);
+                    $.ajax({
+                        url:"/reserve/possible/" + placeNo + "/" + placeDetailNo + "/" + dateText,
+                        method: "GET",
+                        dataType: "json"
+                    })
+                        .done(function(json) {
+                            availTime = json['availTime'].split(',');
+                            //console.log(availTime);
+                            showTimeArea();
+                        })
+                        .fail(function(){
+                            console.log("error");
+                        });
+                }
+            });
+
+            $("#dateArea").datepicker('setDate', 'today');
+        });
+
+        function showDateTimeArea(id) {
+            placeDetailNo = id.getAttribute("value");
+
+            $("#dateTimeArea").removeAttr("style");
+        }
+
+        function showTimeArea() {
+            $("#timeArea").removeAttr("style");
+
+            var strHtml = "";
+            var strTime = "";
+            var counter = 0;
+
+            console.log("showTimeArea");
+
+            console.log(availTime);
+
+            for (var i = 0; i < 24; i++) {
+                ++counter;
+                if (i < 10) {
+                    strTime = "0" + i;
+                    const isFound = availTime.find(element => element === strTime);
+                    strHtml = strHtml + isAvailTimeHtml(isFound, strTime);
+                } else {
+                    strTime = "" + i;
+                    const isFound = availTime.find(element => element === strTime);
+                    strHtml = strHtml + isAvailTimeHtml(isFound, strTime);
+                }
+
+                if(counter === 6) {
+                    counter = 0;
+                    strHtml = strHtml + "</br></br>";
+                }
+            }
+
+            console.log(strHtml);
+
+            $("#availTimeList").append(strHtml);
+
+        }
+
+        function isAvailTimeHtml(isFound, strTime) {
+            if(isFound) {
+                return "<span class=\"inline bg-yellow-300 py-1 px-2 rounded-full text-xs lowercase text-gray-700\" onclick=\"selectTimeToggle(this)\">&nbsp;&nbsp;" + strTime + "&nbsp;&nbsp;</span>";
+            } else {
+                return "<span class=\"inline bg-gray-300 py-1 px-2 rounded-full text-xs lowercase text-gray-700\">&nbsp;&nbsp;" + strTime + "&nbsp;&nbsp;</span>";
+            }
+        }
+
+        function selectTimeToggle(time) {
+            var TimeSum = parseInt($("#selectedTimeSum").text());
+            $("#selectedTimeSum").text(TimeSum + 1);
+
+            $(time).removeAttr("class");
+            $(time).removeAttr("onclick");
+            $(time).attr("class", "inline bg-blue-300 py-1 px-2 rounded-full text-xs lowercase text-gray-700");
+            $(time).attr("onclick", "unselectTimeToggle(this)");
+        }
+
+        function unselectTimeToggle(time) {
+            var TimeSum = parseInt($("#selectedTimeSum").text());
+            $("#selectedTimeSum").text(TimeSum - 1);
+
+            $(time).removeAttr("class");
+            $(time).removeAttr("onclick");
+            $(time).attr("class", "inline bg-yellow-300 py-1 px-2 rounded-full text-xs lowercase text-gray-700");
+            $(time).attr("onclick", "selectTimeToggle(this)");
         }
     </script>
 

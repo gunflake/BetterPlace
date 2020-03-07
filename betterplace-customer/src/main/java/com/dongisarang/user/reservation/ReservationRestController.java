@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class ReservationRestController {
@@ -45,7 +42,9 @@ public class ReservationRestController {
      * 공간의 예약 가능한 시간을 구한다.
      * */
     @GetMapping("/reserve/possible/{placeNo}/{placeDetailNo}/{reservationDate}")
-    public void getPossibleReservationTime(@PathVariable("placeNo") int placeNo, @PathVariable("placeDetailNo") int placeDetailNo, @PathVariable("reservationDate") String reservationDate){
+    public Map<String,String> getPossibleReservationTime(@PathVariable("placeNo") int placeNo, @PathVariable("placeDetailNo") int placeDetailNo, @PathVariable("reservationDate") String reservationDate){
+
+        System.out.println("getPossibleReservationTime");
 
         Place place = placeRepository.findById(placeNo).orElseThrow();
         PlaceDetail placeDetail = placeDetailRepository.findById(placeDetailNo).orElseThrow();
@@ -59,11 +58,29 @@ public class ReservationRestController {
                 possible[i] = false;
             }
         }
+        Map<String, String> availTimeJson = new HashMap<>();
+
+        String availTimes = "";
 
         for (int i = 0; i < 24; i++) {
-            if(possible[i])
-                logger.info("가능시간 :" + i);
+            if(possible[i]) {
+                if(i == 0) {
+                    availTimes += "0" + i;
+                }
+
+                if(i%2 == 0 && i < 10 && i != 0) {
+                    availTimes += ",0" + i;
+                }
+
+                if(i%2 == 0 && i >= 10) {
+                    availTimes += "," + i;
+                }
+            }
         }
+
+        availTimeJson.put("availTime", availTimes);
+
+        return availTimeJson;
     }
 
     @PostMapping("/reserve/pg/kakaopay")

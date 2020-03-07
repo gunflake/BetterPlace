@@ -90,3 +90,144 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+.meetspace-option {
+    padding-top: 32px;
+}
+
+.meetspace-calandar .reserve_calendar_wrap .calendar_tit {
+    padding: 13px 0;
+    text-align: center;
+    color: #000;
+}
+
+.meetspace-calandar .reserve_calendar_wrap .calendar_tit a {
+    display: inline-block;
+    padding: 16px;
+    line-height: 0;
+    position: absolute;
+    top: 0;
+}
+
+.meetspace-calandar .reserve_calendar_wrap .calendar_tit .btn_month_prev {
+    left: 0;
+}
+
+.meetspace-calandar .reserve_calendar_wrap .calendar_tit .btn_month_next {
+    right: 0;
+}
+
+.meetspace-calandar .ico_month_prev {
+    background-position: -336px -276px;
+}
+
+.meetspace-calandar .ico_month_next, .meetspace-calandar .ico_month_prev {
+    width: 7px;
+    height: 12px;
+    /*background-image: url(/_nuxt/img/a1927c9.png);*/
+    background-size: 463px 458px;
+}
+
+.meetspace-calandar .ico_month_next {
+    background-position: -368px -313px;
+}
+
+.meetspace-calandar .reserve_calendar_wrap .calendar_tit strong {
+    font-size: 15px;
+}
+
+.meetspace-calandar .reserve_calendar_wrap .calendar table tr th {
+    padding: 5px 0;
+    color: #949494;
+    text-align: center;
+    font-size: 10px;
+}
+
+.meetspace-calandar .reserve_calendar_wrap.timely .calendar table tr td a {
+    display: table;
+    min-height: 41px;
+    width: 100%;
+    height: 100%;
+    color: #ccc;
+}
+
+.meetspace-calandar .reserve_calendar_wrap.timely .calendar table tr td {
+    height: 41px;
+    position: relative;
+    border-left: 1px solid #ebebeb;
+    border-top: 1px solid #ebebeb;
+    text-align: center;
+    font-size: 12px;
+}
+
+.meetspace .reserve_time_wrap .time_list {
+    padding: 10px 0;
+}
+
+.meetspace .reserve_time_wrap .time_list li {
+    position: relative;
+    float: left;
+    height: 103px;
+    width: 45px;
+    padding: 47px 0 14px;
+}
+
+.meetspace .reserve_time_wrap .time_list li:first-child {
+    margin-left: 20px;
+}
+
+.meetspace .reserve_time_wrap .time_list li:last-child {
+    margin-right: 20px;
+}
+
+.meetspace .reserve_time_wrap .time_list li .time_box > span.price {
+    width: 45px;
+    min-width: 45px;
+    height: 41px;
+    font-size: 10px;
+}
+
+.meetspace .reserve_time_wrap .time_list li.disable .time_box > span.price {
+    /*background-image: url(/_nuxt/img/a1927c9.png);*/
+    background-size: 463px 458px;
+    background-position: -208px -90px;
+    border: 1px solid #ccc;
+}
+
+.meetspace .reserve_time_wrap .time_list li.able .time_box > span.price {
+    color: #cc8c28;
+    border: 2px solid #ffc000;
+    background-color: #ffd014;
+}
+
+.meetspace .reserve_time_wrap .time_list li.selected .time_box > span.price {
+    border: 2px solid #5940ac;
+    background-color: #704de4;
+    color: #fff;
+}
+
+.meetspace .reserve_time_wrap .time_list .time.time_half {
+    left: -9px;
+}
+
+.meetspace .reserve_time_wrap .time_list .time_box {
+    display: table;
+    position: relative;
+    text-align: center;
+}
+
+.meetspace .reserve_time_wrap .time_list .time {
+    position: absolute;
+    left: -8px;
+    top: -23px;
+    width: 15px;
+    text-align: center;
+}
+
+.meetspace .reserve_time_wrap .time_list .time.time_half {
+    top: 4px;
+    left: -8px;
+    width: auto;
+    color: #b2b2b2;
+    font-size: 9px;
+}
