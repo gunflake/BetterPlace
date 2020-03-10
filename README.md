@@ -44,26 +44,3 @@
     1. Default = Local Properties  
     2. --spring.profiles.active=aws 옵션을 주면 application-aws.properties 파일을 읽는다.  
 
-## Code Rule
-
-1. 타입
-	String : strVar  
-	Int : intVar  
-	bool : bVar  
-	float : fVar  
-	double : dVar  
-	object : objVar
-
-## Schedule
-
-08.01 ~ 08.03 : 스터디 계획  
-08.04 ~ 08.10 : 어떤 프로젝트로 할지 정하기  
-08.11 ~ 08.16 : Spring Boot 공부  
-08.17 ~ 08.24 : 화면정의서 관리자 / 사용자 정의  
-08.25 ~ 08.31 : DB 설계  
-09.01 ~ 09.08 : GitHub 설정 및 AWS 구축  
-09.09 ~ 09.14 : DB 설계 및 RDS 적용  
-09.15 ~ 10.05 : DB JPA 매핑  
-10.06 ~       : 코드 구현  
-
-
