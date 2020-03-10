@@ -21,19 +21,8 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public boolean changePassword(String currentPassword, String changePassword) {
-        Customer getCustomer = customerRepository.findByCustomerIdAndCustomerPassword("hskim", currentPassword);
-
-        //유저정보가 일치하면
-        if(getCustomer !=null){
-            getCustomer.setCustomerPassword(changePassword);
-            Customer saveConfirm = customerRepository.save(getCustomer);
-
-            if(saveConfirm.getCustomerId().equals("hskim")){
-                return true;
-            }
-        }
-
-        return false;
+    public void changePassword(Customer customer, String changePassword) {
+        customer.setCustomerPassword(passwordEncoder.encode(changePassword));
+        customerRepository.save(customer);
     }
 }
